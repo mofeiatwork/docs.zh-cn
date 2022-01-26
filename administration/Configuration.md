@@ -205,7 +205,7 @@
 |tablet_meta_checkpoint_min_new_rowsets_num|10|TabletMeta Checkpoint的最小Rowset数目|
 |tablet_meta_checkpoint_min_interval_secs|600|TabletMeta Checkpoint线程轮询的时间间隔|
 |default_rowset_type|ALPHA|存储引擎的格式，默认新ALPHA，后面会替换成BETA|
-|brpc_max_body_size|2147483648|BRPC最大的包容量，200MB|
+|brpc_max_body_size|2147483648|BRPC最大的包容量，2GB|
 |max_runnings_transactions|2000|存储引擎支持的最大事务数|
 |tablet_map_shard_size|1|Tablet分组数|
 |enable_bitmap_union_disk_format_with_set | False |Bitmap新存储格式，可以优化bitmap_union性能|
