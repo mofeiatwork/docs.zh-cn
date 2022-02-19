@@ -300,7 +300,7 @@
       + [array_sum](/sql-reference/sql-functions/array-functions/array_sum.md)
       + [array_remove](/sql-reference/sql-functions/array-functions/array_remove.md)
     + JSON函数
-        + [箭头语法](/sql-reference/sql-functions/json-functions/json_arrow.md)
+      + [箭头语法](/sql-reference/sql-functions/json-functions/json_arrow.md)
       + [json_query](/sql-reference/sql-functions/json-functions/json_query.md)
       + [json_exists](/sql-reference/sql-functions/json-functions/json_exists.md)
       + [json_object](/sql-reference/sql-functions/json-functions/json_object.md)
