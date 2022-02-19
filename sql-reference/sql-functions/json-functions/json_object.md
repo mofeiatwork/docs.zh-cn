@@ -1,29 +1,27 @@
 # json_object
 
-## Description
+## 功能
 
-构造JSON对象。
+手动构造JSON对象。
 
-## Syntax
+## 语法
 
-- JSON json_object()
-- JSON json_object(varchar field_name, any field_value, ...)
+- `JSON json_object()`
+- `JSON json_object(varchar field_name, any field_value, ...)`
 
-## Arguments
+## 参数说明
 
-- `field_name VARCHAR`
-JSON字段名
-- `field_value any`
-JSON字段值，允许double/float/integer/varchar/char等类型。
+- `VARCHAR field_name`: JSON字段名
+- `ANY field_value`: JSON字段值，允许double/float/integer/varchar/char等类型
 
-## Return value
+## 返回值说明
 
-- 返回类型：JSON
-- 返回构造出的JSON对象
+返回类型为 JSON, 即构造出的JSON对象。
 
-## Example
+## 示例
 
 ```sql
+
 -- 构造空的JSON对象
 mysql> select json_object();
 +---------------+
@@ -41,6 +39,6 @@ mysql> select json_object('name', 'starrocks', 'active', true, 'published', 2020
 +---------------------------------------------------------------------+
 ```
 
-## keyword
+## 关键词
 
 JSON, JSON_OBJECT

@@ -84,6 +84,9 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
 
     * BITMAP
     bitmap列类型，不需要指定长度和默认值。表示整型的集合，元素最大支持到2^64 - 1
+
+    * JSON
+    JSON列类型
     ```
 
     ```plain text

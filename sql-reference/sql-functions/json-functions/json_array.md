@@ -1,25 +1,25 @@
 # json_array
 
-## Description
+## 功能
 
 构造JSON数组。
 
-## Syntax
+## 语法
 
 - JSON json_array()
 - JSON json_array(ANY value, ...)
 
-## Arguments
+## 参数说明
 
 - `value ANY`
 JSON值，允许integer/double/float/varchar/char等类型
 
-## Return value
+## 返回值说明
 
 - 返回类型：JSON
 - 返回构造出的JSON数组
 
-## Example
+## 示例
 
 ```sql
 -- 构造空的JSON对象
@@ -39,6 +39,6 @@ mysql> select json_array(1, true, 'starrocks', 1.1);
 +---------------------------------------+
 ```
 
-## keyword
+## 关键词
 
 JSON, JSON_ARRAY

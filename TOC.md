@@ -178,6 +178,7 @@
       + 其他类型
         + [HLL](/sql-reference/sql-statements/data-types/HLL.md)
         + [BITMAP](/sql-reference/sql-statements/data-types/BITMAP.md)
+        + [JSON](/sql-reference/sql-statements/data-types/JSON.md)
     + 辅助命令
       + [DESCRIBE](/sql-reference/sql-statements/Utility/DESCRIBE.md)
   + 函数参考
@@ -299,8 +300,14 @@
       + [array_sum](/sql-reference/sql-functions/array-functions/array_sum.md)
       + [array_remove](/sql-reference/sql-functions/array-functions/array_remove.md)
     + JSON函数
+        + [箭头语法](/sql-reference/sql-functions/json-functions/json_arrow.md)
+      + [json_query](/sql-reference/sql-functions/json-functions/json_query.md)
+      + [json_exists](/sql-reference/sql-functions/json-functions/json_exists.md)
       + [json_object](/sql-reference/sql-functions/json-functions/json_object.md)
       + [json_array](/sql-reference/sql-functions/json-functions/json_array.md)
+      + [json_parse](/sql-reference/sql-functions/json-functions/parse_json.md)
+      + [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
+      + [类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
     + [cast函数](/sql-reference/sql-functions/cast.md)
     + [hash函数](/sql-reference/sql-functions/hash-functions/murmur_hash3_32.md)
     + 加密函数
