@@ -306,8 +306,9 @@
       + [json_object](/sql-reference/sql-functions/json-functions/json_object.md)
       + [json_array](/sql-reference/sql-functions/json-functions/json_array.md)
       + [json_parse](/sql-reference/sql-functions/json-functions/parse_json.md)
+      + [json_each](/sql-reference/sql-functions/json-functions/json_each.md)
       + [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
-      + [类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
+      + [JSON类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
     + [cast函数](/sql-reference/sql-functions/cast.md)
     + [hash函数](/sql-reference/sql-functions/hash-functions/murmur_hash3_32.md)
     + 加密函数
