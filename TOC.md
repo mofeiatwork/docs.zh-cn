@@ -2,53 +2,53 @@
 
 ## 索引
 
-+ [StarRocks介绍](/introduction/StarRocks_intro.md)
++ [StarRocks 介绍](/introduction/StarRocks_intro.md)
 + 快速开始
-  + [StarRocks基本概念](/quick_start/Concepts.md)
-  + [StarRocks系统架构](/quick_start/Architecture.md)
-  + [StarRocks手动部署](/quick_start/Deploy.md)
+  + [StarRocks 基本概念](/quick_start/Concepts.md)
+  + [StarRocks 系统架构](/quick_start/Architecture.md)
+  + [StarRocks 手动部署](/quick_start/Deploy.md)
   + [数据流和控制流](/quick_start/Data_flow_and_control_flow.md)
   + [数据导入和查询](/quick_start/Import_and_query.md)
   + [测试常见问题](/quick_start/Test_faq.md)
   + [下一步](/quick_start/Next_step.md)
 + 表设计
-  + [理解StarRocks表设计](/table_design/StarRocks_table_design.md)
+  + [理解 StarRocks 表设计](/table_design/StarRocks_table_design.md)
   + [数据模型介绍](/table_design/Data_model.md)
   + [数据分布](/table_design/Data_distribution.md)
-  + [排序键和shortkey index](/table_design/Sort_key.md)
+  + [排序键和 shortkey index](/table_design/Sort_key.md)
   + [物化视图](/table_design/Materialized_view.md)
-  + [Bitmap索引](/table_design/Bitmap_index.md)
-  + [Bloomfilter索引](/table_design/Bloomfilter_index.md)
+  + [Bitmap 索引](/table_design/Bitmap_index.md)
+  + [Bloomfilter 索引](/table_design/Bloomfilter_index.md)
 + 数据导入
   + [导入总览](/loading/Loading_intro.md)
   + [Stream Load](/loading/StreamLoad.md)
   + [Broker Load](/loading/BrokerLoad.md)
   + [Routine Load](/loading/RoutineLoad.md)
   + [Spark Load](/loading/SparkLoad.md)
-  + [Insert Into导入](/loading/InsertInto.md)
+  + [Insert Into 导入](/loading/InsertInto.md)
   + [导入过程中完成数据转换](/loading/Etl_in_loading.md)
-  + [Json数据导入](/loading/Json_loading.md)
+  + [Json 数据导入](/loading/Json_loading.md)
   + [Flink connector](/loading/Flink-connector-starrocks.md)
   + [DataX writer](/loading/DataX-starrocks-writer.md)
-  + [CloudCanal数据导入](/loading/CloudCanal_loading.md)
+  + [CloudCanal 数据导入](/loading/CloudCanal_loading.md)
 + 数据提取
   + [数据导出](/unloading/Export.md)
   + [Spark Connector](/unloading/Spark_connector.md)
   + [Flink Connector](/unloading/Flink_connector.md)
-+ 使用StarRocks
-  + [用Bitmap实现精确去重](/using_starrocks/Using_bitmap.md)
-  + [用HLL实现近似去重](/using_starrocks/Using_HLL.md)
++ 使用 StarRocks
+  + [用 Bitmap 实现精确去重](/using_starrocks/Using_bitmap.md)
+  + [用 HLL 实现近似去重](/using_starrocks/Using_HLL.md)
   + [物化视图](/using_starrocks/Materialized_view.md)
   + [Colocation Join](/using_starrocks/Colocation_join.md)
   + [外部表](/using_starrocks/External_table.md)
   + [数组](/using_starrocks/Array.md)
   + [窗口函数](/using_starrocks/Window_function.md)
-  + [CBO优化器](/using_starrocks/Cost_based_optimizer.md)
+  + [CBO 优化器](/using_starrocks/Cost_based_optimizer.md)
   + [Lateral Join](/using_starrocks/Lateral_join.md)
   + [时区](/using_starrocks/timezone.md)
   + [文件管理器](/using_starrocks/filemanager.md)
 + 参考手册
-  + SQL参考
+  + SQL 参考
     + 用户账户管理
       + [ALTER USER](/sql-reference/sql-statements/account-management/ALTER%20USER.md)
       + [CREATE ROLE](/sql-reference/sql-statements/account-management/CREATE%20ROLE.md)
@@ -299,7 +299,8 @@
       + [array_position](/sql-reference/sql-functions/array-functions/array_position.md)
       + [array_sum](/sql-reference/sql-functions/array-functions/array_sum.md)
       + [array_remove](/sql-reference/sql-functions/array-functions/array_remove.md)
-    + JSON函数
+    + JSON 函数
+      + [JSON 函数列表](/sql-reference/sql-functions/json-functions/json_functions.md)
       + [箭头语法](/sql-reference/sql-functions/json-functions/json_arrow.md)
       + [json_query](/sql-reference/sql-functions/json-functions/json_query.md)
       + [json_exists](/sql-reference/sql-functions/json-functions/json_exists.md)
@@ -309,11 +310,11 @@
       + [json_each](/sql-reference/sql-functions/json-functions/json_each.md)
       + [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
       + [JSON类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
-    + [cast函数](/sql-reference/sql-functions/cast.md)
-    + [hash函数](/sql-reference/sql-functions/hash-functions/murmur_hash3_32.md)
     + 加密函数
       + [md5](/sql-reference/sql-functions/encryption-functions/md5.md)
       + [sha2](/sql-reference/sql-functions/encryption-functions/sha2.md)
+    + [cast 函数](/sql-reference/sql-functions/cast.md)
+    + [hash 函数](/sql-reference/sql-functions/hash-functions/murmur_hash3_32.md)
   + [系统变量](/reference/System_variable.md)
   + [错误码](/reference/Error_code.md)
   + [系统限制](/reference/System_limit.md)
@@ -342,7 +343,7 @@
   + [部署运维](/faq/Deploy_faq.md)
   + 数据迁移
     + 导入
-      + [导入通用FAQ](/faq/loading/Loading_faq.md)
+      + [导入通用 FAQ](/faq/loading/Loading_faq.md)
       + [Stream Load](/faq/loading/Stream_load_faq.md)
       + [Routine Load](/faq/loading/Routine_load_faq.md)
       + [Broker Load](/faq/loading/Broker_load_faq.md)
@@ -350,14 +351,14 @@
       + [Insert Into](/faq/loading/Insert_into_faq.md)
       + [Flink connector](/faq/loading/Flink_connector_faq.md)
       + [DataX](/faq/loading/DataX_faq.md)
-      + [CloudCanal数据导入](/faq/loading/CloudCanal_load_faq.md)
+      + [CloudCanal 数据导入](/faq/loading/CloudCanal_load_faq.md)
       + [其他](/faq/loading/Others.md)
     + [导出](/faq/Exporting_faq.md)
   + [SQL FAQ](/faq/Sql_faq.md)
   + [视频资源](/faq/Video.md)
   + [其他](/faq/Others.md)
 + 性能测试
-  + [SSB性能测试](/benchmarking/SSB_Benchmarking.md)
+  + [SSB 性能测试](/benchmarking/SSB_Benchmarking.md)
 + Release Notes
   + [v1.19](/release_notes/release-1.19.md)
   + [v2.0](/release_notes/release-2.0.md)

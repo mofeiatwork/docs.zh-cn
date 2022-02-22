@@ -2,7 +2,7 @@
 
 ## 功能
 
-从 JSON 字符串解析出 JSON 对象。
+从 JSON 格式的字符串解析出 JSON 对象。
 
 ## 语法
 
@@ -18,7 +18,7 @@
 
 ## 注意事项
 
-JSON 对象的 string 需要用双引号括起来，遵循 JSON 标准，而 JSON 字符串需要用单引号。
+JSON 对象的 string 类型需要用双引号括起来，遵循 JSON 标准，例如 `parse_json('"starrocks"')`。而 JSON 格式的字符串需要用单引号。
 
 ## 示例
 

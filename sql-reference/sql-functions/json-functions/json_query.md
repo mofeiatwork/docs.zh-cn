@@ -61,4 +61,4 @@ mysql> select json_query(parse_json('{"a": [1,2,3]}'), '$.a[3]') ;
 
 ## keyword
 
-JSON, JSON_ARRAY
+JSON, JSON_QUERY

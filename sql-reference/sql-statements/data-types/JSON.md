@@ -14,16 +14,16 @@ Starrocks 所支持的 JSON 类型，着眼于为数据分析领域的半结构�
 
 ```sql
 CREATE TABLE `tj` (
-  `id` INT(11) NOT NULL COMMENT "",
-  `j`  JSON NULL COMMENT ""
+    `id` INT(11) NOT NULL COMMENT "",
+    `j`  JSON NULL COMMENT ""
 ) ENGINE=OLAP
 DUPLICATE KEY(`id`)
 COMMENT "OLAP"
 DISTRIBUTED BY HASH(`id`) BUCKETS 1
 PROPERTIES (
-"replication_num" = "1",
-"in_memory" = "false",
-"storage_format" = "DEFAULT"
+    "replication_num" = "1",
+    "in_memory" = "false",
+    "storage_format" = "DEFAULT"
 );
 ```
 
@@ -61,6 +61,7 @@ mysql> select * from tj where id = 1;
 +------+---------------------+
 
 -- 按照JSON过滤
+-- 由于 j->'a'返回的类型是 JSON，只能和JSON类型比较，因此右边需要使用 parse_json构造JSON
 mysql> select * from tj where j->'a' = parse_json('1');
 +------+---------------------+
 | id   | j                   |
@@ -141,16 +142,17 @@ mysql> select * from tj where j->'a' <= parse_json('3') order by cast(j->'a' as 
 
 ## 查询
 
-当前 JSON 支持以下函数和类型转换：
+当前 JSON 支持以下 [JSON 函数](/sql-reference/sql-functions/json-functions/json_functions.md)：
 
 - [箭头语法](/sql-reference/sql-functions/json-functions/json_arrow.md)
 - [json_query](/sql-reference/sql-functions/json-functions/json_query.md)
 - [json_exists](/sql-reference/sql-functions/json-functions/json_exists.md)
 - [json_object](/sql-reference/sql-functions/json-functions/json_object.md)
 - [json_array](/sql-reference/sql-functions/json-functions/json_array.md)
-- [json_parse](/sql-reference/sql-functions/json-functions/parse_json.md)
+- [parse_json](/sql-reference/sql-functions/json-functions/parse_json.md)
 - [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
 - [类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
+- [JSON 谓词](/sql-reference/sql-functions/json-functions/json_predicate.md)
 
 ## 限制
 

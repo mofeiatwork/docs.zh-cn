@@ -2,20 +2,20 @@
 
 ## 功能
 
-查询 JSON 对象中是否存在某个字段。
+判断 JSON 对象中是否存在某个字段。
 
 ## 语法
 
-- bool json_exists(JSON document, VARCHAR json_path)
+- bool json_exists(JSON object, VARCHAR json_path)
 
 ## 参数说明
 
-- `document JSON`: JSON 对象, 须为 JSON 类型
-- `json_path`: json_path, JSON 对象中的路径。须为 varchar 类型
+- `JSON object`: JSON 对象
+- `VARCHAR json_path`: JSON 对象中的路径
 
 ## 返回值说明
 
-返回类型为 BOOL，表示 JSON 对象中是否存在某个字段。
+返回类型为 BOOL。
 
 ## 注意事项
 
@@ -25,7 +25,7 @@ Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](/sql-referen
 
 ```sql
 
--- 查询JSON对象中是否存在 $.a.b 的字段, 结果为存在
+-- 查询JSON对象中是否存在 a.b 的字段, 结果为存在
 mysql> select json_exists(parse_json('{"a": {"b": 1}}'), '$.a.b') ;
 +-----------------------------------------------------+
 | json_exists(parse_json('{"a": {"b": 1}}'), '$.a.b') |

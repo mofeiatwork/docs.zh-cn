@@ -47,3 +47,7 @@ mysql> select parse_json('"a"') < parse_json('"b"');
 +---------------------------------------+
 
 ```
+
+## 关键词
+
+JSON、Predicate

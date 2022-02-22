@@ -7,12 +7,12 @@
 ## 语法
 
 - `JSON json_object()`
-- `JSON json_object(varchar field_name, any field_value, ...)`
+- `JSON json_object(VARCHAR field_name, ANY field_value, ...)`
 
 ## 参数说明
 
 - `VARCHAR field_name`: JSON 字段名
-- `ANY field_value`: JSON 字段值，允许 double/float/integer/varchar/char 等类型
+- `ANY field_value`: JSON 字段值，允许 INTEGER/DOUBLE/FLOAT/VARCHAR/CHAR SQL 类型
 
 ## 返回值说明
 
@@ -30,13 +30,21 @@ mysql> select json_object();
 | {}            |
 +---------------+
 
--- 构造一个多种数据类型组成的JSON对象
+-- 构造一个多种数据类型组成的 JSON 对象
 mysql> select json_object('name', 'starrocks', 'active', true, 'published', 2020);
 +---------------------------------------------------------------------+
 | json_object('name', 'starrocks', 'active', TRUE, 'published', 2020) |
 +---------------------------------------------------------------------+
 | {"active": true, "name": "starrocks", "published": 2020}            |
 +---------------------------------------------------------------------+
+
+-- 构造嵌套的 JSON Object
+mysql> select json_object('k1', 1, 'k2', json_object('k2', 2), 'k3', json_array(4, 5));
++--------------------------------------------------------------------------+
+| json_object('k1', 1, 'k2', json_object('k2', 2), 'k3', json_array(4, 5)) |
++--------------------------------------------------------------------------+
+| {"k1": 1, "k2": {"k2": 2}, "k3": [4, 5]}                                 |
++--------------------------------------------------------------------------+
 ```
 
 ## 关键词
