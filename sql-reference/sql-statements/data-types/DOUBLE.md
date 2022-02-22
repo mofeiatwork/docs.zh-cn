@@ -4,7 +4,7 @@
 
 DOUBLE
 
-8字节浮点数
+8 字节浮点数
 
 ## keyword
 

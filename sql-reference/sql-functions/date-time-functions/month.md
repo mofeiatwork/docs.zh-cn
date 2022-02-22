@@ -8,9 +8,9 @@
 INT MONTH(DATETIME date)
 ```
 
-返回时间类型中的月份信息，范围是1, 12
+返回时间类型中的月份信息，范围是 1, 12
 
-参数为Date或者Datetime类型
+参数为 Date 或者 Datetime 类型
 
 ## example
 

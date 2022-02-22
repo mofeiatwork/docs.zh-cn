@@ -6,9 +6,9 @@
 
 `INT TIMESTAMPDIFF(unit,DATETIME datetime_expr1, DATETIME datetime_expr2)`
 
-返回datetime_expr2−datetime_expr1，其中datetime_expr1和datetime_expr2是日期或日期时间表达式。
+返回 datetime_expr2 − datetime_expr1，其中 datetime_expr1 和 datetime_expr2 是日期或日期时间表达式。
 
-结果(整数)的单位由unit参数给出。interval的单位由unit参数给出，它应该是下列值之一:
+结果(整数)的单位由 unit 参数给出。interval 的单位由 unit 参数给出，它应该是下列值之一:
 
 SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, or YEAR。
 

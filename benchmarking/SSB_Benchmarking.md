@@ -2,18 +2,18 @@
 
 ## 测试方法
 
-为了方便用户快速的了解StarRocks的性能指标，这里我们提供了一个标准的Star schema benchmark的测试方法和工具仅供参考。
+为了方便用户快速的了解 StarRocks 的性能指标，这里我们提供了一个标准的 Star schema benchmark 的测试方法和工具仅供参考。
 
-Star schema benchmark（以下简称SSB）是学术界和工业界广泛使用的一个星型模型测试集，通过这个测试集合也可以容易的和其他OLAP产品进行性能对比。
+Star schema benchmark（以下简称 SSB）是学术界和工业界广泛使用的一个星型模型测试集，通过这个测试集合也可以容易的和其他 OLAP 产品进行性能对比。
 
 ## 测试准备
 
 ### 环境准备
 
-* 硬件环境准备，StarRocks对机器没有严格要求，建议大于8C 32G，磁盘是SSD/SATA均可，网络建议万兆网卡。
+* 硬件环境准备，StarRocks 对机器没有严格要求，建议大于 8C 32G，磁盘是 SSD/SATA 均可，网络建议万兆网卡。
 * 集群部署参考 [集群部署](../administration/Deployment.md)
 * 系统参数参考 [配置参数](../administration/Configuration.md)
-* 下载ssb-poc工具集
+* 下载 ssb-poc 工具集
 
 ### SSB SQL(多表)
 
@@ -88,8 +88,8 @@ from lineorder
 join dates on lo_orderdate = d_datekey
 join customer on lo_custkey = c_custkey
 join supplier on lo_suppkey = s_suppkey
-where (c_city='UNITED KI1' or c_city='UNITED KI5')
-and (s_city='UNITED KI1' or s_city='UNITED KI5')
+where (c_city ='UNITED KI1' or c_city ='UNITED KI5')
+and (s_city ='UNITED KI1' or s_city ='UNITED KI5')
 and d_year >= 1992 and d_year <= 1997
 group by c_city, s_city, d_year
 order by d_year asc, lo_revenue desc;
@@ -99,7 +99,7 @@ from lineorder
 join dates on lo_orderdate = d_datekey
 join customer on lo_custkey = c_custkey
 join supplier on lo_suppkey = s_suppkey
-where (c_city='UNITED KI1' or c_city='UNITED KI5') and (s_city='UNITED KI1' or s_city='UNITED KI5') and d_yearmonth = 'Dec1997'
+where (c_city ='UNITED KI1' or c_city ='UNITED KI5') and (s_city ='UNITED KI1' or s_city ='UNITED KI5') and d_yearmonth = 'Dec1997'
 group by c_city, s_city, d_year
 order by d_year asc, lo_revenue desc;
 --Q4.1
@@ -142,7 +142,7 @@ order by d_year, s_city, p_brand;
 
 ### 数据创建
 
-#### 下载ssb-poc工具包并编译
+#### 下载 ssb-poc 工具包并编译
 
 ~~~shell
 wget https://starrocks-public.oss-cn-zhangjiakou.aliyuncs.com/ssb-poc-0.9.3.zip
@@ -151,48 +151,48 @@ cd ssb-poc
 make && make install  
 ~~~
 
-所有相关工具都会安装到output目录
+所有相关工具都会安装到 output 目录
 
 #### 生成数据
 
 ~~~shell
-# 生成100G数据脚本
+# 生成 100G 数据脚本
 cd output
 bin/gen-ssb.sh 100 data_dir
 
-# 生成1T数据脚本
+# 生成 1T 数据脚本
 cd output
 bin/gen-ssb.sh 1000 data_dir
 ~~~
 
-这里会在data\_dir目录下生成100GB规模的数据
+这里会在 data\_dir 目录下生成 100GB 规模的数据
 
 #### 建表
 
 建表中有三个注意事项，这几个选择会比较大的影响到测试结果：
 
-1. Bucket的数量选择和分桶键的选择
+1. Bucket 的数量选择和分桶键的选择
 
-    Bucket的数量是对性能影响比较大的因素之一，首先我们希望选择合理的分桶键（DISTRIBUTED BY HASH(key))，来保证数据在各个bucket中尽可能均衡，如果碰到数据倾斜严重的数据可以使用多列作为分桶键，或者采用MD5 hash以后作为分桶键，具体可以参考[分桶键选择](../table_design/Data_distribution.md#3-分桶列如何选择)，这里我们都统一使用唯一的key列。
+    Bucket 的数量是对性能影响比较大的因素之一，首先我们希望选择合理的分桶键（DISTRIBUTED BY HASH(key))，来保证数据在各个 bucket 中尽可能均衡，如果碰到数据倾斜严重的数据可以使用多列作为分桶键，或者采用 MD5 hash 以后作为分桶键，具体可以参考 [分桶键选择](../table_design/Data_distribution.md#3-分桶列如何选择)，这里我们都统一使用唯一的 key 列。
 
 2. 建表的数据类型
 
-    数据类型的选择对性能测试的结果是有一定影响的，比如Decimal|String的运算一般比int|bigint要慢，所以在实际场景中我们应该尽可能准确的使用数据类型，从而达到最好的效果，比如可以使用Int|Bigint的字段就尽量避免使用String，如果是日期类型也多使用Date|Datetime以及相对应的时间日期函数，而不是用string和相关字符串操作函数来处理，针对SSB的数据集合，为了体现各个数据类型的效果，我们在多表Join的测试中都采用了Int|Bigint来处理，在lineorder_flat这个打平的宽表中，我们采用了Decimal|date等类型方便。
+    数据类型的选择对性能测试的结果是有一定影响的，比如 Decimal|String 的运算一般比 int|bigint 要慢，所以在实际场景中我们应该尽可能准确的使用数据类型，从而达到最好的效果，比如可以使用 Int|Bigint 的字段就尽量避免使用 String，如果是日期类型也多使用 Date|Datetime 以及相对应的时间日期函数，而不是用 string 和相关字符串操作函数来处理，针对 SSB 的数据集合，为了体现各个数据类型的效果，我们在多表 Join 的测试中都采用了 Int|Bigint 来处理，在 lineorder_flat 这个打平的宽表中，我们采用了 Decimal|date 等类型方便。
 
-      >如果需要做和其他系统的对比，可以参考Kylin和Clickhouse的官方文档中推荐的SSB建表方式，对建表语句进行微调。
+      > 如果需要做和其他系统的对比，可以参考 Kylin 和 Clickhouse 的官方文档中推荐的 SSB 建表方式，对建表语句进行微调。
       >
-      >[Kylin的建表方式](https://github.com/Kyligence/ssb-kylin/blob/master/hive/1_create_basic.sql)
+      > [Kylin 的建表方式](https://github.com/Kyligence/ssb-kylin/blob/master/hive/1_create_basic.sql)
       >
-      >[Clickhouse的建表方式](https://clickhouse.tech/docs/en/getting-started/example-datasets/star-schema/)
+      > [Clickhouse 的建表方式](https://clickhouse.tech/docs/en/getting-started/example-datasets/star-schema/)
 
 3. 字段是否可以为空
 
-    StarRocks的建表这里都采取的NOT NULL关键字，因为在SSB生成的标准数据集合中并没有空字段。
+    StarRocks 的建表这里都采取的 NOT NULL 关键字，因为在 SSB 生成的标准数据集合中并没有空字段。
 
-以下为建表语句，无需执行，可通过执行create_db_table脚本(脚本路径：ssb-poc-0.9.3/ssb-poc/output/bin/create_db_table.sh)进行建表，建表语句中进行了默认分桶数配置。针对我们三台BE的环境我们采取的建表方式如下：
+以下为建表语句，无需执行，可通过执行 create_db_table 脚本(脚本路径：ssb-poc-0.9.3/ssb-poc/output/bin/create_db_table.sh)进行建表，建表语句中进行了默认分桶数配置。针对我们三台 BE 的环境我们采取的建表方式如下：
 
 ~~~sql
-# lineorder表建表语句，测试数据量级是100G时
+# lineorder 表建表语句，测试数据量级是 100G 时
 CREATE TABLE `lineorder` (
   `lo_orderkey` int(11) NOT NULL COMMENT "",
   `lo_linenumber` int(11) NOT NULL COMMENT "",
@@ -211,7 +211,7 @@ CREATE TABLE `lineorder` (
   `lo_tax` int(11) NOT NULL COMMENT "",
   `lo_commitdate` int(11) NOT NULL COMMENT "",
   `lo_shipmode` varchar(11) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`lo_orderkey`)
 COMMENT "OLAP"
 PARTITION BY RANGE(`lo_orderdate`)
@@ -227,7 +227,7 @@ PROPERTIES (
     "replication_num" = "1"
 );
 
-# lineorder表建表语句，测试数据量级是1T时
+# lineorder 表建表语句，测试数据量级是 1T 时
 CREATE TABLE `lineorder` (
   `lo_orderkey` bigint(20) NOT NULL COMMENT "",
   `lo_linenumber` int(11) NOT NULL COMMENT "",
@@ -246,7 +246,7 @@ CREATE TABLE `lineorder` (
   `lo_tax` int(11) NOT NULL COMMENT "",
   `lo_commitdate` int(11) NOT NULL COMMENT "",
   `lo_shipmode` varchar(11) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`lo_orderkey`)
 COMMENT "OLAP"
 PARTITION BY RANGE(`lo_orderdate`)
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `c_region` varchar(13) NOT NULL COMMENT "",
   `c_phone` varchar(16) NOT NULL COMMENT "",
   `c_mktsegment` varchar(11) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`c_custkey`)
 COMMENT "OLAP"
 DISTRIBUTED BY HASH(`c_custkey`) BUCKETS 12
@@ -298,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `dates` (
   `d_lastdayinmonthfl` int(11) NOT NULL COMMENT "",
   `d_holidayfl` int(11) NOT NULL COMMENT "",
   `d_weekdayfl` int(11) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`d_datekey`)
 COMMENT "OLAP"
 DISTRIBUTED BY HASH(`d_datekey`) BUCKETS 1
@@ -314,7 +314,7 @@ PROPERTIES (
   `s_nation` varchar(16) NOT NULL COMMENT "",
   `s_region` varchar(13) NOT NULL COMMENT "",
   `s_phone` varchar(16) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`s_suppkey`)
 COMMENT "OLAP"
 DISTRIBUTED BY HASH(`s_suppkey`) BUCKETS 12
@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `part` (
   `p_type` varchar(26) NOT NULL COMMENT "",
   `p_size` int(11) NOT NULL COMMENT "",
   `p_container` varchar(11) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`p_partkey`)
 COMMENT "OLAP"
 DISTRIBUTED BY HASH(`p_partkey`) BUCKETS 12
@@ -340,7 +340,7 @@ PROPERTIES (
     "replication_num" = "1"
 );
 
-# lineorder_flat表建表语句，测试数据量级是100G时
+# lineorder_flat 表建表语句，测试数据量级是 100G 时
 CREATE TABLE `lineorder_flat` (
   `LO_ORDERDATE` date NOT NULL COMMENT "",
   `LO_ORDERKEY` int(11) NOT NULL COMMENT "",
@@ -380,7 +380,7 @@ CREATE TABLE `lineorder_flat` (
   `P_TYPE` varchar(100) NOT NULL COMMENT "",
   `P_SIZE` tinyint(4) NOT NULL COMMENT "",
   `P_CONTAINER` varchar(100) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`LO_ORDERDATE`, `LO_ORDERKEY`)
 COMMENT "OLAP"
 PARTITION BY RANGE(`LO_ORDERDATE`)
@@ -390,7 +390,7 @@ PROPERTIES (
     "replication_num" = "1"
 );
 
-# lineorder_flat表建表语句，测试数据量级是1T时
+# lineorder_flat 表建表语句，测试数据量级是 1T 时
 CREATE TABLE `lineorder_flat` (
   `LO_ORDERDATE` date NOT NULL COMMENT "",
   `LO_ORDERKEY` bigint(20) NOT NULL COMMENT "",
@@ -430,7 +430,7 @@ CREATE TABLE `lineorder_flat` (
   `P_TYPE` varchar(100) NOT NULL COMMENT "",
   `P_SIZE` tinyint(4) NOT NULL COMMENT "",
   `P_CONTAINER` varchar(100) NOT NULL COMMENT ""
-) ENGINE=OLAP
+) ENGINE = OLAP
 DUPLICATE KEY(`LO_ORDERDATE`, `LO_ORDERKEY`)
 COMMENT "OLAP"
 PARTITION BY RANGE(`LO_ORDERDATE`)
@@ -456,7 +456,7 @@ http_port: 8030
 be_heartbeat_port: 9050
 broker_port: 8000
 
-# parallel_fragment_exec_instance_num 设置并行度，建议是每个集群节点逻辑核数的一半，以下以8为例
+# parallel_fragment_exec_instance_num 设置并行度，建议是每个集群节点逻辑核数的一半，以下以 8 为例
 parallel_num: 8
 
 ...
@@ -465,41 +465,41 @@ parallel_num: 8
 执行建表脚本。如需根据集群规模，节点配置等因素重新规划某个表的分桶数进行建表，可在执行脚本后将对应的表删除。然后通过执行更改后的上面的语句进行创建。
 
 ~~~shell
-# 测试100G数据
+# 测试 100G 数据
  bin/create_db_table.sh ddl_100
  
-# 测试1T数据
+# 测试 1T 数据
  bin/create_db_table.sh ddl_1000
 ~~~
 
-完成后我们创建了6张表：lineorder, supplier, dates, customer, part, lineorder\_flat
+完成后我们创建了 6 张表：lineorder, supplier, dates, customer, part, lineorder\_flat
 
 ### 数据导入
 
-这里我们通过stream load导入数据
+这里我们通过 stream load 导入数据
 
 ~~~shell
 bin/stream_load.sh data_dir
 ~~~
 
-data\_dir是之前生成的数据目录
+data\_dir 是之前生成的数据目录
 
 ### 查询
 
-首先在客户端执行命令，修改并行度(类似clickhouse set max_threads = 8)
+首先在客户端执行命令，修改并行度(类似 clickhouse set max_threads = 8)
 
 ~~~shell
-# 设置并行度，建议是每个集群节点逻辑核数的一半,以下以8为例
+# 设置并行度，建议是每个集群节点逻辑核数的一半, 以下以 8 为例
 set global parallel_fragment_exec_instance_num = 8;
 ~~~
 
-测试ssb多表查询 (SQL 参见 share/ssb\_test/sql/ssb/)
+测试 ssb 多表查询 (SQL 参见 share/ssb\_test/sql/ssb/)
 
 ~~~shell
 bin/benchmark.sh -p -d ssb
 ~~~
 
-测试ssb宽表查询(SQL 参见 share/ssb\_test/sql/ssb-flat/)
+测试 ssb 宽表查询(SQL 参见 share/ssb\_test/sql/ssb-flat/)
 
 ~~~shell
 # 向宽表中插入数据

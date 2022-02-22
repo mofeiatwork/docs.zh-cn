@@ -8,7 +8,7 @@
 BITMAP BITMAP_OR(BITMAP lhs, BITMAP rhs)
 ```
 
-计算两个输入bitmap的并集，返回新的bitmap.
+计算两个输入 bitmap 的并集，返回新的 bitmap.
 
 ## example
 
@@ -30,4 +30,4 @@ MySQL > select bitmap_count(bitmap_or(to_bitmap(1), to_bitmap(1))) cnt;
 
 ## keyword
 
-BITMAP_OR,BITMAP
+BITMAP_OR, BITMAP

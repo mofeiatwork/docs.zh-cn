@@ -27,4 +27,4 @@ DROP FUNCTION function_name
 
 ## keyword
 
-DROP,FUNCTION
+DROP, FUNCTION

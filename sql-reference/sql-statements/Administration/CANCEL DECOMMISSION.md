@@ -20,4 +20,4 @@ CANCEL DECOMMISSION BACKEND "host:heartbeat_port"[,"host:heartbeat_port"...];
 
 ## keyword
 
-CANCEL,DECOMMISSION,BACKEND
+CANCEL, DECOMMISSION, BACKEND

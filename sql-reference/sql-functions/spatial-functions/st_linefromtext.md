@@ -1,4 +1,4 @@
-# ST_LineFromText,ST_LineStringFromText
+# ST_LineFromText, ST_LineStringFromText
 
 ## description
 
@@ -8,7 +8,7 @@
 GEOMETRY ST_LineFromText(VARCHAR wkt)
 ```
 
-将一个WKT（Well Known Text）转化为一个Line形式的内存表现形式
+将一个 WKT（Well Known Text）转化为一个 Line 形式的内存表现形式
 
 ## example
 
@@ -23,4 +23,4 @@ MySQL > SELECT ST_AsText(ST_LineFromText("LINESTRING (1 1, 2 2)"));
 
 ## keyword
 
-ST_LINEFROMTEXT,ST_LINESTRINGFROMTEXT,ST,LINEFROMTEXT,LINESTRINGFROMTEXT
+ST_LINEFROMTEXT, ST_LINESTRINGFROMTEXT, ST, LINEFROMTEXT, LINESTRINGFROMTEXT

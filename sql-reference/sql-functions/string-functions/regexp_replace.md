@@ -30,4 +30,4 @@ MySQL > SELECT regexp_replace('a b c','(b)','<\\1>');
 
 ## keyword
 
-REGEXP_REPLACE,REGEXP,REPLACE
+REGEXP_REPLACE, REGEXP, REPLACE

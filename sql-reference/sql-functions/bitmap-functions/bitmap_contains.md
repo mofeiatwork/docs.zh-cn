@@ -6,7 +6,7 @@
 
 `B00LEAN BITMAP_CONTAINS(BITMAP bitmap, BIGINT input)`
 
-计算输入值是否在Bitmap列中，返回值是Boolean值。
+计算输入值是否在 Bitmap 列中，返回值是 Boolean 值。
 
 ## example
 
@@ -28,4 +28,4 @@ MySQL > select bitmap_contains(to_bitmap(1),1) cnt;
 
 ## keyword
 
-BITMAP_CONTAINS,BITMAP
+BITMAP_CONTAINS, BITMAP

@@ -1,6 +1,6 @@
 # 内存管理
 
-本章节简单的介绍StarRocks中的内存使用分类和基本的查看内存管理的方法
+本章节简单的介绍 StarRocks 中的内存使用分类和基本的查看内存管理的方法
 
 ## 内存分类
 
@@ -11,11 +11,11 @@
 |  process   |  BE 总使用内存   | |
 |  query\_pool   |   查询内存   |分为两部分: (1)执行层使用内存 (2)存储层使用内存。|
 |  load   |   导入内存    | 主要是 MemTable|
-|  table_meta   |   元数据内存  | Schema, Tablet元数据, RowSet元数据, Column元数据, ColumnReader, IndexReader|
+|  table_meta   |   元数据内存  | Schema, Tablet 元数据, RowSet 元数据, Column 元数据, ColumnReader, IndexReader|
 |  compaction   |   多版本合并内存   |  用于数据导入完成后的 Compaction|
 |  snaphost   |   快照内存  |一般用于 clone, 内存使用很少 |
-|  column_pool   |    Column pool内存池   |用于加速Column申请释放的列缓存 |
-|  page_cache   |   BE自有PageCache   | 默认是关闭的，用户可以通过修改BE文件主动打开 |
+|  column_pool   |    Column pool 内存池   |用于加速 Column 申请释放的列缓存 |
+|  page_cache   |   BE 自有 PageCache   | 默认是关闭的，用户可以通过修改 BE 文件主动打开 |
 
 ## 内存相关的配置
 
@@ -24,14 +24,14 @@
 | 名称 |  默认值|   说明|  
  | --- | --- | --- |
 | vector_chunk_size | 4096 | Chunk 行数 |
-| tc_use_memory_min | 10737418240 | TCmalloc 最小保留内存，只有超过这个值，StarRocks才将空闲内存返还给操作系统|
-| mem_limit | 80% | BE可以使用的机器总内存的比例，如果是BE单独部署的话，不需要配置，如果是和其它占用内存比较多的服务混合部署的话，要单独配置下 |
-| disable_storage_page_cache | true |  是否打开StarRocks自有PageCachestorage_page_cache_limit0PageCache容量限制 |
-| write_buffer_size | 104857600 |  单个MemTable内存中的容量限制超过这个限制要执行刷盘 |
-| load_process_max_memory_limit_bytes | 107374182400 | 导入总内存限制min(mem_limit * load_process_max_memory_limit_percent, load_process_max_memory_limit_bytes)是实际可使用的导入内存限制到达这个限制，会触发刷盘逻辑 |
-| load_process_max_memory_limit_percent | 30 | 导入总内存限制min(mem_limit * load_process_max_memory_limit_percent, load_process_max_memory_limit_bytes)是实际可使用的导入内存限制到达这个限制，会触发刷盘逻辑 |
-| default_load_mem_limit | 2147483648 | 单个导入实例，接收端的内存限制到达这个限制，会触发刷盘逻辑当前，需要配合Session变量 load_mem_limit 的修改才能生效|
-| max_compaction_concurrency | -1 | BaseCompaction + CumulativeCompaction的最大并发，-1表示不限制，0表示禁用 Compaction|
+| tc_use_memory_min | 10737418240 | TCmalloc 最小保留内存，只有超过这个值，StarRocks 才将空闲内存返还给操作系统|
+| mem_limit | 80% | BE 可以使用的机器总内存的比例，如果是 BE 单独部署的话，不需要配置，如果是和其它占用内存比较多的服务混合部署的话，要单独配置下 |
+| disable_storage_page_cache | true |  是否打开 StarRocks 自有 PageCachestorage_page_cache_limit0PageCache 容量限制 |
+| write_buffer_size | 104857600 |  单个 MemTable 内存中的容量限制超过这个限制要执行刷盘 |
+| load_process_max_memory_limit_bytes | 107374182400 | 导入总内存限制 min(mem_limit * load_process_max_memory_limit_percent, load_process_max_memory_limit_bytes)是实际可使用的导入内存限制到达这个限制，会触发刷盘逻辑 |
+| load_process_max_memory_limit_percent | 30 | 导入总内存限制 min(mem_limit * load_process_max_memory_limit_percent, load_process_max_memory_limit_bytes)是实际可使用的导入内存限制到达这个限制，会触发刷盘逻辑 |
+| default_load_mem_limit | 2147483648 | 单个导入实例，接收端的内存限制到达这个限制，会触发刷盘逻辑当前，需要配合 Session 变量 load_mem_limit 的修改才能生效|
+| max_compaction_concurrency | -1 | BaseCompaction + CumulativeCompaction 的最大并发，-1 表示不限制，0 表示禁用 Compaction|
 | cumulative_compaction_check_interval_seconds | 1 | Compaction Check 间隔时间|
 
 * **Session 变量**
@@ -39,7 +39,7 @@
 | 名称| 默认值| 说明|
 |  --- |  --- | --- |
 | exec_mem_limit| 2147483648| 单个 instance 内存限制|
-| load_mem_limit| 0| 单个导入任务的内存限制，如果是0,会取exec_mem_limit|
+| load_mem_limit| 0| 单个导入任务的内存限制，如果是 0, 会取 exec_mem_limit|
 
 ## 查看内存使用
 
@@ -81,9 +81,9 @@ Call ReleaseFreeMemory() to release freelist memory to the OS (via madvise()).
 Bytes released to the OS take up virtual address space but no physical memory.
 ~~~
 
-通过这种方法，看到的内存是准确的，但是当前StarRocks，有些内存使用是**Reserve**的，但是并没有使用，TcMalloc统计的**实际上是Reserve的内存**，而不是实际使用的内存。
+通过这种方法，看到的内存是准确的，但是当前 StarRocks，有些内存使用是 **Reserve** 的，但是并没有使用，TcMalloc 统计的 **实际上是 Reserve 的内存**，而不是实际使用的内存。
 
-这里Bytes in use by application 指的是当前使用的内存.
+这里 Bytes in use by application 指的是当前使用的内存.
 
 * **metrics**
 
@@ -92,4 +92,4 @@ curl -XGET http://be_ip:be_web_port/metrics | grep 'mem'
 curl -XGET http://be_ip:be_web_port/metrics | grep 'column_pool'
 ~~~
 
-metrics的值是10秒更新一次，老的版本，可以通过这种方法，监控部分内存统计。
+metrics 的值是 10 秒更新一次，老的版本，可以通过这种方法，监控部分内存统计。

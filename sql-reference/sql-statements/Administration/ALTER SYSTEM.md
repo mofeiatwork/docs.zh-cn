@@ -11,13 +11,13 @@
     ALTER SYSTEM ADD BACKEND "host:heartbeat_port"[,"host:heartbeat_port"...];
     ```
 
-2. 增加空闲节点(即添加不属于任何cluster的BACKEND)
+2. 增加空闲节点(即添加不属于任何 cluster 的 BACKEND)
 
     ```sql
     ALTER SYSTEM ADD FREE BACKEND "host:heartbeat_port"[,"host:heartbeat_port"...];
     ```
 
-3. 增加节点到某个cluster
+3. 增加节点到某个 cluster
 
     ```sql
     ALTER SYSTEM ADD BACKEND TO cluster_name "host:heartbeat_port"[,"host:heartbeat_port"...];
@@ -35,19 +35,19 @@
     ALTER SYSTEM DECOMMISSION BACKEND "host:heartbeat_port"[,"host:heartbeat_port"...];
     ```
 
-6. 增加Broker
+6. 增加 Broker
 
     ```sql
     ALTER SYSTEM ADD BROKER broker_name "host:port"[,"host:port"...];
     ```
 
-7. 减少Broker
+7. 减少 Broker
 
     ```sql
     ALTER SYSTEM DROP BROKER broker_name "host:port"[,"host:port"...];
     ```
 
-8. 删除所有Broker
+8. 删除所有 Broker
 
     ```sql
     ALTER SYSTEM DROP ALL BROKER broker_name
@@ -61,7 +61,7 @@
 
 说明：
 
-1. host 可以是主机名或者ip地址
+1. host 可以是主机名或者 ip 地址
 2. heartbeat_port 为该节点的心跳端口
 3. 增加和删除节点为同步操作。这两种操作不考虑节点上已有的数据，节点直接从元数据中删除，请谨慎使用。
 4. 节点下线操作用于安全下线节点。该操作为异步操作。如果成功，节点最终会从元数据中删除。如果失败，则不会完成下线。
@@ -120,7 +120,7 @@
     ALTER SYSTEM DECOMMISSION BACKEND "host1:port", "host2:port";
     ```
 
-5. 增加两个Hdfs Broker
+5. 增加两个 Hdfs Broker
 
     ```sql
     ALTER SYSTEM ADD BROKER hdfs "host1:port", "host2:port";
@@ -162,4 +162,4 @@
 
 ## keyword
 
-ALTER,SYSTEM,BACKEND,BROKER,FREE
+ALTER, SYSTEM, BACKEND, BROKER, FREE

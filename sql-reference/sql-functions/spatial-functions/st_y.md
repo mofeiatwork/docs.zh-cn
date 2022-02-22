@@ -8,7 +8,7 @@
 DOUBLE ST_Y(POINT point)
 ```
 
-当point是一个合法的POINT类型时，返回对应的Y坐标值
+当 point 是一个合法的 POINT 类型时，返回对应的 Y 坐标值
 
 ## example
 
@@ -23,4 +23,4 @@ MySQL > SELECT ST_Y(ST_Point(24.7, 56.7));
 
 ## keyword
 
-ST_Y,ST,Y
+ST_Y, ST, Y

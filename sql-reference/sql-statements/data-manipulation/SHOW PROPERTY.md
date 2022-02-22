@@ -18,7 +18,7 @@ SHOW PROPERTY [FOR user] [LIKE key]
     SHOW PROPERTY FOR 'jack'
     ```
 
-2. 查看 jack 用户导入cluster相关属性
+2. 查看 jack 用户导入 cluster 相关属性
 
     ```sql
     SHOW PROPERTY FOR 'jack' LIKE '%load_cluster%'

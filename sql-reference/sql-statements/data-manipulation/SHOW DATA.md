@@ -59,4 +59,4 @@ SHOW DATA [FROM db_name[.table_name]];
 
 ## keyword
 
-SHOW,DATA
+SHOW, DATA

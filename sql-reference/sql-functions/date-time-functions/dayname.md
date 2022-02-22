@@ -10,7 +10,7 @@ VARCHAR DAYNAME(DATE)
 
 返回日期对应的日期名字
 
-参数为Date或者Datetime类型
+参数为 Date 或者 Datetime 类型
 
 ## example
 

@@ -8,7 +8,7 @@
 MAX(expr)
 ```
 
-返回expr表达式的最大值
+返回 expr 表达式的最大值
 
 ## example
 

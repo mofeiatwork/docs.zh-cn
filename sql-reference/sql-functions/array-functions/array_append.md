@@ -23,7 +23,7 @@ mysql> select array_append([1, 2], 3);
 
 ```
 
-可以向数组中添加NULL
+可以向数组中添加 NULL
 
 ```plain text
 mysql> select array_append([1, 2], NULL);
@@ -38,4 +38,4 @@ mysql> select array_append([1, 2], NULL);
 
 ## keyword
 
-ARRAY_APPEND,ARRAY
+ARRAY_APPEND, ARRAY

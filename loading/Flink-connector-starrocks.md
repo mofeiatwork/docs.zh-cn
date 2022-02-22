@@ -1,14 +1,14 @@
 # 设计背景
 
-flink的用户想要将数据sink到StarRocks当中，但是flink官方只提供了flink-connector-jdbc, 不足以满足导入性能要求，为此我们新增了一个flink-connector-starrocks，内部实现是通过缓存并批量由stream load导入。
+flink 的用户想要将数据 sink 到 StarRocks 当中，但是 flink 官方只提供了 flink-connector-jdbc, 不足以满足导入性能要求，为此我们新增了一个 flink-connector-starrocks，内部实现是通过缓存并批量由 stream load 导入。
 
 ## 使用方式
 
 [源码地址](https://github.com/StarRocks/flink-connector-starrocks)
 
-将以下内容加入`pom.xml`:
+将以下内容加入 `pom.xml`:
 
-点击 [版本信息](https://search.maven.org/search?q=g:com.starrocks) 查看页面Latest Version信息，替换下面x.x.x内容
+点击 [版本信息](https://search.maven.org/search?q=g:com.starrocks) 查看页面 Latest Version 信息，替换下面 x.x.x 内容
 
 ```xml
 <dependency>
@@ -113,13 +113,13 @@ tEnv.executeSql(
 );
 ```
 
-其中Sink选项如下：
+其中 Sink 选项如下：
 
 | Option | Required | Default | Type | Description |
 |  :-----:  | :-----:  | :-----:  | :-----:  | :-----:  |
 | connector | YES | NONE | String |**starrocks**|
 | jdbc-url | YES | NONE | String | this will be used to execute queries in starrocks. |
-| load-url | YES | NONE | String | **fe_ip:http_port;fe_ip:http_port** separated with '**;**', which would be used to do the batch sinking. |
+| load-url | YES | NONE | String | **fe_ip: http_port; fe_ip: http_port** separated with '**;**', which would be used to do the batch sinking. |
 | database-name | YES | NONE | String | starrocks database name |
 | table-name | YES | NONE | String | starrocks table name |
 | username | YES | NONE | String | starrocks connecting username |
@@ -130,41 +130,41 @@ tEnv.executeSql(
 | sink.buffer-flush.interval-ms | NO | 300000 | String | the flushing time interval, range: **[1000ms, 3600000ms]**. |
 | sink.max-retries | NO | 1 | String | max retry times of the stream load request, range: **[0, 10]**. |
 | sink.connect.timeout-ms | NO | 1000 | String | Timeout in millisecond for connecting to the `load-url`, range: **[100, 60000]**. |
-| sink.properties.* | NO | NONE | String | the stream load properties like **'sink.properties.columns' = 'k1, k2, k3'**. |
+| sink.properties.* | NO | NONE | String | the stream load properties like * *'sink.properties.columns' = 'k1, k2, k3'**. |
 
 ### 注意事项
 
-- 支持exactly-once的数据sink保证，需要外部系统的 two phase commit 机制。由于 StarRocks 无此机制，我们需要依赖flink的checkpoint-interval在每次checkpoint时保存批数据以及其label，在checkpoint完成后的第一次invoke中阻塞flush所有缓存在state当中的数据，以此达到精准一次。但如果StarRocks挂掉了，会导致用户的flink sink stream 算子长时间阻塞，并引起flink的监控报警或强制kill。
+- 支持 exactly-once 的数据 sink 保证，需要外部系统的 two phase commit 机制。由于 StarRocks 无此机制，我们需要依赖 flink 的 checkpoint-interval 在每次 checkpoint 时保存批数据以及其 label，在 checkpoint 完成后的第一次 invoke 中阻塞 flush 所有缓存在 state 当中的数据，以此达到精准一次。但如果 StarRocks 挂掉了，会导致用户的 flink sink stream 算子长时间阻塞，并引起 flink 的监控报警或强制 kill。
 
-- 默认使用csv格式进行导入，用户可以通过指定`'sink.properties.row_delimiter' = '\\x02'`（此参数自 StarRocks-1.15.0 开始支持）与`'sink.properties.column_separator' = '\\x01'`来自定义行分隔符与列分隔符。
+- 默认使用 csv 格式进行导入，用户可以通过指定 `'sink.properties.row_delimiter' = '\\x02'`（此参数自 StarRocks-1.15.0 开始支持）与 `'sink.properties.column_separator' = '\\x01'` 来自定义行分隔符与列分隔符。
 
-- 如果遇到导入停止的 情况，请尝试增加flink任务的内存。
+- 如果遇到导入停止的 情况，请尝试增加 flink 任务的内存。
 
-- 如果代码运行正常且能接收到数据，但是写入不成功时请确认当前机器能访问BE的http_port端口，这里指能ping通集群show backends显示的ip:port。举个例子：如果一台机器有外网和内网ip，且FE/BE的http_port均可通过外网ip:port访问，集群里绑定的ip为内网ip，任务里loadurl写的FE外网ip:http_port,FE会将写入任务转发给BE内网ip:port,这时如果Client机器ping不通BE的内网ip就会写入失败。
+- 如果代码运行正常且能接收到数据，但是写入不成功时请确认当前机器能访问 BE 的 http_port 端口，这里指能 ping 通集群 show backends 显示的 ip: port。举个例子：如果一台机器有外网和内网 ip，且 FE/BE 的 http_port 均可通过外网 ip: port 访问，集群里绑定的 ip 为内网 ip，任务里 loadurl 写的 FE 外网 ip: http_port, FE 会将写入任务转发给 BE 内网 ip: port, 这时如果 Client 机器 ping 不通 BE 的内网 ip 就会写入失败。
 
 ## 使用 Flink-connector 写入实现 MySQL 数据同步
 
 ### 基本原理
 
-通过Flink-cdc和StarRocks-migrate-tools（简称smt）可以实现MySQL数据的秒级同步。
+通过 Flink-cdc 和 StarRocks-migrate-tools（简称 smt）可以实现 MySQL 数据的秒级同步。
 
-![MySQL同步](../assets/4.9.2.png)
+![MySQL 同步](../assets/4.9.2.png)
 
-如图所示，Smt可以根据MySQL和StarRocks的集群信息和表结构自动生成source table和sink table的建表语句。  
-通过Flink-cdc-connector消费MySQL的binlog，然后通过Flink-connector-starrocks写入StarRocks。
+如图所示，Smt 可以根据 MySQL 和 StarRocks 的集群信息和表结构自动生成 source table 和 sink table 的建表语句。  
+通过 Flink-cdc-connector 消费 MySQL 的 binlog，然后通过 Flink-connector-starrocks 写入 StarRocks。
 
 ### 使用说明
 
-1. 下载 [Flink](https://flink.apache.org/downloads.html), 推荐使用1.13，最低支持版本1.11。
-2. 下载 [Flink CDC connector](https://github.com/ververica/flink-cdc-connectors/releases)，请注意下载对应Flink版本的Flink-MySQL-CDC。
-3. 下载 [Flink StarRocks connector](https://github.com/StarRocks/flink-connector-starrocks)，请注意1.13版本和1.11/1.12版本使用不同的connector.
+1. 下载 [Flink](https://flink.apache.org/downloads.html), 推荐使用 1.13，最低支持版本 1.11。
+2. 下载 [Flink CDC connector](https://github.com/ververica/flink-cdc-connectors/releases)，请注意下载对应 Flink 版本的 Flink-MySQL-CDC。
+3. 下载 [Flink StarRocks connector](https://github.com/StarRocks/flink-connector-starrocks)，请注意 1.13 版本和 1.11/1.12 版本使用不同的 connector.
 4. 复制 `flink-sql-connector-mysql-cdc-xxx.jar`, `flink-connector-starrocks-xxx.jar` 到 `flink-xxx/lib/`
 5. 下载 [smt.tar.gz](https://www.starrocks.com/en-US/download/community)
 6. 解压并修改配置文件
-  `Db` 需要修改成MySQL的连接信息。  
-  `be_num` 需要配置成StarRocks集群的节点数（这个能帮助更合理的设置bucket数量）。  
-  `[table-rule.1]` 是匹配规则，可以根据正则表达式匹配数据库和表名生成建表的SQL，也可以配置多个规则。  
-  `flink.starrocks.*` 是StarRocks的集群配置信息，参考Flink.  
+  `Db` 需要修改成 MySQL 的连接信息。  
+  `be_num` 需要配置成 StarRocks 集群的节点数（这个能帮助更合理的设置 bucket 数量）。  
+  `[table-rule.1]` 是匹配规则，可以根据正则表达式匹配数据库和表名生成建表的 SQL，也可以配置多个规则。  
+  `flink.starrocks.*` 是 StarRocks 的集群配置信息，参考 Flink.  
   
     ```bash
     [db]
@@ -201,7 +201,7 @@ tEnv.executeSql(
     flink.starrocks.sink.buffer-flush.interval-ms=15000
     ```
 
-7. 执行starrocks-migrate-tool，所有建表语句都生成在result目录下
+7. 执行 starrocks-migrate-tool，所有建表语句都生成在 result 目录下
 
     ```bash
     $./starrocks-migrate-tool
@@ -210,21 +210,21 @@ tEnv.executeSql(
     flink-create.all.sql  starrocks-create.1.sql
     ```
 
-8. 生成StarRocks的表结构
+8. 生成 StarRocks 的表结构
 
     ```bash
     Mysql -hxx.xx.xx.x -P9030 -uroot -p < starrocks-create.1.sql
     ```
 
-9. 生成Flink table并开始同步
+9. 生成 Flink table 并开始同步
 
     ```bash
     bin/sql-client.sh -f flink-create.1.sql
     ```
 
     这个执行以后同步任务会持续执行
-    > 如果是Flink 1.13之前的版本可能无法直接执行脚本，需要逐行提交
-    注意 记得打开MySQL binlog
+    > 如果是 Flink 1.13 之前的版本可能无法直接执行脚本，需要逐行提交
+    注意 记得打开 MySQL binlog
 
 10. 观察任务状况
   
@@ -232,11 +232,11 @@ tEnv.executeSql(
     bin/flink list 
     ```
 
-  如果有任务请查看log日志，或者调整conf中的系统配置中内存和slot。
+  如果有任务请查看 log 日志，或者调整 conf 中的系统配置中内存和 slot。
 
 ### 注意事项
 
-1. 如果有多组规则，需要给每一组规则匹配database，table和 flink-connector的配置
+1. 如果有多组规则，需要给每一组规则匹配 database，table 和 flink-connector 的配置
 
     ```bash
     [table-rule.1]
@@ -280,7 +280,7 @@ tEnv.executeSql(
 
 3. 针对分库分表的大表可以单独配置一个规则，比如：有两个数据库 edu_db_1，edu_db_2，每个数据库下面分别有course_1，course_2 两张表，并且所有表的数据结构都是相同的，通过如下配置把他们导入StarRocks的一张表中进行分析。
 
-    ```bash
+    ``` bash
     [table-rule.3]
     # pattern to match databases for setting properties
     database = ^edu_db_[0-9]*$
@@ -304,7 +304,7 @@ tEnv.executeSql(
 
 4. 如果在sql-client中命令行执行建表和同步任务，需要做对'\'字符进行转义
 
-    ```bash
+    ``` bash
     'sink.properties.column_separator' = '\\x01'
     'sink.properties.row_delimiter' = '\\x02'  
     ```
@@ -312,17 +312,17 @@ tEnv.executeSql(
 5. 如何开启MySQL binlog  
   修改/etc/my.cnf
   
-    ```bash
-    #开启binlog日志
-    log-bin=/var/lib/mysql/mysql-bin
+    ``` bash
+    #开启 binlog 日志
+    log-bin =/var/lib/mysql/mysql-bin
 
-    #log_bin=ON
-    ##binlog日志的基本文件名
-    #log_bin_basename=/var/lib/mysql/mysql-bin
-    ##binlog文件的索引文件，管理所有binlog文件
-    #log_bin_index=/var/lib/mysql/mysql-bin.index
-    #配置serverid
-    server-id=1
+    #log_bin = ON
+    ##binlog 日志的基本文件名
+    #log_bin_basename =/var/lib/mysql/mysql-bin
+    ##binlog 文件的索引文件，管理所有 binlog 文件
+    #log_bin_index =/var/lib/mysql/mysql-bin.index
+    #配置 serverid
+    server-id = 1
     binlog_format = row
     ```
   

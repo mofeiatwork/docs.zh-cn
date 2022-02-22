@@ -1,6 +1,6 @@
 # 数据删除恢复
 
-StarRocks支持对误删除的数据库/表/分区进行数据恢复，在drop table或者 drop database之后，StarRocks不会立刻对数据进行物理删除，而是在Trash中保留一段时间（默认1天），管理员可以通过RECOVER命令对误删除的数据进行恢复
+StarRocks 支持对误删除的数据库/表/分区进行数据恢复，在 drop table 或者 drop database 之后，StarRocks 不会立刻对数据进行物理删除，而是在 Trash 中保留一段时间（默认 1 天），管理员可以通过 RECOVER 命令对误删除的数据进行恢复
 
 ## 相关命令
 
@@ -10,14 +10,14 @@ StarRocks支持对误删除的数据库/表/分区进行数据恢复，在drop t
 -- 1) 恢复 database
 RECOVER DATABASE db_name;
 -- 2) 恢复 table
-RECOVER TABLE [db_name.]table_name;
+RECOVER TABLE [db_name.] table_name;
 -- 3) 恢复 partition
-RECOVER PARTITION partition_name FROM [db_name.]table_name;
+RECOVER PARTITION partition_name FROM [db_name.] table_name;
 ~~~
 
 ## 重点说明
 
-1. 该操作仅能恢复之前一段时间内删除的元信息。默认为 1 天。（可通过fe.conf中catalog_trash_expire_second参数配置）
+1. 该操作仅能恢复之前一段时间内删除的元信息。默认为 1 天。（可通过 fe.conf 中 catalog_trash_expire_second 参数配置）
 2. 如果删除元信息后新建立了同名同类型的元信息，则之前删除的元信息不能被恢复
 
 ## 样例

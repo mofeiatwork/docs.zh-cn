@@ -29,4 +29,4 @@ MySQL > select date_add('2010-11-30 23:59:59', INTERVAL 2 DAY);
 
 ## keyword
 
-DATE_ADD,DATE,ADD
+DATE_ADD, DATE, ADD

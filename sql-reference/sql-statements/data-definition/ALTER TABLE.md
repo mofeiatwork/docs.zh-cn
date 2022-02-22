@@ -15,7 +15,7 @@ ALTER TABLE [database.]table
 alter_clause1[, alter_clause2, ...];
 ```
 
-alter_clause 分为 partition、rollup、schema change、rename、index和swap六种。
+alter_clause 分为 partition、rollup、schema change、rename、index 和 swap 六种。
 
 partition 支持如下几种修改方式
 
@@ -37,7 +37,7 @@ partition 支持如下几种修改方式
     2. 分区为左闭右开区间，如果用户仅指定右边界，系统会自动确定左边界
     3. 如果没有指定分桶方式，则自动使用建表使用的分桶方式
     4. 如指定分桶方式，只能修改分桶数，不可修改分桶方式或分桶列
-    5. ["key"="value"] 部分可以设置分区的一些属性，具体说明见 CREATE TABLE
+    5. ["key" = "value"] 部分可以设置分区的一些属性，具体说明见 CREATE TABLE
 
 2. 删除分区
 
@@ -84,7 +84,7 @@ rollup 支持如下几种创建方式：
     [PROPERTIES ("key"="value", ...)]
     ```
 
-    properties: 支持设置超时时间，默认超时时间为1天。
+    properties: 支持设置超时时间，默认超时时间为 1 天。
 
     例子：
 
@@ -134,7 +134,7 @@ rollup 支持如下几种创建方式：
     DROP ROLLUP [rollup_name [PROPERTIES ("key"="value", ...)],...]
     ```
 
-    例子：DROP ROLLUP r1,r2
+    例子：DROP ROLLUP r1, r2
     2.2 注意：
     1. 不能删除 base index
 
@@ -172,8 +172,8 @@ rollup 支持如下几种创建方式：
 
     注意：
 
-    1. 聚合模型如果增加 value 列，需要指定agg_type
-    2. 非聚合模型如果增加key列，需要指定KEY关键字
+    1. 聚合模型如果增加 value 列，需要指定 agg_type
+    2. 非聚合模型如果增加 key 列，需要指定 KEY 关键字
     3. 不能在 rollup index 中增加 base index 中已经存在的列
     （如有需要，可以重新创建一个 rollup index）
 
@@ -203,7 +203,7 @@ rollup 支持如下几种创建方式：
 
     注意：
     1. 聚合模型如果修改 value 列，需要指定 agg_type
-    2. 非聚合类型如果修改key列，需要指定KEY关键字
+    2. 非聚合类型如果修改 key 列，需要指定 KEY 关键字
     3. 只能修改列的类型，列的其他属性维持原样（即其他属性需在语句中按照原属性显式的写出，参见 example 8）
     4. 分区列不能做任何修改
     5. 目前支持以下类型的转换（精度损失由用户保证）
@@ -211,12 +211,12 @@ rollup 支持如下几种创建方式：
     TINTINT/SMALLINT/INT/BIGINT/LARGEINT/FLOAT/DOUBLE/DECIMAL 转换成 VARCHAR
     VARCHAR 支持修改最大长度
     VARCHAR 转换成 TINTINT/SMALLINT/INT/BIGINT/LARGEINT/FLOAT/DOUBLE
-    VARCHAR 转换成 DATE (目前支持"%Y-%m-%d", "%y-%m-%d", "%Y%m%d", "%y%m%d", "%Y/%m/%d, "%y/%m/%d"六种格式化格式)
+    VARCHAR 转换成 DATE (目前支持 "%Y-%m-%d", "%y-%m-%d", "%Y%m%d", "%y%m%d", "%Y/%m/%d, "%y/%m/%d " 六种格式化格式)
     DATETIME 转换成 DATE(仅保留年-月-日信息, 例如: `2019-12-09 21:47:05` <--> `2019-12-09`)
     DATE 转换成 DATETIME(时分秒自动补零，例如: `2019-12-09` <--> `2019-12-09 00:00:00`)
     FLOAT 转换成 DOUBLE
-    INT 转换成 DATE (如果INT类型数据不合法则转换失败，原始数据不变)
-    6. 不支持从NULL转为NOT NULL
+    INT 转换成 DATE (如果 INT 类型数据不合法则转换失败，原始数据不变)
+    6. 不支持从 NULL 转为 NOT NULL
 
 10. 对指定 index 的列进行重新排序
 
@@ -232,7 +232,7 @@ rollup 支持如下几种创建方式：
     1. index 中的所有列都要写出来
     2. value 列在 key 列之后
 
-11. 修改table的属性，目前支持修改bloom filter列, colocate_with 属性和dynamic_partition属性，replication_num和default.replication_num属性
+11. 修改 table 的属性，目前支持修改 bloom filter 列, colocate_with 属性和 dynamic_partition 属性，replication_num 和 default.replication_num 属性
 
     语法：
 
@@ -241,7 +241,7 @@ rollup 支持如下几种创建方式：
     ```
 
     注意：
-    也可以合并到上面的schema change操作中来修改，见下面例子
+    也可以合并到上面的 schema change 操作中来修改，见下面例子
 
     rename 支持对以下名称进行修改：
 
@@ -273,7 +273,7 @@ rollup 支持如下几种创建方式：
 
 bitmap index 支持如下几种修改方式
 
-1. 创建bitmap 索引
+1. 创建 bitmap 索引
 
     语法：
 
@@ -384,7 +384,7 @@ bitmap index 支持如下几种修改方式
 
 [rollup]
 
-1. 创建 index: example_rollup_index，基于 base index（k1,k2,k3,v1,v2）。列式存储。
+1. 创建 index: example_rollup_index，基于 base index（k1, k2, k3, v1, v2）。列式存储。
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -392,7 +392,7 @@ bitmap index 支持如下几种修改方式
     PROPERTIES("storage_type"="column");
     ```
 
-2. 创建 index: example_rollup_index2，基于 example_rollup_index（k1,k3,v1,v2）
+2. 创建 index: example_rollup_index2，基于 example_rollup_index（k1, k3, v1, v2）
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -400,7 +400,7 @@ bitmap index 支持如下几种修改方式
     FROM example_rollup_index;
     ```
 
-3. 创建 index: example_rollup_index3, 基于 base index (k1,k2,k3,v1), 自定义 rollup 超时时间一小时。
+3. 创建 index: example_rollup_index3, 基于 base index (k1, k2, k3, v1), 自定义 rollup 超时时间一小时。
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -417,7 +417,7 @@ bitmap index 支持如下几种修改方式
 
 [SchemaChange]
 
-1. 向 example_rollup_index 的 col1 后添加一个key列 new_col(非聚合模型)
+1. 向 example_rollup_index 的 col1 后添加一个 key 列 new_col(非聚合模型)
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -425,7 +425,7 @@ bitmap index 支持如下几种修改方式
     TO example_rollup_index;
     ```
 
-2. 向example_rollup_index的col1后添加一个value列new_col(非聚合模型)
+2. 向 example_rollup_index 的 col1 后添加一个 value 列 new_col(非聚合模型)
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -433,7 +433,7 @@ bitmap index 支持如下几种修改方式
     TO example_rollup_index;
     ```
 
-3. 向example_rollup_index的col1后添加一个key列new_col(聚合模型)
+3. 向 example_rollup_index 的 col1 后添加一个 key 列 new_col(聚合模型)
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -441,7 +441,7 @@ bitmap index 支持如下几种修改方式
     TO example_rollup_index;
     ```
 
-4. 向example_rollup_index的col1后添加一个value列new_col SUM聚合类型(聚合模型)
+4. 向 example_rollup_index 的 col1 后添加一个 value 列 new_col SUM 聚合类型(聚合模型)
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -479,7 +479,7 @@ bitmap index 支持如下几种修改方式
     MODIFY COLUMN val1 VARCHAR(64) REPLACE DEFAULT "abc";
     ```
 
-9. 重新排序 example_rollup_index 中的列（设原列顺序为：k1,k2,k3,v1,v2）
+9. 重新排序 example_rollup_index 中的列（设原列顺序为：k1, k2, k3, v1, v2）
 
     ```sql
     ALTER TABLE example_db.my_table
@@ -509,7 +509,7 @@ bitmap index 支持如下几种修改方式
     PROPERTIES ("bloom_filter_columns"="k1,k2,k3");
     ```
 
-12. 修改表的Colocate 属性
+12. 修改表的 Colocate 属性
 
     ```sql
     ALTER TABLE example_db.my_table set ("colocate_with" = "t1");
@@ -561,13 +561,13 @@ bitmap index 支持如下几种修改方式
 
 [index]
 
-1. 在table1 上为siteid 创建bitmap 索引
+1. 在 table1 上为 siteid 创建 bitmap 索引
 
     ```sql
     ALTER TABLE table1 ADD INDEX index_name (siteid) [USING BITMAP] COMMENT 'balabala';
     ```
 
-2. 删除table1 上的siteid列的bitmap 索引
+2. 删除 table1 上的 siteid 列的 bitmap 索引
 
     ```sql
     ALTER TABLE table1 DROP INDEX index_name;
@@ -575,7 +575,7 @@ bitmap index 支持如下几种修改方式
 
 [swap]
 
-1. 将table1与table2原子替换
+1. 将 table1 与 table2 原子替换
 
     ```sql
     ALTER TABLE table1 SWAP WITH table2
@@ -583,4 +583,4 @@ bitmap index 支持如下几种修改方式
 
 ## keyword
 
-ALTER,TABLE,ROLLUP,COLUMN,PARTITION,RENAME,SWAP
+ALTER, TABLE, ROLLUP, COLUMN, PARTITION, RENAME, SWAP

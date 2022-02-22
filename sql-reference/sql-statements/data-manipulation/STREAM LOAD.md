@@ -102,28 +102,28 @@ SHOW LOAD WARNINGS ON 'url'
 
 ## example
 
-1. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表，使用Label用于去重。指定超时时间为 100 秒
+1. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表，使用 Label 用于去重。指定超时时间为 100 秒
 
     ```bash
     curl --location-trusted -u root -H "label:123" -H "timeout:100" -T testData \
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-2. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表，使用Label用于去重, 并且只导入k1等于20180601的数据
+2. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表，使用 Label 用于去重, 并且只导入 k1 等于 20180601 的数据
 
     ```bash
     curl --location-trusted -u root -H "label:123" -H "where: k1=20180601" -T testData \
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-3. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表, 允许20%的错误率（用户是defalut_cluster中的）
+3. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表, 允许 20%的错误率（用户是 defalut_cluster 中的）
 
     ```bash
     curl --location-trusted -u root -H "label:123" -H "max_filter_ratio:0.2" -T testData \
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-4. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表, 允许20%的错误率，并且指定文件的列名（用户是defalut_cluster中的）
+4. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表, 允许 20%的错误率，并且指定文件的列名（用户是 defalut_cluster 中的）
 
     ```bash
     curl --location-trusted -u root  -H "label:123" -H "max_filter_ratio:0.2" \
@@ -131,7 +131,7 @@ SHOW LOAD WARNINGS ON 'url'
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-5. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表中的p1, p2分区, 允许20%的错误率。
+5. 将本地文件'testData'中的数据导入到数据库'testDb'中'testTbl'的表中的 p1, p2 分区, 允许 20%的错误率。
 
     ```bash
     curl --location-trusted -u root  -H "label:123" -H "max_filter_ratio:0.2" \
@@ -139,14 +139,14 @@ SHOW LOAD WARNINGS ON 'url'
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-6. 使用streaming方式导入（用户是defalut_cluster中的）
+6. 使用 streaming 方式导入（用户是 defalut_cluster 中的）
 
     ```sql
     seq 1 10 | awk '{OFS="\t"}{print $1, $1 * 10}' | curl --location-trusted -u root -T - \
      http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-7. 导入含有HLL列的表，可以是表中的列或者数据中的列用于生成HLL列，也可使用hll_empty补充数据中没有的列
+7. 导入含有 HLL 列的表，可以是表中的列或者数据中的列用于生成 HLL 列，也可使用 hll_empty 补充数据中没有的列
 
     ```bash
     curl --location-trusted -u root \
@@ -162,7 +162,7 @@ SHOW LOAD WARNINGS ON 'url'
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-9. 导入含有BITMAP列的表，可以是表中的列或者数据中的列用于生成BITMAP列，也可以使用bitmap_empty填充空的Bitmap
+9. 导入含有 BITMAP 列的表，可以是表中的列或者数据中的列用于生成 BITMAP 列，也可以使用 bitmap_empty 填充空的 Bitmap
 
     ```bash
     curl --location-trusted -u root \
@@ -170,7 +170,7 @@ SHOW LOAD WARNINGS ON 'url'
         http://host:port/api/testDb/testTbl/_stream_load
     ```
 
-10. 简单模式，导入json数据
+10. 简单模式，导入 json 数据
 
     ```plain text
     表结构：
@@ -191,7 +191,7 @@ SHOW LOAD WARNINGS ON 'url'
     ]
     ```
 
-11. 匹配模式，导入json数据
+11. 匹配模式，导入 json 数据
 
     ```plain text
     json数据格式：
@@ -212,7 +212,7 @@ SHOW LOAD WARNINGS ON 'url'
     2）如果json数据是以数组开始，并且数组中每个对象是一条记录，在设置jsonpath时，我们的ROOT节点实际上是数组中对象。
     ```
 
-12. 用户指定json根节点
+12. 用户指定 json 根节点
 
     ```plain text
     json数据格式:
@@ -231,4 +231,4 @@ SHOW LOAD WARNINGS ON 'url'
 
 ## keyword
 
-STREAM,LOAD
+STREAM, LOAD

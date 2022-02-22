@@ -1,8 +1,8 @@
 # 导出总览
 
-数据导出（Export）是 StarRocks 提供的一种将数据导出并存储到其他介质上的功能。该功能可以将用户指定的表或分区的数据，以**文本**的格式，通过 Broker 进程导出到远端存储上，如 HDFS/阿里云OSS/AWS S3（或者兼容S3协议的对象存储） 等。
+数据导出（Export）是 StarRocks 提供的一种将数据导出并存储到其他介质上的功能。该功能可以将用户指定的表或分区的数据，以 **文本** 的格式，通过 Broker 进程导出到远端存储上，如 HDFS/阿里云 OSS/AWS S3（或者兼容 S3 协议的对象存储） 等。
 
-本章介绍StarRocks数据导出的基本原理、使用方式、最佳实践以及注意事项。
+本章介绍 StarRocks 数据导出的基本原理、使用方式、最佳实践以及注意事项。
 
 ## 名词解释
 
@@ -13,7 +13,7 @@
 
 ### 导出作业的执行流程
 
-用户提交一个**导出作业**后，StarRocks 会统计这个作业涉及的所有 Tablet，然后对这些 Tablet 进行**分组**，**每组生成一个**特殊的**查询计划**。该**查询计划**会读取所包含的 Tablet 上的数据，然后通过 Broker 将数据写到远端存储指定的路径中。
+用户提交一个 **导出作业** 后，StarRocks 会统计这个作业涉及的所有 Tablet，然后对这些 Tablet 进行 **分组**，**每组生成一个** 特殊的 **查询计划**。该 **查询计划** 会读取所包含的 Tablet 上的数据，然后通过 Broker 将数据写到远端存储指定的路径中。
 
 导出作业的总体处理流程如下:
 
@@ -24,15 +24,15 @@
 1. 用户提交一个 Export 作业到 FE。
 2. FE 的导出调度器会通过两阶段来执行一个导出作业：
 
-    a.  PENDING：FE 生成**一个** ExportPendingTask，向 BE 发送 snapshot 命令，对所有涉及到的 Tablet 做一个快照，并生成**多个**查询计划。
+    a.  PENDING：FE 生成 **一个** ExportPendingTask，向 BE 发送 snapshot 命令，对所有涉及到的 Tablet 做一个快照，并生成 **多个** 查询计划。
 
-    b.  EXPORTING：FE 生成**一个** ExportExportingTask，开始执行**一个个**的查询计划。
+    b.  EXPORTING：FE 生成 **一个** ExportExportingTask，开始执行 **一个个** 的查询计划。
 
 ### 查询计划拆分
 
-Export 作业会生成多个查询计划，每个查询计划负责扫描一部分 Tablet。每个查询计划中**每个 BE** 扫描的数据量由 FE 配置参数 `export_max_bytes_per_be_per_task` 计算得到，默认为 256M。每个查询计划中每个 BE 最少一个 Tablet，最多导出的数据量不超过配置的参数 `export_max_bytes_per_be_per_task`。
+Export 作业会生成多个查询计划，每个查询计划负责扫描一部分 Tablet。每个查询计划中 **每个 BE** 扫描的数据量由 FE 配置参数 `export_max_bytes_per_be_per_task` 计算得到，默认为 256M。每个查询计划中每个 BE 最少一个 Tablet，最多导出的数据量不超过配置的参数 `export_max_bytes_per_be_per_task`。
 
-一个作业的多个查询计划**并行执行**，任务线程池的大小通过 FE 参数 `export_task_pool_size` 配置，默认为 5。
+一个作业的多个查询计划 **并行执行**，任务线程池的大小通过 FE 参数 `export_task_pool_size` 配置，默认为 5。
 
 ### 查询计划执行
 
@@ -48,20 +48,20 @@ StarRocks 会首先在指定的远端存储的路径中，建立一个名为 `__
 
 * `1615471540361` 为时间戳，用于保证重试生成的文件不冲突。
 
-当所有数据都导出后，StarRocks 会将这些文件 **rename** 到用户指定的路径中，rename的时候会去掉后面的时间戳。最终导出的文件名示例：
+当所有数据都导出后，StarRocks 会将这些文件 **rename** 到用户指定的路径中，rename 的时候会去掉后面的时间戳。最终导出的文件名示例：
 
 `lineorder_921d8f80-7c9d-11eb-9342-acde48001122_1_2_0.csv`
 
 其中:
 
-* `lineorder_`：为导出文件的前缀，由用户指定到导出路径中，不指定默认为`data_`。
+* `lineorder_`：为导出文件的前缀，由用户指定到导出路径中，不指定默认为 `data_`。
 * `921d8f80-7c9d-11eb-9342-acde48001122`：为作业的 query id。文件名默认包含 query id，指定参数 include_query_id = false 后不包含。
-* `1_2_0`：分为三部分，第一部分为**查询计划**对应任务的序号，第二部分为任务中**实例**的序号，第三部分为一个实例中**生成文件**的序号。
+* `1_2_0`：分为三部分，第一部分为 **查询计划** 对应任务的序号，第二部分为任务中 **实例** 的序号，第三部分为一个实例中 **生成文件** 的序号。
 * `csv`：为导出文件格式，目前只支持 csv 格式。
 
 #### Broker 参数
 
-导出作业需要借助 Broker 进程访问远端存储，不同的 Broker 需要提供不同的参数，具体请参阅 Broker文档。
+导出作业需要借助 Broker 进程访问远端存储，不同的 Broker 需要提供不同的参数，具体请参阅 Broker 文档。
 
 ### 使用示例
 
@@ -71,13 +71,13 @@ StarRocks 会首先在指定的远端存储的路径中，建立一个名为 `__
 
 ~~~sql
 EXPORT TABLE db1.tbl1 
-PARTITION (p1,p2)
+PARTITION (p1, p2)
 (col1, col3)
 TO "hdfs://host/path/to/export/lineorder_" 
 PROPERTIES
 (
-    "column_separator"=",",
-    "load_mem_limit"="2147483648",
+    "column_separator" = ",",
+    "load_mem_limit" = "2147483648",
     "timeout" = "3600"
 )
 WITH BROKER "hdfs"
@@ -91,14 +91,14 @@ WITH BROKER "hdfs"
 
 可以指定需要导出的列，顺序可以跟 schema 不同，不写默认导出表中所有列。
 
-导出路径**如果指定到目录**，需要指定最后的`/`，否则最后的部分会被当做导出文件的前缀。不指定前缀默认为`data_`。
+导出路径 **如果指定到目录**，需要指定最后的 `/`，否则最后的部分会被当做导出文件的前缀。不指定前缀默认为 `data_`。
 示例中导出文件会生成到 export 目录中，文件前缀为 `lineorder_`。
 
-PROPERTIES如下：
+PROPERTIES 如下：
 
 * `column_separator`：列分隔符。默认为 `\t`。
 * `line_delimiter`：行分隔符。默认为 `\n`。
-* `load_mem_limit`： 表示 Export 作业中，**一个查询计划**在**单个 BE** 上的内存使用限制。默认 2GB。单位字节。
+* `load_mem_limit`： 表示 Export 作业中，**一个查询计划** 在 **单个 BE** 上的内存使用限制。默认 2GB。单位字节。
 * `timeout`：作业超时时间。默认为 2 小时。单位秒。
 * `include_query_id`: 导出文件名中是否包含 query id，默认为 true。
 
@@ -120,11 +120,11 @@ SHOW EXPORT WHERE queryid = "921d8f80-7c9d-11eb-9342-acde48001122";
      JobId: 14008
      State: FINISHED
   Progress: 100%
-  TaskInfo: {"partitions":["*"],"mem limit":2147483648,"column separator":",","line delimiter":"\n","tablet num":1,"broker":"hdfs","coord num":1,"db":"default_cluster:db1","tbl":"tbl3",columns:["col1", "col3"]}
+  TaskInfo: {"partitions":["*"]," mem limit ": 2147483648," column separator ":", "," line delimiter ":"\n "," tablet num ": 1," broker ":" hdfs "," coord num ": 1," db ":" default_cluster: db1 "," tbl ":" tbl3 ", columns:[" col1 ", " col3 "]}
       Path: oss://bj-test/export/
-CreateTime: 2019-06-25 17:08:24
- StartTime: 2019-06-25 17:08:28
-FinishTime: 2019-06-25 17:08:34
+CreateTime: 2019-06-25 17: 08: 24
+ StartTime: 2019-06-25 17: 08: 28
+FinishTime: 2019-06-25 17: 08: 34
    Timeout: 3600
   ErrorMsg: N/A
 ~~~
@@ -180,8 +180,8 @@ CANCEL EXPORT WHERE queryid = "921d8f80-7c9d-11eb-9342-acde48001122";
 * 不建议一次性导出大量数据。一个 Export 作业建议的导出数据量最大在几十 GB。过大的导出会导致更多的垃圾文件和更高的重试成本。
 * 如果表数据量过大，建议按照分区导出。
 * 在 Export 作业运行过程中，如果 FE 发生重启或切主，则 Export 作业会失败，需要用户重新提交。
-* Export 作业产生的`__starrocks_export_tmp_xxx`临时目录，作业失败或成功后会自动删除。
-* 当 Export 运行完成后（成功或失败），FE 发生重启或切主，则`SHOW EXPORT`展示的作业的部分信息会丢失，无法查看。
+* Export 作业产生的 `__starrocks_export_tmp_xxx` 临时目录，作业失败或成功后会自动删除。
+* 当 Export 运行完成后（成功或失败），FE 发生重启或切主，则 `SHOW EXPORT` 展示的作业的部分信息会丢失，无法查看。
 * Export 作业只会导出 Base 表的数据，不会导出 Rollup Index 的数据。
 * Export 作业会扫描数据，占用 IO 资源，可能会影响系统的查询延迟。
 

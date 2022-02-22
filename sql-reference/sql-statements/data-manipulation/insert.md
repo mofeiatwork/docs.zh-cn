@@ -40,9 +40,9 @@ hint: 用于指示 `INSERT` 执行行为的一些指示符。`streaming` 和 默
 
 ## example
 
-`test` 表包含两个列`c1`, `c2`。
+`test` 表包含两个列 `c1`, `c2`。
 
-1. 向`test`表中导入一行数据
+1. 向 `test` 表中导入一行数据
 
     ```sql
     INSERT INTO test VALUES (1, 2);
@@ -52,9 +52,9 @@ hint: 用于指示 `INSERT` 执行行为的一些指示符。`streaming` 和 默
     ```
 
     其中第一条、第二条语句是一样的效果。在不指定目标列时，使用表中的列顺序来作为默认的目标列。
-    第三条、第四条语句表达的意思是一样的，使用`c2`列的默认值，来完成数据导入。
+    第三条、第四条语句表达的意思是一样的，使用 `c2` 列的默认值，来完成数据导入。
 
-2. 向`test`表中一次性导入多行数据
+2. 向 `test` 表中一次性导入多行数据
 
     ```sql
     INSERT INTO test VALUES (1, 2), (3, 2 + 2);
@@ -63,8 +63,8 @@ hint: 用于指示 `INSERT` 执行行为的一些指示符。`streaming` 和 默
     INSERT INTO test (c1, c2) VALUES (1, DEFAULT), (3, DEFAULT);
     ```
 
-    其中第一条、第二条语句效果一样，向`test`表中一次性导入两条数据
-    第三条、第四条语句效果已知，使用`c2`列的默认值向`test`表中导入两条数据
+    其中第一条、第二条语句效果一样，向 `test` 表中一次性导入两条数据
+    第三条、第四条语句效果已知，使用 `c2` 列的默认值向 `test` 表中导入两条数据
 
 3. 向 `test` 表中导入一个查询语句结果
 
@@ -80,9 +80,9 @@ hint: 用于指示 `INSERT` 执行行为的一些指示符。`streaming` 和 默
     INSERT INTO test WITH LABEL `label1` (c1, c2) SELECT * from test2;
     ```
 
-    异步的导入其实是，一个同步的导入封装成了异步。填写 streaming 和不填写的**执行效率是一样**的。
+    异步的导入其实是，一个同步的导入封装成了异步。填写 streaming 和不填写的 **执行效率是一样** 的。
 
-    由于StarRocks之前的导入方式都是异步导入方式，为了兼容旧有的使用习惯，不加 streaming 的 `INSERT` 语句依旧会返回一个 label，用户需要通过`SHOW LOAD`命令查看此`label`导入作业的状态。
+    由于 StarRocks 之前的导入方式都是异步导入方式，为了兼容旧有的使用习惯，不加 streaming 的 `INSERT` 语句依旧会返回一个 label，用户需要通过 `SHOW LOAD` 命令查看此 `label` 导入作业的状态。
 
 ## keyword
 

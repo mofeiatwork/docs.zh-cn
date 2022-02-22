@@ -34,4 +34,4 @@ TRUNCATE TABLE [db.]tbl[ PARTITION(p1, p2, ...)];
 
 ## keyword
 
-TRUNCATE,TABLE
+TRUNCATE, TABLE

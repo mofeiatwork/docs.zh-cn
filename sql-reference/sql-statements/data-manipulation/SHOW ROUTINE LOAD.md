@@ -42,4 +42,4 @@
 
 ## keyword
 
-SHOW,ROUTINE,LOAD
+SHOW, ROUTINE, LOAD

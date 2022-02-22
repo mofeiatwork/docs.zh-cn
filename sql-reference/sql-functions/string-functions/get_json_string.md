@@ -62,4 +62,4 @@ path 的内容不能包含 ", [ 和 ]。
 
 ## keyword
 
-GET_JSON_STRING,GET,JSON,STRING
+GET_JSON_STRING, GET, JSON, STRING

@@ -8,7 +8,7 @@
 DATE FROM_DAYS(INT N)
 ```
 
-通过距离0000-01-01日的天数计算出哪一天
+通过距离 0000-01-01 日的天数计算出哪一天
 
 ## example
 
@@ -23,4 +23,4 @@ MySQL > select from_days(730669);
 
 ## keyword
 
-FROM_DAYS,FROM,DAYS
+FROM_DAYS, FROM, DAYS

@@ -11,7 +11,7 @@
 
 语法：
 
-```sql
+``` sql
 CREATE MATERIALIZED VIEW [MV name] as [query]
 [PROPERTIES ("key" = "value")]
 ```
@@ -26,11 +26,11 @@ CREATE MATERIALIZED VIEW [MV name] as [query]
 
     用于构建物化视图的查询语句，查询语句的结果既物化视图的数据。目前支持的 query 格式为:
 
-    ```sql
-    SELECT select_expr[, select_expr ...]
+    ``` sql
+    SELECT select_expr [, select_expr ...]
     FROM [Base view name]
-    GROUP BY column_name[, column_name ...]
-    ORDER BY column_name[, column_name ...]
+    GROUP BY column_name [, column_name ...]
+    ORDER BY column_name [, column_name ...]
     ```
 
     语法和查询语句语法一致。
@@ -58,7 +58,7 @@ CREATE MATERIALIZED VIEW [MV name] as [query]
 
     声明物化视图的一些配置，选填项。
 
-    ```sql
+    ``` sql
 
     PROPERTIES ("key" = "value", "key" = "value" ...)
     ```
@@ -72,8 +72,8 @@ CREATE MATERIALIZED VIEW [MV name] as [query]
 
 Base 表结构为
 
-```Plain Text
-mysql> desc duplicate_table;
+``` Plain Text
+mysql > desc duplicate_table;
 +-------+--------+------+------+---------+-------+
 | Field | Type   | Null | Key  | Default | Extra |
 +-------+--------+------+------+---------+-------+
@@ -86,14 +86,14 @@ mysql> desc duplicate_table;
 
 1. 创建一个仅包含原始表 （k1, k2）列的物化视图
 
-    ```sql
+    ``` sql
     create materialized view k1_k2 as
     select k1, k2 from duplicate_table;
     ```
 
     物化视图的 schema 如下图，物化视图仅包含两列 k1, k2 且不带任何聚合
 
-    ```plain text
+    ``` plain text
     +-----------------+-------+--------+------+------+---------+-------+
     | IndexName       | Field | Type   | Null | Key  | Default | Extra |
     +-----------------+-------+--------+------+------+---------+-------+
@@ -104,14 +104,14 @@ mysql> desc duplicate_table;
 
 2. 创建一个以 k2 为排序列的物化视图
 
-    ```sql
+    ``` sql
     create materialized view k2_order as
     select k2, k1 from duplicate_table order by k2;
     ```
 
     物化视图的 schema 如下图，物化视图仅包含两列 k2, k1，其中 k2 列为排序列，不带任何聚合。
 
-    ```plain text
+    ``` plain text
     +-----------------+-------+--------+------+-------+---------+-------+
     | IndexName       | Field | Type   | Null | Key   | Default | Extra |
     +-----------------+-------+--------+------+-------+---------+-------+
@@ -122,7 +122,7 @@ mysql> desc duplicate_table;
 
 3. 创建一个以 k1, k2 分组，k3 列为 SUM 聚合的物化视图
 
-    ```sql
+    ``` sql
     create materialized view k1_k2_sumk3 as
     select k1, k2, sum(k3) from duplicate_table group by k1, k2;
     ```
@@ -131,7 +131,7 @@ mysql> desc duplicate_table;
 
     由于物化视图没有声明排序列，且物化视图带聚合数据，系统默认补充分组列 k1, k2 为排序列。
 
-    ```plain text
+    ``` plain text
     +-----------------+-------+--------+------+-------+---------+-------+
     | IndexName       | Field | Type   | Null | Key   | Default | Extra |
     +-----------------+-------+--------+------+-------+---------+-------+
@@ -143,14 +143,14 @@ mysql> desc duplicate_table;
 
 4. 创建一个去除重复行的物化视图
 
-    ```sql
+    ``` sql
     create materialized view deduplicate as
     select k1, k2, k3, k4 from duplicate_table group by k1, k2, k3, k4;
     ```
 
     物化视图 schema 如下图，物化视图包含 k1, k2, k3, k4列，且不存在重复行。
 
-    ```plain text
+    ``` plain text
     +-----------------+-------+--------+------+-------+---------+-------+
     | IndexName       | Field | Type   | Null | Key   | Default | Extra |
     +-----------------+-------+--------+------+-------+---------+-------+
@@ -166,7 +166,7 @@ mysql> desc duplicate_table;
 
     all_type_table 的 schema 如下：
 
-    ```plain text
+    ``` plain text
     +-------+--------------+------+-------+---------+-------+
     | Field | Type         | Null | Key   | Default | Extra |
     +-------+--------------+------+-------+---------+-------+
@@ -182,7 +182,7 @@ mysql> desc duplicate_table;
 
     物化视图包含 k3, k4, k5, k6, k7 列，且不声明排序列，则创建语句如下：
 
-    ```sql
+    ``` sql
     create materialized view mv_1 as
     select k3, k4, k5, k6, k7 from all_type_table;
     ```
@@ -190,7 +190,7 @@ mysql> desc duplicate_table;
     系统默认补充的排序列为 k3, k4, k5 三列。这三列类型的字节数之和为 4(INT) + 8(BIGINT) + 16(DECIMAL) = 28 < 36。所以补充的是这三列作为排序列。
     物化视图的 schema 如下，可以看到其中 k3, k4, k5 列的 key 字段为 true，也就是排序列。k6, k7 列的 key 字段为 false，也就是非排序列。
 
-    ```plain text
+    ``` plain text
     +----------------+-------+--------------+------+-------+---------+-------+
     | IndexName      | Field | Type         | Null | Key   | Default | Extra |
     +----------------+-------+--------------+------+-------+---------+-------+

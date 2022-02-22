@@ -8,9 +8,9 @@
 INT MINUTE(DATETIME date)
 ```
 
-获得日期中的分钟的信息，返回值范围从0-59。
+获得日期中的分钟的信息，返回值范围从 0-59。
 
-参数为Date或者Datetime类型
+参数为 Date 或者 Datetime 类型
 
 ## example
 

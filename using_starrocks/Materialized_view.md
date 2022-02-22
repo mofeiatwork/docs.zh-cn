@@ -5,9 +5,9 @@
 
 物化视图的一般定义是：它一种包含一个查询结果的数据库对象，它可以是远端数据的一份本地拷贝，也可以是一个表或一个 join 结果的行/列的一个子集，还可以是使用聚合函数的一个汇总。相对于普通的逻辑视图，将数据「物化」后，能够带来查询性能的提升。
 
-> 系统目前还不支持join，更多注意事项请参看 [注意事项](#注意事项)。
+> 系统目前还不支持 join，更多注意事项请参看 [注意事项](#注意事项)。
 
-在本系统中，物化视图会被更多地用来当做一种预先计算的技术，同RollUp表，预先计算是为了减少查询时现场计算量，从而降低查询延迟。RollUp 表有两种使用方式：对明细表的任意维度组合进行预先聚合；采用新的维度列排序方式，以命中更多的前缀查询条件。当然也可以两种方式一起使用。物化视图的功能是 RollUp 表的超集，原有的 RollUp 功能都可通过物化视图来实现。
+在本系统中，物化视图会被更多地用来当做一种预先计算的技术，同 RollUp 表，预先计算是为了减少查询时现场计算量，从而降低查询延迟。RollUp 表有两种使用方式：对明细表的任意维度组合进行预先聚合；采用新的维度列排序方式，以命中更多的前缀查询条件。当然也可以两种方式一起使用。物化视图的功能是 RollUp 表的超集，原有的 RollUp 功能都可通过物化视图来实现。
 
 <br/>
 
@@ -21,7 +21,7 @@
 
 ## 原理
 
-物化视图的数据组织形式和基表、RollUp表相同。用户可以在新建的基表时添加物化视图，也可以对已有表添加物化视图，这种情况下，基表的数据会自动以**异步**方式填充到物化视图中。基表可以拥有多张物化视图，向基表导入数据时，会**同时**更新基表的所有物化视图。数据导入操作具有**原子性**，因此基表和它的物化视图保持数据一致。
+物化视图的数据组织形式和基表、RollUp 表相同。用户可以在新建的基表时添加物化视图，也可以对已有表添加物化视图，这种情况下，基表的数据会自动以 **异步** 方式填充到物化视图中。基表可以拥有多张物化视图，向基表导入数据时，会 **同时** 更新基表的所有物化视图。数据导入操作具有 **原子性**，因此基表和它的物化视图保持数据一致。
 
 物化视图创建成功后，用户的原有的查询基表的 SQL 语句保持不变，StarRocks 会自动选择一个最优的物化视图，从物化视图中读取数据并计算。用户可以通过 EXPLAIN 命令来检查当前查询是否使用了物化视图。
 
@@ -58,7 +58,7 @@ CREATE MATERIALIZED VIEW
 HELP CREATE MATERIALIZED VIEW
 ~~~
 
-假设用户有一张销售记录明细表，存储了每个交易的交易id、销售员、售卖门店、销售时间、以及金额。建表语句为：
+假设用户有一张销售记录明细表，存储了每个交易的交易 id、销售员、售卖门店、销售时间、以及金额。建表语句为：
 
 ~~~SQL
 CREATE TABLE sales_records(
@@ -74,7 +74,7 @@ properties("replication_num" = "1");
 表 sales_records 的结构为:
 
 ~~~PlainText
-MySQL [test]> desc sales_records;
+MySQL [test] > desc sales_records;
 
 +-----------+--------+------+-------+---------+-------+
 | Field     | Type   | Null | Key   | Default | Extra |
@@ -96,7 +96,7 @@ FROM sales_records
 GROUP BY store_id;
 ~~~
 
-更详细物化视图创建语法请参看SQL参考手册 [CREATE MATERIALIZED VIEW](../sql-reference/sql-statements/data-definition/CREATE%20MATERIALIZED%20VIEW.md) ，或者在 MySQL 客户端使用命令 `help create materialized view` 获得帮助。
+更详细物化视图创建语法请参看 SQL 参考手册 [CREATE MATERIALIZED VIEW](../sql-reference/sql-statements/data-definition/CREATE%20MATERIALIZED%20VIEW.md) ，或者在 MySQL 客户端使用命令 `help create materialized view` 获得帮助。
 
 <br/>
 
@@ -114,7 +114,7 @@ SHOW ALTER MATERIALIZED VIEW FROM db_name;
 SHOW ALTER TABLE ROLLUP FROM db_name;
 ~~~
 
-> db_name：替换成真实的 db name，比如"test"。
+> db_name：替换成真实的 db name，比如 "test"。
 
 查询结果为:
 
@@ -122,7 +122,7 @@ SHOW ALTER TABLE ROLLUP FROM db_name;
 +-------+---------------+---------------------+---------------------+---------------+-----------------+----------+---------------+----------+------+----------+---------+
 | JobId | TableName     | CreateTime          | FinishedTime        | BaseIndexName | RollupIndexName | RollupId | TransactionId | State    | Msg  | Progress | Timeout |
 +-------+---------------+---------------------+---------------------+---------------+-----------------+----------+---------------+----------+------+----------+---------+
-| 22324 | sales_records | 2020-09-27 01:02:49 | 2020-09-27 01:03:13 | sales_records | store_amt       | 22325    | 672           | FINISHED |      | NULL     | 86400   |
+| 22324 | sales_records | 2020-09-27 01: 02: 49 | 2020-09-27 01: 03: 13 | sales_records | store_amt       | 22325    | 672           | FINISHED |      | NULL     | 86400   |
 +-------+---------------+---------------------+---------------------+---------------+-----------------+----------+---------------+----------+------+----------+---------+
 ~~~
 
@@ -131,7 +131,7 @@ SHOW ALTER TABLE ROLLUP FROM db_name;
 查看物化视图的表结果，需用通过基表名进行：
 
 ~~~PlainText
-mysql> desc sales_records all;
+mysql > desc sales_records all;
 
 +---------------+---------------+-----------+--------+------+-------+---------+-------+
 | IndexName     | IndexKeysType | Field     | Type   | Null | Key   | Default | Extra |
@@ -172,12 +172,12 @@ EXPLAIN SELECT store_id, SUM(sale_amt) FROM sales_records GROUP BY store_id;
 | Explain String                                                              |
 +-----------------------------------------------------------------------------+
 | PLAN FRAGMENT 0                                                             |
-|  OUTPUT EXPRS:<slot 2> `store_id` | <slot 3> sum(`sale_amt`)                |
+|  OUTPUT EXPRS: <slot 2> `store_id` | <slot 3> sum(`sale_amt`)                |
 |   PARTITION: UNPARTITIONED                                                  |
 |                                                                             |
 |   RESULT SINK                                                               |
 |                                                                             |
-|   4:EXCHANGE                                                                |
+|   4: EXCHANGE                                                                |
 |      use vectorized: true                                                   |
 |                                                                             |
 | PLAN FRAGMENT 1                                                             |
@@ -188,12 +188,12 @@ EXPLAIN SELECT store_id, SUM(sale_amt) FROM sales_records GROUP BY store_id;
 |     EXCHANGE ID: 04                                                         |
 |     UNPARTITIONED                                                           |
 |                                                                             |
-|   3:AGGREGATE (merge finalize)                                              |
+|   3: AGGREGATE (merge finalize)                                              |
 |   |  output: sum(<slot 3> sum(`sale_amt`))                                  |
 |   |  group by: <slot 2> `store_id`                                          |
 |   |  use vectorized: true                                                   |
 |   |                                                                         |
-|   2:EXCHANGE                                                                |
+|   2: EXCHANGE                                                                |
 |      use vectorized: true                                                   |
 |                                                                             |
 | PLAN FRAGMENT 2                                                             |
@@ -204,22 +204,22 @@ EXPLAIN SELECT store_id, SUM(sale_amt) FROM sales_records GROUP BY store_id;
 |     EXCHANGE ID: 02                                                         |
 |     HASH_PARTITIONED: <slot 2> `store_id`                                   |
 |                                                                             |
-|   1:AGGREGATE (update serialize)                                            |
+|   1: AGGREGATE (update serialize)                                            |
 |   |  STREAMING                                                              |
 |   |  output: sum(`sale_amt`)                                                |
 |   |  group by: `store_id`                                                   |
 |   |  use vectorized: true                                                   |
 |   |                                                                         |
-|   0:OlapScanNode                                                            |
+|   0: OlapScanNode                                                            |
 |      TABLE: sales_records                                                   |
 |      PREAGGREGATION: ON                                                     |
-|      partitions=1/1                                                         |
+|      partitions = 1/1                                                         |
 |      rollup: store_amt                                                      |
-|      tabletRatio=10/10                                                      |
-|      tabletList=22326,22328,22330,22332,22334,22336,22338,22340,22342,22344 |
-|      cardinality=0                                                          |
-|      avgRowSize=0.0                                                         |
-|      numNodes=1                                                             |
+|      tabletRatio = 10/10                                                      |
+|      tabletList = 22326,22328,22330,22332,22334,22336,22338,22340,22342,22344 |
+|      cardinality = 0                                                          |
+|      avgRowSize = 0.0                                                         |
+|      numNodes = 1                                                             |
 |      use vectorized: true                                                   |
 +-----------------------------------------------------------------------------+
 ~~~
@@ -243,7 +243,7 @@ DROP MATERIALIZED VIEW IF EXISTS store_amt on sales_records;
 
 删除处于创建中的物化视图，需要先取消异步任务，然后再删除物化视图，以表 `db0.table0` 上的物化视图 mv 为例:
 
-首先获得JobId，执行命令:
+首先获得 JobId，执行命令:
 
 ~~~SQL
 show alter table rollup from db0;
@@ -254,11 +254,11 @@ show alter table rollup from db0;
 ~~~PlainText
 +-------+---------------+---------------------+---------------------+---------------+-----------------+----------+---------------+-------------+------+----------+---------+
 | JobId | TableName     | CreateTime          | FinishedTime        | BaseIndexName | RollupIndexName | RollupId | TransactionId | State       | Msg  | Progress | Timeout |
-| 22478 | table0        | 2020-09-27 01:46:42 | NULL                | table0        | mv              | 22479    | 676           | WAITING_TXN |      | NULL     | 86400   |
+| 22478 | table0        | 2020-09-27 01: 46: 42 | NULL                | table0        | mv              | 22479    | 676           | WAITING_TXN |      | NULL     | 86400   |
 +-------+---------------+---------------------+---------------------+---------------+-----------------+----------+---------------+-------------+------+----------+---------+
 ~~~
 
-其中JobId为22478，取消该Job，执行命令:
+其中 JobId 为 22478，取消该 Job，执行命令:
 
 ~~~SQL
 cancel alter table rollup from db0.table0 (22478);
@@ -270,7 +270,7 @@ cancel alter table rollup from db0.table0 (22478);
 
 ### 精确去重
 
-用户可以在明细表上使用表达式`bitmap_union(to_bitmap(col))`创建物化视图，实现原来聚合表才支持的基于 bitmap 的预先计算的精确去重功能。
+用户可以在明细表上使用表达式 `bitmap_union(to_bitmap(col))` 创建物化视图，实现原来聚合表才支持的基于 bitmap 的预先计算的精确去重功能。
 
 比如，用户有一张计算广告业务相关的明细表，每条记录包含的信息有点击日期、点击的是什么广告、通过什么渠道点击、以及点击的用户是谁：
 
@@ -301,7 +301,7 @@ FROM advertiser_view_record
 GROUP BY advertiser, channel;
 ~~~
 
-物化视图创建完毕后，查询语句中的`count(distinct user_id)`，会自动改写为`bitmap_union_count (to_bitmap(user_id))`以命中物化视图。
+物化视图创建完毕后，查询语句中的 `count(distinct user_id)`，会自动改写为 `bitmap_union_count (to_bitmap(user_id))` 以命中物化视图。
 
 <br/>
 
@@ -339,7 +339,7 @@ ORDER BY k3;
 
 1. 物化视图的聚合函数的参数仅支持单列，比如：`sum(a+b)` 不支持。
 2. 如果删除语句的条件列，在物化视图中不存在，则不能进行删除操作。如果一定要删除数据，则需要先将物化视图删除，然后方可删除数据。
-3. 单表上过多的物化视图会影响导入的效率：导入数据时，物化视图和 base 表数据是同步更新的，如果一张表的物化视图表超过10张，则有可能导致导入速度很慢。这就像单次导入需要同时导入10张表数据是一样的。
+3. 单表上过多的物化视图会影响导入的效率：导入数据时，物化视图和 base 表数据是同步更新的，如果一张表的物化视图表超过 10 张，则有可能导致导入速度很慢。这就像单次导入需要同时导入 10 张表数据是一样的。
 4. 相同列，不同聚合函数，不能同时出现在一张物化视图中，比如：`select sum(a), min(a) from table` 不支持。
 5. 物化视图的创建语句目前不支持 JOIN 和 WHERE ，也不支持 GROUP BY 的 HAVING 子句。
 6. 不能同时创建多个物化视图，只能等待上一个物化视图创建完成，才能创建下一个物化视图。

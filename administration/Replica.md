@@ -3,7 +3,7 @@
 ## 名词解释
 
 * Tablet：StarRocks 表的逻辑分片，一个表有多个分片。
-* Replica：分片的副本，默认一个分片有3个副本。
+* Replica：分片的副本，默认一个分片有 3 个副本。
 * Healthy Replica：健康副本，副本所在 Backend 存活，且副本的版本完整。
 * TabletChecker（TC）：是一个常驻的后台线程，用于定期扫描所有的 Tablet，检查这些 Tablet 的状态，并据检查结果，决定是否将 tablet 发送给 TabletScheduler。
 * TabletScheduler（TS）：是一个常驻的后台线程，用于处理由 TabletChecker 发来的需要修复的 Tablet。同时也会进行集群副本均衡的工作。
@@ -12,13 +12,13 @@
 
 ## 副本状态
 
-### Replica状态
+### Replica 状态
 
 一个 Replica 的健康状态有以下几种：
 
 * **BAD**
 
-即副本损坏。包括但不限于磁盘故障、BUG等引起的副本不可恢复的损毁状态。
+即副本损坏。包括但不限于磁盘故障、BUG 等引起的副本不可恢复的损毁状态。
 
 * **VERSION_MISSING**
 
@@ -28,7 +28,7 @@
 
 健康副本。即数据正常的副本，并且副本所在的 BE 节点状态正常（心跳正常且不处于下线过程中）。
 
-### Tablet状态
+### Tablet 状态
 
 一个 Tablet 的健康状态由其所有副本的状态决定，有以下几种：
 
@@ -66,13 +66,13 @@
 
 * **HEALTHY**
 
-健康分片，即条件[1-8]都不满足
+健康分片，即条件 [1-8] 都不满足
 
 ## 副本修复
 
 TabletChecker 作为常驻的后台进程，会定期检查所有分片的状态。对于非健康状态的分片，将会交给 TabletScheduler 进行调度和修复。修复的实际操作，都由 BE 上的 clone 任务完成。FE 只负责生成这些 clone 任务。
 
-> 注1：副本修复的主要思想是先通过创建或补齐使得分片的副本数达到期望值，然后再删除多余的副本。注2：一个 clone 任务就是完成从一个指定远端 BE 拷贝指定数据到指定目的端 BE 的过程。
+> 注 1：副本修复的主要思想是先通过创建或补齐使得分片的副本数达到期望值，然后再删除多余的副本。注 2：一个 clone 任务就是完成从一个指定远端 BE 拷贝指定数据到指定目的端 BE 的过程。
 
 针对不同的状态，我们采用不同的修复方式：
 
@@ -115,16 +115,16 @@ TabletScheduler 里等待被调度的分片会根据状态不同，赋予不同�
 
 * HIGH
 
-* REPLICA_MISSING 且多数副本缺失（比如3副本丢失了2个）
+* REPLICA_MISSING 且多数副本缺失（比如 3 副本丢失了 2 个）
 * VERSION_INCOMPLETE 且多数副本的版本缺失
 * COLOCATE_MISMATCH 我们希望 Colocation 表相关的分片能够尽快修复完成。
 * COLOCATE_REDUNDANT
 
 * NORMAL
 
-* REPLICA_MISSING 但多数存活（比如3副本丢失了1个）
+* REPLICA_MISSING 但多数存活（比如 3 副本丢失了 1 个）
 * VERSION_INCOMPLETE 但多数副本的版本完整
-* REPLICA_RELOCATING 且多数副本需要 relocate（比如3副本有2个）
+* REPLICA_RELOCATING 且多数副本需要 relocate（比如 3 副本有 2 个）
 
 * LOW
 
@@ -149,7 +149,7 @@ ADMIN CANCEL REPAIR TABLE tbl [PARTITION (p1, p2, ...)];
 
 优先级保证了损坏严重的分片能够优先被修复，提高系统可用性。但是如果高优先级的修复任务一直失败，则会导致低优先级的任务一直得不到调度。因此，我们会根据任务的运行状态，动态的调整任务的优先级，保证所有任务都有机会被调度到。
 
-* 连续5次调度失败（如无法获取资源，无法找到合适的源端或目的端等），则优先级会被下调。
+* 连续 5 次调度失败（如无法获取资源，无法找到合适的源端或目的端等），则优先级会被下调。
 * 持续 30 分钟未被调度，则上调优先级。
 * 同一 tablet 任务的优先级至少间隔 5 分钟才会被调整一次。
 
@@ -163,9 +163,9 @@ StarRocks 会自动进行集群内的副本均衡。均衡的主要思想，是�
 
 ### BE 节点负载
 
-我们用 ClusterLoadStatistics（CLS）表示一个 cluster 中各个 Backend 的负载均衡情况。TabletScheduler 根据这个统计值，来触发集群均衡。我们当前通过 **磁盘使用率** 和 **副本数量** 两个指标，为每个BE计算一个 loadScore，作为 BE 的负载分数。分数越高，表示该 BE 的负载越重。
+我们用 ClusterLoadStatistics（CLS）表示一个 cluster 中各个 Backend 的负载均衡情况。TabletScheduler 根据这个统计值，来触发集群均衡。我们当前通过 **磁盘使用率** 和 **副本数量** 两个指标，为每个 BE 计算一个 loadScore，作为 BE 的负载分数。分数越高，表示该 BE 的负载越重。
 
-磁盘使用率和副本数量各有一个权重系数，分别为 **capacityCoefficient** 和 **replicaNumCoefficient**，其 **和衡为1**。其中 capacityCoefficient 会根据实际磁盘使用率动态调整。当一个 BE 的总体磁盘使用率在 50% 以下，则 capacityCoefficient 值为 0.5，如果磁盘使用率在 75%（可通过 FE 配置项 `capacity_used_percent_high_water` 配置）以上，则值为 1。如果使用率介于 50% ~ 75% 之间，则该权重系数平滑增加，公式为：
+磁盘使用率和副本数量各有一个权重系数，分别为 **capacityCoefficient** 和 **replicaNumCoefficient**，其 **和衡为 1**。其中 capacityCoefficient 会根据实际磁盘使用率动态调整。当一个 BE 的总体磁盘使用率在 50% 以下，则 capacityCoefficient 值为 0.5，如果磁盘使用率在 75%（可通过 FE 配置项 `capacity_used_percent_high_water` 配置）以上，则值为 1。如果使用率介于 50% ~ 75% 之间，则该权重系数平滑增加，公式为：
 
 `capacityCoefficient= 2 * 磁盘使用率 - 0.5`
 
@@ -185,7 +185,7 @@ TabletScheduler 在每轮调度时，都会通过 LoadBalancer 来选择一定�
 
 ## 副本状态查看
 
-副本状态查看主要是查看副本的状态，以及副本修复和均衡任务的运行状态。这些状态大部分都**仅存在于** Master FE 节点中。因此，以下命令需直连到 Master FE 执行。
+副本状态查看主要是查看副本的状态，以及副本修复和均衡任务的运行状态。这些状态大部分都 **仅存在于** Master FE 节点中。因此，以下命令需直连到 Master FE 执行。
 
 ### 查看副本状态
 
@@ -203,7 +203,7 @@ TabletScheduler 在每轮调度时，都会通过 LoadBalancer 来选择一定�
     +----------+-----------------------------+----------+--------------+----------+-----------+------------+--------------------+-----------------------+
     ~~~
 
-    其中 `UnhealthyTabletNum` 列显示了对应的 Database 中，有多少 Tablet 处于非健康状态。`InconsistentTabletNum` 列显示了对应的 Database 中，有多少 Tablet 处于副本不一致的状态。最后一行 `Total` 行对整个集群进行了统计。正常情况下 `UnhealthyTabletNum` 和 `InconsistentTabletNum` 应为0。如果不为零，可以进一步查看具体有哪些 Tablet。如上图中，UM_TEST 数据库有 1 个 Tablet 状态不健康，则可以使用以下命令查看具体是哪一个 Tablet。
+    其中 `UnhealthyTabletNum` 列显示了对应的 Database 中，有多少 Tablet 处于非健康状态。`InconsistentTabletNum` 列显示了对应的 Database 中，有多少 Tablet 处于副本不一致的状态。最后一行 `Total` 行对整个集群进行了统计。正常情况下 `UnhealthyTabletNum` 和 `InconsistentTabletNum` 应为 0。如果不为零，可以进一步查看具体有哪些 Tablet。如上图中，UM_TEST 数据库有 1 个 Tablet 状态不健康，则可以使用以下命令查看具体是哪一个 Tablet。
 
     `SHOW PROC '/statistic/5909381';`  
     其中 `5909381` 为对应的 DbId。
@@ -301,7 +301,7 @@ TabletScheduler 在每轮调度时，都会通过 LoadBalancer 来选择一定�
 
 ### 副本调度任务
 
-1. 查看等待被调度的任务`SHOW PROC '/cluster_balance/pending_tablets';`
+1. 查看等待被调度的任务 `SHOW PROC '/cluster_balance/pending_tablets';`
 
     ~~~plain text
     +----------+--------+-----------------+---------+----------+----------+-------+---------+--------+----------+---------+---------------------+---------------------+---------------------+----------+------+-------------+---------------+---------------------+------------+---------------------+--------+---------------------+-------------------------------+

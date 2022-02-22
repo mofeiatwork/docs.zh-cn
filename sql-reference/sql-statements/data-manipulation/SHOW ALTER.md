@@ -48,4 +48,4 @@ CLUSTER: 展示集群操作相关任务情况（仅管理员使用！待实现..
 
 ## keyword
 
-SHOW,ALTER
+SHOW, ALTER

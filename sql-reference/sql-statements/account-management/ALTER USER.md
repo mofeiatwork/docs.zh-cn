@@ -27,7 +27,7 @@ auth_option指定用户的认证方式，目前支持mysql_native_password和aut
 
 ## example
 
-1. 修改用户在mysql中的密码
+1. 修改用户在 mysql 中的密码
 
     ```sql
     ALTER USER 'jack' IDENTIFIED BY '123456';
@@ -51,19 +51,19 @@ auth_option指定用户的认证方式，目前支持mysql_native_password和aut
     ALTER USER 'jack' IDENTIFIED WITH mysql_native_password AS '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
     ```
 
-    后面加密的内容可以通过PASSWORD()获得到,例如：
+    后面加密的内容可以通过 PASSWORD()获得到, 例如：
 
     ```sql
     SELECT PASSWORD('123456');
     ```
 
-3. 修改用户为ldap认证
+3. 修改用户为 ldap 认证
 
     ```SQL
     ALTER USER 'jack' IDENTIFIED WITH authentication_ldap_simple
     ```
 
-4. 修改用户为ldap认证，并指定用户在ldap中的DN(Distinguished Name)
+4. 修改用户为 ldap 认证，并指定用户在 ldap 中的 DN(Distinguished Name)
 
     ```SQL
     ALTER USER 'jack' IDENTIFIED WITH authentication_ldap_simple AS 'uid=jack,ou=company,dc=example,dc=com'

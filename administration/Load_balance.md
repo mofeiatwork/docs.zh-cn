@@ -6,11 +6,11 @@
 
 ## 代码方式
 
-自己在应用层代码进行重试和负载均衡。比如发现一个连接挂掉，就自动在其他连接上进行重试。应用层代码重试需要应用自己配置多个StarRocks前端节点地址。
+自己在应用层代码进行重试和负载均衡。比如发现一个连接挂掉，就自动在其他连接上进行重试。应用层代码重试需要应用自己配置多个 StarRocks 前端节点地址。
 
 ## JDBC Connector
 
-如果使用 mysql jdbc connector 来连接StarRocks，可以使用 jdbc 的自动重试机制:
+如果使用 mysql jdbc connector 来连接 StarRocks，可以使用 jdbc 的自动重试机制:
 
 ~~~sql
 jdbc:mysql://[host:port],[host:port].../[database][?propertyName1][=propertyValue1][&propertyName2][=propertyValue2]...
@@ -81,7 +81,7 @@ SAVE MYSQL VARIABLES TO DISK;
 insert into mysql_servers(hostgroup_id, hostname, port) values(1, '172.26.92.139', 8533);
 ~~~
 
-### 9. 插入Observer节点
+### 9. 插入 Observer 节点
 
 ~~~sql
 insert into mysql_servers(hostgroup_id, hostname, port) values(2, '172.26.34.139', 9931);
@@ -102,7 +102,7 @@ insert into mysql_users(username, password, active, default_hostgroup, backend, 
 values('root', '*FAAFFE644E901CFAFAEC7562415E5FAEC243B8B2', 1, 1, 1, 1);
 ~~~
 
-注：这里password输入值为密文。比如root用户密码为root123,则password输入为'*FAAFFE644E901CFAFAEC7562415E5FAEC243B8B2'。具体输入的加密value可以通过 `password()`函数获取。示例如下：
+注：这里 password 输入值为密文。比如 root 用户密码为 root123, 则 password 输入为'*FAAFFE644E901CFAFAEC7562415E5FAEC243B8B2'。具体输入的加密 value 可以通过 `password()` 函数获取。示例如下：
 
 ~~~plain text
 mysql> select password('root123');

@@ -8,7 +8,7 @@
 MIN(expr)
 ```
 
-返回expr表达式的最小值
+返回 expr 表达式的最小值
 
 ## example
 

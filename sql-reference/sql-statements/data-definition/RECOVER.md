@@ -6,7 +6,7 @@
 
 语法：
 
-1. 恢复database
+1. 恢复 database
 
     ```sql
     RECOVER DATABASE db_name;
@@ -26,7 +26,7 @@
 
 说明：
 
-1. 该操作仅能恢复之前一段时间内删除的元信息。默认为 1 天。（可通过fe.conf中`catalog_trash_expire_second`参数配置）
+1. 该操作仅能恢复之前一段时间内删除的元信息。默认为 1 天。（可通过 fe.conf 中 `catalog_trash_expire_second` 参数配置）
 
 2. 如果删除元信息后新建立了同名同类型的元信息，则之前删除的元信息不能被恢复
 

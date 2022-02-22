@@ -20,4 +20,4 @@ SHOW DELETE FROM database;
 
 ## keyword
 
-SHOW,DELETE
+SHOW, DELETE

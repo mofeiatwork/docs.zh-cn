@@ -2,32 +2,32 @@
 
 ## description
 
-HLL是基于HyperLogLog算法的工程实现，用于保存HyperLogLog计算过程的中间结果，它只能作为表的value列类型
-通过聚合来不断的减少数据量，以此来实现加快查询的目的，基于它到的是一个估算结果，误差大概在1%左右
+HLL 是基于 HyperLogLog 算法的工程实现，用于保存 HyperLogLog 计算过程的中间结果，它只能作为表的 value 列类型
+通过聚合来不断的减少数据量，以此来实现加快查询的目的，基于它到的是一个估算结果，误差大概在 1%左右
 
-hll列是通过其它列或者导入数据里面的数据生成的，导入的时候通过hll_hash函数来指定数据中哪一列用于生成hll列
-它常用于替代count distinct，通过结合rollup在业务上用于快速计算uv等
+hll 列是通过其它列或者导入数据里面的数据生成的，导入的时候通过 hll_hash 函数来指定数据中哪一列用于生成 hll 列
+它常用于替代 count distinct，通过结合 rollup 在业务上用于快速计算 uv 等
 
 相关函数:
 
 HLL_UNION_AGG(hll)
-此函数为聚合函数，用于计算满足条件的所有数据的基数估算。此函数还可用于分析函数，只支持默认窗口，不支持window从句。
+此函数为聚合函数，用于计算满足条件的所有数据的基数估算。此函数还可用于分析函数，只支持默认窗口，不支持 window 从句。
 
 HLL_RAW_AGG(hll)
-此函数为聚合函数，用于聚合hll类型字段，并且返回的还是hll类型。
+此函数为聚合函数，用于聚合 hll 类型字段，并且返回的还是 hll 类型。
 
 HLL_CARDINALITY(hll)
-此函数用于计算单条hll列的基数估算
+此函数用于计算单条 hll 列的基数估算
 
 HLL_HASH(column_name)
-生成HLL列类型，用于insert或导入的时候，导入的使用见相关说明
+生成 HLL 列类型，用于 insert 或导入的时候，导入的使用见相关说明
 
 HLL_EMPTY()
-生成空HLL列，用于insert或导入的时候补充默认值，导入的使用见相关说明
+生成空 HLL 列，用于 insert 或导入的时候补充默认值，导入的使用见相关说明
 
 ## example
 
-1. 首先创建一张含有hll列的表
+1. 首先创建一张含有 hll 列的表
 
     ```sql
     create table test(
@@ -41,7 +41,7 @@ HLL_EMPTY()
     distributed by hash(id) buckets 32;
     ```
 
-2. 导入数据，导入的方式见相关help curl
+2. 导入数据，导入的方式见相关 help curl
 
     ```plain text
     a. 使用表中的列生成hll列
@@ -55,7 +55,7 @@ HLL_EMPTY()
     http://host/api/test_db/test/_stream_load
     ```
 
-3. 聚合数据，常用方式3种：（如果不聚合直接对base表查询，速度可能跟直接使用approx_count_distinct速度差不多）
+3. 聚合数据，常用方式 3 种：（如果不聚合直接对 base 表查询，速度可能跟直接使用 approx_count_distinct 速度差不多）
 
     ```plain text
     a. 创建一个rollup，让hll列产生聚合，
@@ -81,7 +81,7 @@ HLL_EMPTY()
     insert into test_uv select dt, hll_hash(id) from test;
     ```
 
-4. 查询，hll列不允许直接查询它的原始值，可以通过配套的函数进行查询
+4. 查询，hll 列不允许直接查询它的原始值，可以通过配套的函数进行查询
 
     ```plain text
     a. 求总uv

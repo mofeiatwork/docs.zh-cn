@@ -8,9 +8,9 @@
 INT dayofweek(DATETIME date)
 ```
 
-DAYOFWEEK函数返回日期的工作日索引值，即星期日为1，星期一为2，星期六为7
+DAYOFWEEK 函数返回日期的工作日索引值，即星期日为 1，星期一为 2，星期六为 7
 
-参数为Date或者Datetime类型或者可以cast为Date或者Datetime类型的数字
+参数为 Date 或者 Datetime 类型或者可以 cast 为 Date 或者 Datetime 类型的数字
 
 ## example
 

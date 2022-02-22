@@ -97,11 +97,11 @@ select id, bitmap_hash(id2) from table;
 
 ### Syntax
 
-`BITMAP_UNION(expr)` ：计算输入 Bitmap 的并集，返回新的bitmap
+`BITMAP_UNION(expr)` ：计算输入 Bitmap 的并集，返回新的 bitmap
 
 `BITMAP_UNION_COUNT(expr)`：计算输入 Bitmap 的并集，返回其基数，和 `BITMAP_COUNT(BITMAP_UNION(expr))` 等价。目前推荐优先使用 `BITMAP_UNION_COUNT()` ，其性能优于 `BITMAP_COUNT(BITMAP_UNION(expr))`
 
-`BITMAP_UNION_INT(expr)` ：计算 TINYINT,SMALLINT 和 INT 类型的列中不同值的个数，返回值和
+`BITMAP_UNION_INT(expr)` ：计算 TINYINT, SMALLINT 和 INT 类型的列中不同值的个数，返回值和
 COUNT(DISTINCT expr) 相同
 
 `INTERSECT_COUNT(bitmap_column_to_count, filter_column, filter_values ...)` ：计算满足
@@ -143,4 +143,4 @@ where page in ('meituan', 'waimai');
 
 ## keyword
 
-BITMAP,BITMAP_COUNT,BITMAP_EMPTY,BITMAP_UNION,BITMAP_UNION_INT,TO_BITMAP,BITMAP_UNION_COUNT,INTERSECT_COUNT,BITMAP_INTERSECT
+BITMAP, BITMAP_COUNT, BITMAP_EMPTY, BITMAP_UNION, BITMAP_UNION_INT, TO_BITMAP, BITMAP_UNION_COUNT, INTERSECT_COUNT, BITMAP_INTERSECT

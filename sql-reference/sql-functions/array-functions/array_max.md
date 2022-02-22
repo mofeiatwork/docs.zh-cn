@@ -8,7 +8,7 @@
 array_max(array(type))
 ```
 
-求取一个ARRAY中的所有数据中的最大值，返回这个结果。
+求取一个 ARRAY 中的所有数据中的最大值，返回这个结果。
 
 ## example
 
@@ -37,4 +37,4 @@ mysql> select array_max([cast('2020-02-25 11:35:17' as datetime), cast('2019-08-
 
 ## keyword
 
-ARRAY_MAX,ARRAY
+ARRAY_MAX, ARRAY

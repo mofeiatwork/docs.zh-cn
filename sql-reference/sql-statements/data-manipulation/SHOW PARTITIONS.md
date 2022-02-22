@@ -19,19 +19,19 @@ SHOW PARTITIONS FROM [db_name.]table_name [WHERE] [ORDER BY] [LIMIT];
 
 ## example
 
-1.展示指定db下指定表的所有分区信息
+1.展示指定 db 下指定表的所有分区信息
 
 ```sql
 SHOW PARTITIONS FROM example_db.table_name;
 ```
 
-2.展示指定db下指定表的指定分区的信息
+2.展示指定 db 下指定表的指定分区的信息
 
 ```sql
 SHOW PARTITIONS FROM example_db.table_name WHERE PartitionName = "p1";
 ```
 
-3.展示指定db下指定表的最新分区的信息
+3.展示指定 db 下指定表的最新分区的信息
 
 ```sql
 SHOW PARTITIONS FROM example_db.table_name ORDER BY PartitionId DESC LIMIT 1;
@@ -39,4 +39,4 @@ SHOW PARTITIONS FROM example_db.table_name ORDER BY PartitionId DESC LIMIT 1;
 
 ## keyword
 
-SHOW,PARTITIONS
+SHOW, PARTITIONS

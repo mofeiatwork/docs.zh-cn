@@ -6,7 +6,7 @@
 
 ## Description
 
-转换datetime值dt，从 from_tz 由给定转到 to_tz 时区给出的时区，并返回的结果值。 如果参数无效该函数返回NULL。
+转换 datetime 值 dt，从 from_tz 由给定转到 to_tz 时区给出的时区，并返回的结果值。 如果参数无效该函数返回 NULL。
 
 ## Example
 

@@ -22,4 +22,4 @@ WHERE QUERYID = "your_query_id";
 
 ## keyword
 
-CANCEL,EXPORT
+CANCEL, EXPORT

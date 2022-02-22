@@ -12,7 +12,7 @@ REVOKE privilege_list ON RESOURCE resource_name FROM user_identity [ROLE role_na
 
 user_identity：
 
-这里的 user_identity 语法同 CREATE USER。且必须为使用 CREATE USER 创建过的 user_identity。user_identity 中的host可以是域名，如果是域名的话，权限的撤销时间可能会有1分钟左右的延迟。
+这里的 user_identity 语法同 CREATE USER。且必须为使用 CREATE USER 创建过的 user_identity。user_identity 中的 host 可以是域名，如果是域名的话，权限的撤销时间可能会有 1 分钟左右的延迟。
 
 也可以撤销指定的 ROLE 的权限，执行的 ROLE 必须存在。
 

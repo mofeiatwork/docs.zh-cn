@@ -10,7 +10,7 @@ ENTER cluster_name
 
 ## example
 
-1. 进入逻辑集群test_cluster
+1. 进入逻辑集群 test_cluster
 
     ```sql
     ENTER test_cluster;

@@ -63,4 +63,4 @@ MySQL > select unix_timestamp('1969-01-01 00:00:00');
 
 ## keyword
 
-UNIX_TIMESTAMP,UNIX,TIMESTAMP
+UNIX_TIMESTAMP, UNIX, TIMESTAMP

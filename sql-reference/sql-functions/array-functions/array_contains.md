@@ -8,7 +8,7 @@
 array_contains(any_array, any_element)
 ```
 
-检查数组中是否包含某个元素，是的话返回1，否则返回0.
+检查数组中是否包含某个元素，是的话返回 1，否则返回 0.
 
 ## example
 
@@ -22,7 +22,7 @@ mysql> select array_contains(["apple","orange","pear"], "orange");
 1 row in set (0.01 sec)
 ```
 
-也可以检查数组中是否包含NULL
+也可以检查数组中是否包含 NULL
 
 ```plain text
 mysql> select array_contains([1, NULL], NULL);
@@ -56,4 +56,4 @@ mysql> select array_contains([[1,2,3], [4,5,6]], [4,6,5]);
 
 ## keyword
 
-ARRAY_CONTAINS,ARRAY
+ARRAY_CONTAINS, ARRAY

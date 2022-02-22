@@ -6,7 +6,7 @@
 
 VARCHAR money_format(Number)
 
-将数字按照货币格式输出，整数部分每隔3位用逗号分隔，小数部分保留2位
+将数字按照货币格式输出，整数部分每隔 3 位用逗号分隔，小数部分保留 2 位
 
 ## example
 
@@ -35,4 +35,4 @@ MySQL > select money_format(1123.4);
 
 ## keyword
 
-MONEY_FORMAT,MONEY,FORMAT
+MONEY_FORMAT, MONEY, FORMAT

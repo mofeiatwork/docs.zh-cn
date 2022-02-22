@@ -31,7 +31,7 @@ INSERT INTO table_name
 * partitions: 指定待导入的分区，必须是 table_name 中存在的分区，多个分区名称用逗号分隔。如果指定目标分区，则只会导入符合目标分区的数据。如果没有指定，则默认值为这张表的所有分区。
 * label: 为 insert 作业指定一个 Label，Label 是该 Insert Into 导入作业的标识。每个导入作业，都有一个在单 database 内部唯一的 Label。
 
-> * **注意**：建议指定 Label 而不是由系统自动分配。如果由系统自动分配，但在 Insert Into 语句执行过程中，因网络错误导致连接断开等，则无法得知 Insert Into 是否成功。而如果指定 Label，则可以再次通过 Label 查看任务结果。
+> * * *注意**：建议指定 Label 而不是由系统自动分配。如果由系统自动分配，但在 Insert Into 语句执行过程中，因网络错误导致连接断开等，则无法得知 Insert Into 是否成功。而如果指定 Label，则可以再次通过 Label 查看任务结果。
 
 * column_name: 指定的目的列，必须是 table_name 中存在的列。导入表的目标列，可以以任意的顺序存在。如果没有指定目标列，那么默认值是这张表的所有列。如果导入表中的某个列不在目标列中，那么这个列需要有默认值，否则 Insert Into 会失败。如果查询语句的结果列类型与目标列的类型不一致，那么会调用隐式类型转化，如果不能进行转化，那么 Insert Into 语句会报语法解析错误。
 * expression：需要赋值给某个列的对应表达式。
@@ -39,7 +39,7 @@ INSERT INTO table_name
 * query：一个普通查询，查询的结果会写入到目标中。查询语句支持任意 StarRocks 支持的 SQL 查询语法。
 * values：用户可以通过 VALUES 语法插入一条或者多条数据。
 
-> * **注意**：VALUES 方式仅适用于导入几条数据作为 DEMO 的情况，完全不适用于任何测试和生产环境。StarRocks 系统本身也不适合单条数据导入的场景。建议使用 INSERT INTO SELECT 的方式进行批量导入。
+> * * *注意**：VALUES 方式仅适用于导入几条数据作为 DEMO 的情况，完全不适用于任何测试和生产环境。StarRocks 系统本身也不适合单条数据导入的场景。建议使用 INSERT INTO SELECT 的方式进行批量导入。
 
 ### 导入结果
 
@@ -48,22 +48,22 @@ Insert Into 本身就是一个 SQL 命令，其返回结果会根据执行结果
 执行成功
 
 ~~~sql
-mysql> insert into tbl1 select * from empty_tbl;
+mysql > insert into tbl1 select * from empty_tbl;
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> insert into tbl1 select * from tbl2;
+mysql > insert into tbl1 select * from tbl2;
 Query OK, 4 rows affected (0.38 sec)
 {'label':'insert_8510c568-9eda-4173-9e36-6adc7d35291c', 'status':'visible', 'txnId':'4005'}
 
-mysql> insert into tbl1 with label my_label1 select * from tbl2;
+mysql > insert into tbl1 with label my_label1 select * from tbl2;
 Query OK, 4 rows affected (0.38 sec)
 {'label':'my_label1', 'status':'visible', 'txnId':'4005'}
 
-mysql> insert into tbl1 select * from tbl2;
+mysql > insert into tbl1 select * from tbl2;
 Query OK, 2 rows affected, 2 warnings (0.31 sec)
 {'label':'insert_f0747f0e-7a35-46e2-affa-13a235f4020d', 'status':'visible', 'txnId':'4005'}
 
-mysql> insert into tbl1 select * from tbl2;
+mysql > insert into tbl1 select * from tbl2;
 Query OK, 2 rows affected, 2 warnings (0.31 sec)
 {'label':'insert_f0747f0e-7a35-46e2-affa-13a235f4020d', 'status':'committed', 'txnId':'4005'}
 
@@ -101,7 +101,7 @@ ERROR 1064 (HY000): all partitions have no load data. url: [http://10.74.167.16:
 
 ### FE 配置
 
-* timeout：导入任务的超时时间(以秒为单位)。导入任务在设定的 timeout 时间内未完成则会被系统取消，变成 CANCELLED。目前 Insert Into 并不支持自定义导入的 timeout 时间，所有 Insert Into 导入的超时时间是统一的，默认的 timeout 时间为1小时。如果导入任务无法在规定时间内完成，则需要调整FE的参数insert_load_default_timeout_second。
+* timeout：导入任务的超时时间(以秒为单位)。导入任务在设定的 timeout 时间内未完成则会被系统取消，变成 CANCELLED。目前 Insert Into 并不支持自定义导入的 timeout 时间，所有 Insert Into 导入的超时时间是统一的，默认的 timeout 时间为 1 小时。如果导入任务无法在规定时间内完成，则需要调整 FE 的参数 insert_load_default_timeout_second。
 
 ### Session 变量
 
@@ -142,7 +142,7 @@ PROPERTIES("replication_num" = "1");
 
 ~~~
 
-### 通过values导入数据
+### 通过 values 导入数据
 
 ~~~sql
 mysql> INSERT INTO insert_wiki_edit VALUES("2015-09-12 00:00:00","#en.wikipedia","GELongstreet",0,0,0,0,0,36,36,0),("2015-09-12 00:00:00","#ca.wikipedia","PereBot",0,1,0,1,0,17,17,0);
@@ -151,7 +151,7 @@ Query OK, 2 rows affected (0.29 sec)
 
 ~~~
 
-### 通过select导入数据
+### 通过 select 导入数据
 
 ~~~sql
 mysql> INSERT INTO insert_wiki_edit WITH LABEL insert_load_wikipedia SELECT * FROM routine_wiki_edit; 
@@ -163,4 +163,4 @@ Query OK, 18203 rows affected (0.40 sec)
 ## 注意事项
 
 * 当前执行 INSERT 语句时，对于有不符合目标表格式的数据，默认的行为是过滤，比如字符串超长等。但是对于要求数据不能够被过滤的业务场景，可以通过设置会话变量 enable_insert_strict 为 true 来确保当有数据被过滤掉的时候，INSERT 不会成功执行。
-* 因为StarRocks的insert复用导入数据的逻辑，所以每一次insert语句都会产生一个新的数据版本。频繁小批量导入操作会产生过多的数据版本，而过多的小版本会影响查询的性能。所以并不建议频繁的使用insert语法导入数据或作为生产环境的日常例行导入任务。如果有流式导入或者小批量导入任务的需求，可以使用Stream Load或者Routine Load的方式进行导入。
+* 因为 StarRocks 的 insert 复用导入数据的逻辑，所以每一次 insert 语句都会产生一个新的数据版本。频繁小批量导入操作会产生过多的数据版本，而过多的小版本会影响查询的性能。所以并不建议频繁的使用 insert 语法导入数据或作为生产环境的日常例行导入任务。如果有流式导入或者小批量导入任务的需求，可以使用 Stream Load 或者 Routine Load 的方式进行导入。

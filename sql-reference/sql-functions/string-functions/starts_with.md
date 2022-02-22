@@ -8,7 +8,7 @@
 BOOLEAN starts_with(VARCHAR str, VARCHAR prefix)
 ```
 
-如果字符串以指定前缀开头，返回 1; 否则返回 0. 任意参数为NULL，返回NULL
+如果字符串以指定前缀开头，返回 1; 否则返回 0. 任意参数为 NULL，返回 NULL
 
 ## example
 

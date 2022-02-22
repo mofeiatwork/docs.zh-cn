@@ -27,4 +27,4 @@ MySQL > select date_sub('2010-11-30 23:59:59', INTERVAL 2 DAY);
 
 ## keyword
 
-DATE_SUB,DATE,SUB
+DATE_SUB, DATE, SUB

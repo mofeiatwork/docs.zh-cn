@@ -6,7 +6,7 @@
 
 `INT MURMUR_HASH3_32(VARCHAR input, ...)`
 
-返回输入字符串的32位murmur3 hash值
+返回输入字符串的 32 位 murmur3 hash 值
 
 ## example
 
@@ -35,4 +35,4 @@ MySQL > select murmur_hash3_32("hello", "world");
 
 ## keyword
 
-MURMUR_HASH3_32,HASH
+MURMUR_HASH3_32, HASH

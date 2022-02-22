@@ -14,8 +14,8 @@ SHOW TABLET
 [limit [offset,]size]
 ```
 
-现在show tablet命令支持按照按照以下字段进行过滤：partition, index name, version, backendid,
-state，同时支持按照任意字段进行排序，并且提供limit限制返回条数。
+现在 show tablet 命令支持按照按照以下字段进行过滤：partition, index name, version, backendid,
+state，同时支持按照任意字段进行排序，并且提供 limit 限制返回条数。
 
 ## example
 
@@ -53,4 +53,4 @@ state，同时支持按照任意字段进行排序，并且提供limit限制返�
 
 ## keyword
 
-SHOW,TABLET,LIMIT
+SHOW, TABLET, LIMIT

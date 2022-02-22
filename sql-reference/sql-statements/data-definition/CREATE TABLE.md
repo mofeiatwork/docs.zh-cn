@@ -124,7 +124,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     col_name：列名
 
     > 注意：
-    当前仅支持BITMAP索引， BITMAP索引仅支持应用于单列
+    当前仅支持 BITMAP 索引， BITMAP 索引仅支持应用于单列
 
 3. ENGINE 类型
 
@@ -164,7 +164,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     )
     ```
 
-    其中host为ES集群连接地址，可指定一个或者多个,user/password为开启basic认证的ES集群的用户名/密码，index是StarRocks中的表对应的ES的index名字，可以是alias，type指定index的type，默认是doc。
+    其中 host 为 ES 集群连接地址，可指定一个或者多个, user/password 为开启 basic 认证的 ES 集群的用户名/密码，index 是 StarRocks 中的表对应的 ES 的 index 名字，可以是 alias，type 指定 index 的 type，默认是 doc。
 
 3. 如果是 hive，则需要在 properties 提供以下信息：
 
@@ -207,7 +207,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
 
 2. partition_desc
 
-    partition描述有三种使用方式：
+    partition 描述有三种使用方式：
 
     **LESS THAN**
 
@@ -251,9 +251,9 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     ```
 
     说明：
-    1. Fixed Range比LESS THAN相对灵活些，左右区间完全由用户自己确定
+    1. Fixed Range 比 LESS THAN 相对灵活些，左右区间完全由用户自己确定
 
-    2. 其他与LESS THAN保持同步
+    2. 其他与 LESS THAN 保持同步
 
     **批量创建分区**
 
@@ -266,9 +266,9 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     ```
 
     说明：
-    用户可以通过给出一个START值、一个END值以及一个定义分区增量值的EVERY子句批量产生分区。
-    1. 当前分区键仅支持日期类型和整数类型，分区类型需要与EVERY里的表达式匹配。
-    2. 当分区键为日期类型的时候需要指定INTERVAL关键字来表示日期间隔，目前日期仅支持day、week、month、year，分区的命名规则同动态分区一样。
+    用户可以通过给出一个 START 值、一个 END 值以及一个定义分区增量值的 EVERY 子句批量产生分区。
+    1. 当前分区键仅支持日期类型和整数类型，分区类型需要与 EVERY 里的表达式匹配。
+    2. 当分区键为日期类型的时候需要指定 INTERVAL 关键字来表示日期间隔，目前日期仅支持 day、week、month、year，分区的命名规则同动态分区一样。
 
     更详细的语法规则请参考：（[数据分布-批量创建和修改分区](../table_design/Data_distribution.md)）。
 
@@ -283,13 +283,13 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     ```
 
     说明：
-    使用指定的 key 列进行哈希分桶。默认分桶数为10
+    使用指定的 key 列进行哈希分桶。默认分桶数为 10
 
-    建议:建议使用Hash分桶方式
+    建议: 建议使用 Hash 分桶方式
 
 4. PROPERTIES
 
-    1.如果 ENGINE 类型为 olap,可以在 properties 设置该表数据的初始存储介质、存储到期时间和副本数。
+    1.如果 ENGINE 类型为 olap, 可以在 properties 设置该表数据的初始存储介质、存储到期时间和副本数。
 
     ```sql
     PROPERTIES (
@@ -300,13 +300,13 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     ```
 
     storage_medium：用于指定该分区的初始存储介质，可选择 SSD 或 HDD。
-    * 默认初始存储介质可通过fe的配置文件 `fe.conf` 中指定 `default_storage_medium=xxx`，如果没有指定，则默认为 HDD。
+    * 默认初始存储介质可通过 fe 的配置文件 `fe.conf` 中指定 `default_storage_medium=xxx`，如果没有指定，则默认为 HDD。
 
-    > 注意：当FE配置项 `enable_strict_storage_medium_check` 为 `True` 时，若集群中没有设置对应的存储介质时，建表语句会报错 `Failed to find enough host in all backends with storage medium is SSD|HDD`.
+    > 注意：当 FE 配置项 `enable_strict_storage_medium_check` 为 `True` 时，若集群中没有设置对应的存储介质时，建表语句会报错 `Failed to find enough host in all backends with storage medium is SSD|HDD`.
 
     storage_cooldown_time：当设置存储介质为 SSD 时，指定该分区在 SSD 上的存储到期时间。
     * 默认存放 30 天。
-    * 格式为："yyyy-MM-dd HH:mm:ss"
+    * 格式为："yyyy-MM-dd HH: mm: ss"
 
     replication_num：指定分区的副本数。
     * 默认为 3。
@@ -323,7 +323,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
 
     2.如果 Engine 类型为 olap, 可以指定某列使用 bloom filter 索引
     bloom filter 索引仅适用于查询条件为 in 和 equal 的情况，该列的值越分散效果越好
-    目前只支持以下情况的列:除了 TINYINT FLOAT DOUBLE 类型以外的 key 列及聚合方法为 REPLACE 的 value 列
+    目前只支持以下情况的列: 除了 TINYINT FLOAT DOUBLE 类型以外的 key 列及聚合方法为 REPLACE 的 value 列
 
     ```sql
     PROPERTIES (
@@ -339,7 +339,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     )
     ```
 
-    4.如果希望使用动态分区特性，需要在properties 中指定
+    4.如果希望使用动态分区特性，需要在 properties 中指定
 
     ```sql
     PROPERTIES (
@@ -354,13 +354,13 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
 
     dynamic_partition.enable: 用于指定表级别的动态分区功能是否开启。默认为 true。
 
-    dynamic_partition.time_unit: 用于指定动态添加分区的时间单位，可选择为DAY（天），WEEK(周)，MONTH（月）。
+    dynamic_partition.time_unit: 用于指定动态添加分区的时间单位，可选择为 DAY（天），WEEK(周)，MONTH（月）。
 
-    dynamic_partition.start: 用于指定向前删除多少个分区。值必须小于0。默认为 Integer.MIN_VALUE。
+    dynamic_partition.start: 用于指定向前删除多少个分区。值必须小于 0。默认为 Integer.MIN_VALUE。
 
-    dynamic_partition.end: 用于指定提前创建的分区数量。值必须大于0。
+    dynamic_partition.end: 用于指定提前创建的分区数量。值必须大于 0。
 
-    dynamic_partition.prefix: 用于指定创建的分区名前缀，例如分区名前缀为p，则自动创建分区名为p20200108。
+    dynamic_partition.prefix: 用于指定创建的分区名前缀，例如分区名前缀为 p，则自动创建分区名为 p20200108。
 
     dynamic_partition.buckets: 用于指定自动创建的分区分桶数量。
 
@@ -382,11 +382,11 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     )
     ```
 
-    当 in_memory 属性为 true 时，StarRocks会尽可能将该表的数据和索引Cache到BE 内存中
+    当 in_memory 属性为 true 时，StarRocks 会尽可能将该表的数据和索引 Cache 到 BE 内存中
 
 ## example
 
-1. 创建一个 olap 表，使用 HASH 分桶，使用列存，相同key的记录进行聚合
+1. 创建一个 olap 表，使用 HASH 分桶，使用列存，相同 key 的记录进行聚合
 
     ```sql
     CREATE TABLE example_db.table_hash
@@ -403,7 +403,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     PROPERTIES ("storage_type"="column");
     ```
 
-2. 创建一个 olap 表，使用 Hash 分桶，使用列存，相同key的记录进行覆盖，
+2. 创建一个 olap 表，使用 Hash 分桶，使用列存，相同 key 的记录进行覆盖，
     设置初始存储介质和冷却时间
 
     ```sql
@@ -444,7 +444,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     );
     ```
 
-3. 创建一个 olap 表，使用 Range 分区，使用Hash分桶，默认使用列存，相同key的记录同时存在，设置初始存储介质和冷却时间
+3. 创建一个 olap 表，使用 Range 分区，使用 Hash 分桶，默认使用列存，相同 key 的记录同时存在，设置初始存储介质和冷却时间
 
     LESS THAN
 
@@ -472,7 +472,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     ```
 
     说明：
-    这个语句会将数据划分成如下3个分区：
+    这个语句会将数据划分成如下 3 个分区：
 
     ```sql
     ( {    MIN     },   {"2014-01-01"} )
@@ -529,7 +529,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     )
     ```
 
-5. 创建一张含有HLL列的表
+5. 创建一张含有 HLL 列的表
 
     ```sql
     CREATE TABLE example_db.example_table
@@ -545,7 +545,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     PROPERTIES ("storage_type"="column");
     ```
 
-6. 创建一张含有BITMAP_UNION聚合类型的表（v1和v2列的原始数据类型必须是TINYINT,SMALLINT,INT）
+6. 创建一张含有 BITMAP_UNION 聚合类型的表（v1 和 v2 列的原始数据类型必须是 TINYINT, SMALLINT, INT）
 
     ```sql
     CREATE TABLE example_db.example_table
@@ -561,7 +561,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     PROPERTIES ("storage_type"="column");
     ```
 
-7. 创建两张支持Colocat Join的表t1 和t2
+7. 创建两张支持 Colocat Join 的表 t1 和 t2
 
     ```sql
     CREATE TABLE `t1` (
@@ -585,7 +585,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     );
     ```
 
-8. 创建一个带有bitmap 索引的表
+8. 创建一个带有 bitmap 索引的表
 
     ```sql
     CREATE TABLE example_db.table_hash
@@ -603,7 +603,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     PROPERTIES ("storage_type"="column");
     ```
 
-9. 创建一个动态分区表(需要在FE配置中开启动态分区功能)，该表每天提前创建3天的分区，并删除3天前的分区。例如今天为`2020-01-08`，则会创建分区名为`p20200108`, `p20200109`, `p20200110`, `p20200111`的分区. 分区范围分别为:
+9. 创建一个动态分区表(需要在 FE 配置中开启动态分区功能)，该表每天提前创建 3 天的分区，并删除 3 天前的分区。例如今天为 `2020-01-08`，则会创建分区名为 `p20200108`, `p20200109`, `p20200110`, `p20200111` 的分区. 分区范围分别为:
 
     ```plain text
     [types: [DATE]; keys: [2020-01-08]; ‥types: [DATE]; keys: [2020-01-09]; )
@@ -662,7 +662,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
 
 11. 创建一个内存表
 
-    ```sql
+    ``` sql
     CREATE TABLE example_db.table_hash
     (
     k1 TINYINT,
@@ -671,28 +671,28 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] [database.]table_name
     v2 INT SUM,
     INDEX k1_idx (k1) USING BITMAP COMMENT 'xxxxxx'
     )
-    ENGINE=olap
+    ENGINE = olap
     AGGREGATE KEY(k1, k2)
     COMMENT "my first starrocks table"
     DISTRIBUTED BY HASH(k1) BUCKETS 32
-    PROPERTIES ("in_memory"="true");
+    PROPERTIES ("in_memory" = "true");
     ```
 
 12. 创建一个hive外部表
 
-    ```SQL
+    ``` SQL
     CREATE TABLE example_db.table_hive
     (
     k1 TINYINT,
     k2 VARCHAR(50),
     v INT
     )
-    ENGINE=hive
+    ENGINE = hive
     PROPERTIES
     (
         "database" = "hive_db_name",
         "table" = "hive_table_name",
-        "hive.metastore.uris" = "thrift://127.0.0.1:9083"
+        "hive.metastore.uris" = "thrift://127.0.0.1: 9083"
     );
     ```
 

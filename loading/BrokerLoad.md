@@ -1,10 +1,10 @@
 # Broker Load
 
-StarRocks支持从Apache HDFS、Amazon S3等外部存储系统导入数据，支持CSV、ORCFile、Parquet等文件格式。数据量在几十GB到上百GB 级别。
+StarRocks 支持从 Apache HDFS、Amazon S3 等外部存储系统导入数据，支持 CSV、ORCFile、Parquet 等文件格式。数据量在几十 GB 到上百 GB 级别。
 
-在Broker Load模式下，通过部署的Broker程序，StarRocks可读取对应数据源（如HDFS, S3）上的数据，利用自身的计算资源对数据进行预处理和导入。这是一种**异步**的导入方式，用户需要通过MySQL协议创建导入，并通过查看导入命令检查导入结果。
+在 Broker Load 模式下，通过部署的 Broker 程序，StarRocks 可读取对应数据源（如 HDFS, S3）上的数据，利用自身的计算资源对数据进行预处理和导入。这是一种 **异步** 的导入方式，用户需要通过 MySQL 协议创建导入，并通过查看导入命令检查导入结果。
 
-本节主要介绍Broker导入的基本原理、使用示例、最佳实践，及常见问题。
+本节主要介绍 Broker 导入的基本原理、使用示例、最佳实践，及常见问题。
 
 ---
 
@@ -12,7 +12,7 @@ StarRocks支持从Apache HDFS、Amazon S3等外部存储系统导入数据，支
 
 * Broker:  Broker 为一个独立的无状态进程，封装了文件系统接口，为 StarRocks 提供读取远端存储系统中文件的能力。
 
-* Plan:  导入执行计划，BE会执行导入执行计划将数据导入到StarRocks系统中。
+* Plan:  导入执行计划，BE 会执行导入执行计划将数据导入到 StarRocks 系统中。
 
 ---
 
@@ -37,11 +37,11 @@ StarRocks支持从Apache HDFS、Amazon S3等外部存储系统导入数据，支
 
 ## 导入示例
 
-### Broker搭建
+### Broker 搭建
 
-Broker Load需要借助Broker进程访问远端存储，因此使用Broker Load前需要搭建好Broker。
+Broker Load 需要借助 Broker 进程访问远端存储，因此使用 Broker Load 前需要搭建好 Broker。
 
-可以参考手动部署（[部署Broker](../quick_start/Deploy.md)）。
+可以参考手动部署（[部署 Broker](../quick_start/Deploy.md)）。
 
 ### 创建导入任务
 
@@ -69,7 +69,7 @@ broker_properties:
     (key2=value2, ...)
 ~~~
 
-**Apache HDFS导入示例：**
+**Apache HDFS 导入示例：**
 
 ~~~sql
 LOAD LABEL db1.label1
@@ -101,7 +101,7 @@ PROPERTIES
 );
 ~~~
 
-**阿里云 OSS导入示例：**
+**阿里云 OSS 导入示例：**
 
 ~~~SQL
 LOAD LABEL example_db.label12
@@ -118,25 +118,25 @@ WITH BROKER my_broker
 )
 ~~~
 
-执行`HELP BROKER LOAD`可查看创建导入作业的详细语法。这里主要介绍命令中参数的意义和注意事项。
+执行 `HELP BROKER LOAD` 可查看创建导入作业的详细语法。这里主要介绍命令中参数的意义和注意事项。
   
 **Label：**
 
-导入任务的标识。每个导入任务，都有**一个数据库**内部唯一的Label。Label是用户在导入命令中自定义的名称。通过这个Label，用户可以查看对应导入任务的执行情况，并且Label可以用来防止用户导入相同的数据。当导入任务状态为FINISHED时，对应的Label就不能再次使用了。当 Label 对应的导入任务状态为CANCELLED时，**可以再次使用**该Label提交导入作业。
+导入任务的标识。每个导入任务，都有 **一个数据库** 内部唯一的 Label。Label 是用户在导入命令中自定义的名称。通过这个 Label，用户可以查看对应导入任务的执行情况，并且 Label 可以用来防止用户导入相同的数据。当导入任务状态为 FINISHED 时，对应的 Label 就不能再次使用了。当 Label 对应的导入任务状态为 CANCELLED 时，**可以再次使用** 该 Label 提交导入作业。
 
 **数据描述类参数：**
 
-数据描述类参数，主要指的是语句中data_desc部分的参数。每组 data_desc表述了本次导入涉及到的数据源地址，ETL 函数，目标表及分区等信息。下面是对数据描述类部分参数的详细说明。
+数据描述类参数，主要指的是语句中 data_desc 部分的参数。每组 data_desc 表述了本次导入涉及到的数据源地址，ETL 函数，目标表及分区等信息。下面是对数据描述类部分参数的详细说明。
 
 * 多表导入
 
-Broker load支持一次导入任务涉及多张表，每个Broker load导入任务可通过多个data_desc声明多张表来实现多表导入。每个单独的data-desc可以指定属于**该表**的数据源地址，可以用多个 file-path 来指定导入同一个表的多个文件。Broker load 保证了单次导入的多张表之间原子性成功或失败。
+Broker load 支持一次导入任务涉及多张表，每个 Broker load 导入任务可通过多个 data_desc 声明多张表来实现多表导入。每个单独的 data-desc 可以指定属于 **该表** 的数据源地址，可以用多个 file-path 来指定导入同一个表的多个文件。Broker load 保证了单次导入的多张表之间原子性成功或失败。
 
 * file_path
 
 文件路径可以指定到一个文件，也可以用 * 通配符指定某个目录下的所有文件。中间的目录也可以使用通配符匹配。
 
-可以使用的通配符有```? * [] {} ^```，[通配符使用规则参考](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/fs/FileSystem.html#globStatus-org.apache.hadoop.fs.Path-)。
+可以使用的通配符有 ```? * [] {} ^```，[通配符使用规则参考](https://hadoop.apache.org/docs/stable/api/org/apache/hadoop/fs/FileSystem.html#globStatus-org.apache.hadoop.fs.Path-)。
 
 例如：
 通过 "hdfs://hdfs_host:hdfs_port/user/data/tablename/\*/\*" , 可以匹配tablename下所有分区内的所有文件；
@@ -319,9 +319,9 @@ LoadFinishTime: 2019-07-27 11:50:16
 2. 多个DataDescription对应导入同一个表的不同分区，每个也会拆成一个任务。
 
 每个任务还会拆分成一个或者多个实例，然后将这些实例平均分配到BE上并行执行。实例的拆分由以下FE配置决定：
-```min_bytes_per_broker_scanner```：单个实例处理的最小数据量，默认64MB。
-```max_broker_concurrency```：单个任务最大并发实例数，默认100个。
-```load_parallel_instance_num```：单个BE上并发实例数，默认1个。
+``` min_bytes_per_broker_scanner ```：单个实例处理的最小数据量，默认64MB。
+``` max_broker_concurrency ```：单个任务最大并发实例数，默认100个。
+``` load_parallel_instance_num ```：单个BE上并发实例数，默认1个。
 实例的总数=min(导入文件总大小/单个实例处理的最小数据量，单个任务最大并发实例数，单个BE上并发实例数 * BE数)
 
 一般情况下，一个作业只有一个DataDescription，只会拆分成一个任务。任务会拆成与BE数相等的实例，然后分配到所有BE上并行执行。

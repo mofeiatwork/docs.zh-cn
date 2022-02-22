@@ -8,8 +8,8 @@
 VARCHAR DATE_FORMAT(DATETIME date, VARCHAR format)
 ```
 
-将日期类型按照format的类型转化为字符串，
-当前支持最大128字节的字符串，如果返回值长度超过128，则返回NULL
+将日期类型按照 format 的类型转化为字符串，
+当前支持最大 128 字节的字符串，如果返回值长度超过 128，则返回 NULL
 
 * date 参数是合法的日期。
 * format 规定日期/时间的输出格式。
@@ -106,4 +106,4 @@ MySQL > select date_format('2006-06-01', '%%%d');
 
 ## keyword
 
-DATE_FORMAT,DATE,FORMAT
+DATE_FORMAT, DATE, FORMAT

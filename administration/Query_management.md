@@ -2,7 +2,7 @@
 
 ## 用户连接数
 
-Property 是针对用户粒度的属性设置，客户端到FE的最大连接数可以通过该命令设置
+Property 是针对用户粒度的属性设置，客户端到 FE 的最大连接数可以通过该命令设置
 
 ```sql
 SET PROPERTY [FOR 'user'] 'key' = 'value' [, 'key' = 'value']
@@ -20,13 +20,13 @@ SET PROPERTY FOR 'jack' 'max_user_connections' = '1000';
 SHOW PROPERTY FOR 'root'; 
 ```
 
-## 查询相关的session变量
+## 查询相关的 session 变量
 
-通过 set 'key' = 'value' 可以设置session级别的变量，可以限制当前session中查询的并发度，内存等等参数，例如：
+通过 set 'key' = 'value' 可以设置 session 级别的变量，可以限制当前 session 中查询的并发度，内存等等参数，例如：
 
 - parallel_fragment_exec_instance_num
 
-  查询的并行度，默认为1.表示每个BE上fragment的实例数量，如果希望提升单个查询的性能，可以设置为BE的CPU核数的一半。
+  查询的并行度，默认为 1.表示每个 BE 上 fragment 的实例数量，如果希望提升单个查询的性能，可以设置为 BE 的 CPU 核数的一半。
 - exec_mem_limit
 
   查询的内存限制，在查询报内存不足时可以调整。
@@ -41,15 +41,15 @@ set parallel_fragment_exec_instance_num  = 8;
 set exec_mem_limit  = 137438953472;
 ```
 
-## 数据库存储容量Quota
+## 数据库存储容量 Quota
 
-默认每个DB的容量限制是1TB，我们可以通过alter database 修改
+默认每个 DB 的容量限制是 1TB，我们可以通过 alter database 修改
 
 ```sql
 ALTER DATABASE db_name SET DATA QUOTA quota;
 ```
 
-这里quota 单位为：B/K/KB/M/MB/G/GB/T/TB/P/PB
+这里 quota 单位为：B/K/KB/M/MB/G/GB/T/TB/P/PB
 例如
 
 ```sql
@@ -60,13 +60,13 @@ ALTER DATABASE example_db SET DATA QUOTA 10T;
 
 ## 杀死查询
 
-我们可以通过kill 命令杀掉某一个连接上的查询，其语法是：
+我们可以通过 kill 命令杀掉某一个连接上的查询，其语法是：
 
 ```sql
 kill connection_id;
 ```
 
-connection_id 可以通过show processlist; 或者select connection_id(); 查询到
+connection_id 可以通过 show processlist; 或者 select connection_id(); 查询到
 
 ```plain text
  show processlist;

@@ -6,7 +6,7 @@ GRANT 命令用于赋予指定用户或角色指定的权限。
 
 ### Syntax
 
-GRANT privilege_list ON db_name[.tbl_name] TO user_identity [ROLE role_name]
+GRANT privilege_list ON db_name [.tbl_name] TO user_identity [ROLE role_name]
 
 GRANT privilege_list ON RESOURCE resource_name TO user_identity [ROLE role_name]
 
@@ -24,7 +24,7 @@ DROP_PRIV：对指定的库或表的删除权限
 USAGE_PRIV: 对指定资源的使用权限
 ```
 
-旧版权限中的 ALL 和 READ_WRITE 会被转换成：SELECT_PRIV,LOAD_PRIV,ALTER_PRIV,CREATE_PRIV,DROP_PRIV；
+旧版权限中的 ALL 和 READ_WRITE 会被转换成：SELECT_PRIV, LOAD_PRIV, ALTER_PRIV, CREATE_PRIV, DROP_PRIV；
 READ_ONLY 会被转换为 SELECT_PRIV。
 
 权限分类：
@@ -35,7 +35,7 @@ READ_ONLY 会被转换为 SELECT_PRIV。
 3. 资源权限：USAGE_PRIV
 ```
 
-db_name[.tbl_name] 支持以下三种形式：
+db_name [.tbl_name] 支持以下三种形式：
 
 ```plain text
 1. *.* 权限可以应用于所有库及其中所有表
@@ -58,7 +58,7 @@ resource_name 支持以下两种形式：
 user_identity：
 ```
 
-这里的 user_identity 语法同 CREATE USER。且必须为使用 CREATE USER 创建过的 user_identity。user_identity 中的host可以是域名，如果是域名的话，权限的生效时间可能会有1分钟左右的延迟。
+这里的 user_identity 语法同 CREATE USER。且必须为使用 CREATE USER 创建过的 user_identity。user_identity 中的 host 可以是域名，如果是域名的话，权限的生效时间可能会有 1 分钟左右的延迟。
 
 也可以将权限赋予指定的 ROLE，如果指定的 ROLE 不存在，则会自动创建。
 

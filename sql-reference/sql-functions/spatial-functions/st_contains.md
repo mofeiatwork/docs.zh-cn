@@ -6,7 +6,7 @@
 
 `BOOL ST_Contains(GEOMETRY shape1, GEOMETRY shape2)`
 
-判断几何图形shape1是否完全能够包含几何图形shape2
+判断几何图形 shape1 是否完全能够包含几何图形 shape2
 
 ## example
 
@@ -28,4 +28,4 @@ MySQL > SELECT ST_Contains(ST_Polygon("POLYGON ((0 0, 10 0, 10 10, 0 10, 0 0))")
 
 ## keyword
 
-ST_CONTAINS,ST,CONTAINS
+ST_CONTAINS, ST, CONTAINS

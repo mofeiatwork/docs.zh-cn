@@ -21,4 +21,4 @@ DROP VIEW [IF EXISTS]
 
 ## keyword
 
-DROP,VIEW
+DROP, VIEW

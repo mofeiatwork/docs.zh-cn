@@ -24,7 +24,7 @@ auth_option: {
 
 2. user_identity 由两部分组成，user_name 和 host，其中 user_name 为用户名。host 标识用户端连接所在的主机地址。host 部分可以使用 % 进行模糊匹配。如果不指定 host，默认为 '%'，即表示该用户可以从任意 host 连接到 StarRocks。
 
-3. auth_option指定用户的认证方式，目前支持mysql_native_password和authentication_ldap_simple
+3. auth_option 指定用户的认证方式，目前支持 mysql_native_password 和 authentication_ldap_simple
 
     如果指定了角色（ROLE），则会自动将该角色所拥有的权限赋予新创建的这个用户。如果不指定，则该用户默认没有任何权限。指定的 ROLE 必须已经存在。
 
@@ -48,7 +48,7 @@ auth_option: {
     CREATE USER jack@'172.10.1.10' IDENTIFIED WITH mysql_native_password BY '123456';
     ```
 
-3. 为了避免传递明文，用例2也可以使用下面的方式来创建
+3. 为了避免传递明文，用例 2 也可以使用下面的方式来创建
 
     ```SQL
     CREATE USER jack@'172.10.1.10' IDENTIFIED BY PASSWORD '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
@@ -60,19 +60,19 @@ auth_option: {
     CREATE USER jack@'172.10.1.10' IDENTIFIED WITH mysql_native_password AS '*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9';
     ```
 
-    后面加密的内容可以通过PASSWORD()获得到,例如：
+    后面加密的内容可以通过 PASSWORD()获得到, 例如：
 
     ```sql
     SELECT PASSWORD('123456');
     ```
 
-4. 创建一个ldap认证的用户
+4. 创建一个 ldap 认证的用户
 
     ```sql
     CREATE USER jack@'172.10.1.10' IDENTIFIED WITH authentication_ldap_simple
     ```
 
-5. 创建一个ldap认证的用户，并指定用户在ldap中的DN(Distinguished Name)
+5. 创建一个 ldap 认证的用户，并指定用户在 ldap 中的 DN(Distinguished Name)
 
     ```sql
     CREATE USER jack@'172.10.1.10' IDENTIFIED WITH authentication_ldap_simple AS 'uid=jack,ou=company,dc=example,dc=com'

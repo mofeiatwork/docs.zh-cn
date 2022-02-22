@@ -6,13 +6,13 @@ Broker Load 通过随 StarRocks 集群一同部署的 broker 进行，访问对�
 
 可以通过 show broker 命令查看已经部署的 broker。
 
-目前支持以下5种数据源：
+目前支持以下 5 种数据源：
 
 1. Apache HDFS：社区版本 hdfs。
-2. Amazon S3：Amazon对象存储。
+2. Amazon S3：Amazon 对象存储。
 3. 阿里云 OSS：阿里云对象存储。
-4. 腾讯COS：腾讯云对象存储。
-5. 百度BOS：百度对象存储。
+4. 腾讯 COS：腾讯云对象存储。
+5. 百度 BOS：百度对象存储。
 语法：
 
 ```sql
@@ -142,34 +142,34 @@ WITH BROKER broker_name
 
         dfs.nameservices: 指定 hdfs 服务的名字，自定义，如："dfs.nameservices" = "my_ha"
 
-        dfs.ha.namenodes.xxx：自定义 namenode 的名字,多个名字以逗号分隔。其中 xxx 为 dfs.nameservices 中自定义的名字，如 "dfs.ha.namenodes.my_ha" = "my_nn"
+        dfs.ha.namenodes.xxx：自定义 namenode 的名字, 多个名字以逗号分隔。其中 xxx 为 dfs.nameservices 中自定义的名字，如 "dfs.ha.namenodes.my_ha" = "my_nn"
 
-        dfs.namenode.rpc-address.xxx.nn：指定 namenode 的rpc地址信息。其中 nn 表示 dfs.ha.namenodes.xxx 中配置的 namenode 的名字，如："dfs.namenode.rpc-address.my_ha.my_nn" = "host:port"
+        dfs.namenode.rpc-address.xxx.nn：指定 namenode 的 rpc 地址信息。其中 nn 表示 dfs.ha.namenodes.xxx 中配置的 namenode 的名字，如："dfs.namenode.rpc-address.my_ha.my_nn" = "host: port"
 
         dfs.client.failover.proxy.provider：指定 client 连接 namenode 的 provider，默认为：org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider
 
     2. Amazon S3
 
         需提供：
-        fs.s3a.access.key：AmazonS3的access key
+        fs.s3a.access.key：AmazonS3 的 access key
 
-        fs.s3a.secret.key：AmazonS3的secret key
+        fs.s3a.secret.key：AmazonS3 的 secret key
 
-        fs.s3a.endpoint：AmazonS3的endpoint
+        fs.s3a.endpoint：AmazonS3 的 endpoint
 
     3. 阿里云 OSS
 
         需提供：
-        fs.oss.accessKeyId：Aliyun OSS的access key
+        fs.oss.accessKeyId：Aliyun OSS 的 access key
 
-        fs.oss.accessKeySecret：Aliyun OSS的secret key
+        fs.oss.accessKeySecret：Aliyun OSS 的 secret key
 
-        fs.oss.endpoint：Aliyun OSS的endpoint
+        fs.oss.endpoint：Aliyun OSS 的 endpoint
 
     4. 百度 BOS
 
        需提供：
-       bos_endpoint：BOS 的endpoint
+       bos_endpoint：BOS 的 endpoint
 
        bos_accesskey：公有云用户的 accesskey
 
@@ -181,10 +181,10 @@ WITH BROKER broker_name
 
         语法：
 
-        [PROPERTIES ("key"="value", ...)]
+        [PROPERTIES ("key" = "value", ...)]
 
         可以指定如下参数：
-        timeout：         指定导入操作的超时时间。默认超时为4小时。单位秒。
+        timeout：         指定导入操作的超时时间。默认超时为 4 小时。单位秒。
 
         max_filter_ratio：最大容忍可过滤（数据不规范等原因）的数据比例。默认零容忍。
 
@@ -200,12 +200,12 @@ WITH BROKER broker_name
 
         浮点类（FLOAT/DOUBLE/DECIMAL）：1.1, 0.23, .356
 
-        日期类（DATE/DATETIME）：2017-10-03, 2017-06-13 12:34:03。
+        日期类（DATE/DATETIME）：2017-10-03, 2017-06-13 12: 34: 03。
         （注：如果是其他日期格式，可以在导入命令中，使用 strftime 或者 time_format 函数进行转换）
 
         字符串类（CHAR/VARCHAR）："I am a student", "a"
 
-        NULL值：\N
+        NULL 值：\N
 
 ### Syntax
 
@@ -229,9 +229,9 @@ WITH BROKER broker_name
     );
     ```
 
-    其中 hdfs_host 为 namenode 的 host，hdfs_port 为 fs.defaultFS 端口（默认9000）
+    其中 hdfs_host 为 namenode 的 host，hdfs_port 为 fs.defaultFS 端口（默认 9000）
 
-2. 从 HDFS 导入一批数据，指定hive的默认分隔符\x01，并使用通配符*指定目录下的所有文件。
+2. 从 HDFS 导入一批数据，指定 hive 的默认分隔符\x01，并使用通配符*指定目录下的所有文件。
 
     使用简单认证，同时配置 namenode HA
 
@@ -302,7 +302,7 @@ WITH BROKER broker_name
     Adele,1,1
 
     数据文件中各列，对应导入语句中指定的各列：
-    k1,tmp_k2,tmp_k3
+    k1, tmp_k2, tmp_k3
 
     转换如下：
     1. k1: 不变换
@@ -328,11 +328,11 @@ WITH BROKER broker_name
     )
     ```
 
-6. 导入数据到含有HLL列的表，可以是表中的列或者数据里面的列
+6. 导入数据到含有 HLL 列的表，可以是表中的列或者数据里面的列
 
-    如果表中有三列分别是（id,v1,v2,v3）。其中v1和v2列是hll列。导入的源文件有3列。则（column_list）中声明第一列为id，第二三列为一个临时命名的k1,k2。
+    如果表中有三列分别是（id, v1, v2, v3）。其中 v1 和 v2 列是 hll 列。导入的源文件有 3 列。则（column_list）中声明第一列为 id，第二三列为一个临时命名的 k1, k2。
 
-    在SET中必须给表中的hll列特殊声明 hll_hash。表中的v1列等于原始数据中的hll_hash(k1)列, 表中的v3列在原始数据中并没有对应的值，使用empty_hll补充默认值。
+    在 SET 中必须给表中的 hll 列特殊声明 hll_hash。表中的 v1 列等于原始数据中的 hll_hash(k1)列, 表中的 v3 列在原始数据中并没有对应的值，使用 empty_hll 补充默认值。
 
     ```SQL
     LOAD LABEL example_db.label7
@@ -365,7 +365,7 @@ WITH BROKER broker_name
     WITH BROKER hdfs ("username"="hdfs_user", "password"="hdfs_password");
     ```
 
-7. 导入Parquet文件中数据  指定FORMAT 为parquet， 默认是通过文件后缀判断
+7. 导入 Parquet 文件中数据  指定 FORMAT 为 parquet， 默认是通过文件后缀判断
 
     ```SQL
     LOAD LABEL example_db.label9
@@ -380,7 +380,7 @@ WITH BROKER broker_name
 
 8. 提取文件路径中的分区字段
 
-    如果需要，则会根据表中定义的字段类型解析文件路径中的分区字段（partitioned fields），类似Spark中Partition Discovery的功能
+    如果需要，则会根据表中定义的字段类型解析文件路径中的分区字段（partitioned fields），类似 Spark 中 Partition Discovery 的功能
 
     ```SQL
     LOAD LABEL example_db.label10
@@ -395,11 +395,11 @@ WITH BROKER broker_name
     WITH BROKER hdfs ("username"="hdfs_user", "password"="hdfs_password");
     ```
 
-    hdfs://hdfs_host:hdfs_port/user/starRocks/data/input/dir/city=beijing目录下包括如下文件：
+    hdfs://hdfs_host: hdfs_port/user/starRocks/data/input/dir/city = beijing 目录下包括如下文件：
 
-    [hdfs://hdfs_host:hdfs_port/user/starRocks/data/input/dir/city=beijing/utc_date=2019-06-26/0000.csv, hdfs://hdfs_host:hdfs_port/user/starRocks/data/input/dir/city=beijing/utc_date=2019-06-26/0001.csv, ...]
+    [hdfs://hdfs_host: hdfs_port/user/starRocks/data/input/dir/city = beijing/utc_date = 2019-06-26/0000.csv, hdfs://hdfs_host: hdfs_port/user/starRocks/data/input/dir/city = beijing/utc_date = 2019-06-26/0001.csv, ...]
 
-    则提取文件路径的中的city和utc_date字段
+    则提取文件路径的中的 city 和 utc_date 字段
 
 9. 对待导入数据进行过滤，k1 值大于 k2 值的列才能被导入
 
@@ -416,9 +416,9 @@ WITH BROKER broker_name
 
     假设有如下文件：
 
-    /user/data/data_time=2020-02-17 00%3A00%3A00/test.txt
+    /user/data/data_time = 2020-02-17 00%3A00%3A00/test.txt
 
-    /user/data/data_time=2020-02-18 00%3A00%3A00/test.txt
+    /user/data/data_time = 2020-02-18 00%3A00%3A00/test.txt
 
     ```PLAIN TEXT
     表结构为：
@@ -493,4 +493,4 @@ WITH BROKER broker_name
 
 ## keyword
 
-BROKER,LOAD
+BROKER, LOAD

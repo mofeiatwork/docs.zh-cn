@@ -12,4 +12,4 @@ SHOW TABLES;
 
 ## keyword
 
-SHOW,TABLES
+SHOW, TABLES

@@ -1,4 +1,4 @@
-# ST_AsText,ST_AsWKT
+# ST_AsText, ST_AsWKT
 
 ## description
 
@@ -8,7 +8,7 @@
 VARCHAR ST_AsText(GEOMETRY geo)
 ```
 
-将一个几何图形转化为WKT（Well Known Text）的表示形式
+将一个几何图形转化为 WKT（Well Known Text）的表示形式
 
 ## example
 
@@ -23,4 +23,4 @@ MySQL > SELECT ST_AsText(ST_Point(24.7, 56.7));
 
 ## keyword
 
-ST_ASTEXT,ST_ASWKT,ST,ASTEXT,ASWKT
+ST_ASTEXT, ST_ASWKT, ST, ASTEXT, ASWKT

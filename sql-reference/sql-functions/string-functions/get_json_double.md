@@ -51,4 +51,4 @@ path 的内容不能包含 ", [ 和 ]。
 
 ## keyword
 
-GET_JSON_DOUBLE,GET,JSON,DOUBLE
+GET_JSON_DOUBLE, GET, JSON, DOUBLE

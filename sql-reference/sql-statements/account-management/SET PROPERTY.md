@@ -29,19 +29,19 @@ quota.low: low级别的资源分配。
 
 ## example
 
-1. 修改用户 jack 最大连接数为1000
+1. 修改用户 jack 最大连接数为 1000
 
     ```SQL
     SET PROPERTY FOR 'jack' 'max_user_connections' = '1000';
     ```
 
-2. 修改用户 jack 的cpu_share为1000
+2. 修改用户 jack 的 cpu_share 为 1000
 
     ```SQL
     SET PROPERTY FOR 'jack' 'resource.cpu_share' = '1000';
     ```
 
-3. 修改 jack 用户的normal组的权重
+3. 修改 jack 用户的 normal 组的权重
 
     ```SQL
     SET PROPERTY FOR 'jack' 'quota.normal' = '400';

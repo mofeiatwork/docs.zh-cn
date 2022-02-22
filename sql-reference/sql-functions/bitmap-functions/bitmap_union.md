@@ -2,7 +2,7 @@
 
 ## description
 
-聚合函数，用于计算分组后的 bitmap 并集。常见使用场景如：计算PV，UV。
+聚合函数，用于计算分组后的 bitmap 并集。常见使用场景如：计算 PV，UV。
 
 ### Syntax
 

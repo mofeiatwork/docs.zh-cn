@@ -48,4 +48,4 @@ AS query_stmt
 
 ## keyword
 
-CREATE,VIEW
+CREATE, VIEW

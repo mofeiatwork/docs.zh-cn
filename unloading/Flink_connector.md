@@ -18,7 +18,7 @@ Flink 可以通过 flink-connector-starrocks 的 source 功能读取 StarRocks �
 
 ## 操作步骤
 
-### 步骤一：准备flink-connector-starrocks
+### 步骤一：准备 flink-connector-starrocks
 
 1. 下载源码 [flink-connector-starrocks](https://github.com/StarRocks/flink-connector-starrocks/tree/dev)。
 2. 根据 Flink 的版本，选择对应的分支。
@@ -39,7 +39,7 @@ Flink 可以通过 flink-connector-starrocks 的 source 功能读取 StarRocks �
 
 > flink-connector-starrocks 的 source 功能暂时无法保证 exactly-once 语义。如果读取任务失败，您需要重复本步骤，再次创建读取任务。
 
-- 如您使用 Flink SQL 客户端（推荐），则需要参考如下命令，调用 flink-connector-starrocks，读取 StarRocks 的数据。相关参数说明，请参见[参数说明](#参数说明)。
+- 如您使用 Flink SQL 客户端（推荐），则需要参考如下命令，调用 flink-connector-starrocks，读取 StarRocks 的数据。相关参数说明，请参见 [参数说明](#参数说明)。
 
    ```SQL
    -- 根据 StarRocks 的表，创建表和配置属性（包括 flink-connector-starrocks 和库表的信息）。
@@ -70,14 +70,14 @@ Flink 可以通过 flink-connector-starrocks 的 source 功能读取 StarRocks �
    select date_1, smallint_1 from flink_test where char_1 <> 'A' and int_1 = -126;
    ```
 
-   > - 仅支持使用部分 SQL 语句读取 StarRocks 数据，如`select ... from table_name where ...`。暂不支持除 COUNT 外的聚合函数。
+   > - 仅支持使用部分 SQL 语句读取 StarRocks 数据，如 `select ... from table_name where ...`。暂不支持除 COUNT 外的聚合函数。
    > - 支持谓词下推。使用 SQL 语句时，支持自动进行谓词下推，比如上述例子中的过滤条件 `char_1 <> 'A' and int_1 = -126`，会直接发送到 BE 节点的存储层进行过滤，不需要额外配置。
 
 - 如您使用 Flink DataStream ，则需要先添加依赖，然后调用 flink-connector-starrocks，读取 StarRocks 的数据。
 
 1. 在 pom.xml 文件中添加如下依赖。
 
-   > x.x.x需要替换为 flink-connector-starrocks 的最新版本号，您可以单击[版本信息](https://search.maven.org/search?q=g:com.starrocks)获取。
+   > x.x.x 需要替换为 flink-connector-starrocks 的最新版本号，您可以单击 [版本信息](https://search.maven.org/search?q=g:com.starrocks) 获取。
 
    ```SQL
    <dependency>    
@@ -95,7 +95,7 @@ Flink 可以通过 flink-connector-starrocks 的 source 功能读取 StarRocks �
    </dependency>
    ```
 
-2. 参考如下示例代码，调用 flink-connector-starrocks，读取 StarRocks 的数据。相关参数说明，请参见[参数说明](~~https://docs.starrocks.com/zh-cn/main/unloading/Flink_connector#参数说明~~)。
+2. 参考如下示例代码，调用 flink-connector-starrocks，读取 StarRocks 的数据。相关参数说明，请参见 [参数说明](~~https://docs.starrocks.com/zh-cn/main/unloading/Flink_connector#参数说明~~)。
 
    ```Java
    StarRocksSourceOptions options = StarRocksSourceOptions.builder()
@@ -133,17 +133,17 @@ Flink 可以通过 flink-connector-starrocks 的 source 功能读取 StarRocks �
 | 参数                        | 是否必填 | 数据类型 | 描述                                                         |
 | --------------------------- | -------- | -------- | ------------------------------------------------------------ |
 | connector                   | 是       | String   | 固定为 starrocks。                                          |
-| scan-url                    | 是       | String   | FE 节点的连接地址，用于通过 Web 服务器访问 FE 节点。 具体格式为< FE 节点的 IP 地址>:< FE 的 http_port>，端口号默认为8030。多个地址之间用英文半角逗号分隔。例如192.168.xxx.xxx:8030,192.168.xxx.xxx:8030。 |
-| jdbc-url                    | 是       | String   | FE 节点的连接地址，用于访问 FE 节点上的 MySQL 客户端。具体格式为 jdbc:mysql://< FE 节点的 IP 地址>:< FE 的 query_port>，端口号默认为9030。 |
-| username                    | 是       | String   | StarRocks 中的用户名称。需具备目标数据库表的读权限。用户权限说明，请参见[用户权限](../administration/User_privilege.md)。 |
+| scan-url                    | 是       | String   | FE 节点的连接地址，用于通过 Web 服务器访问 FE 节点。 具体格式为 < FE 节点的 IP 地址>: < FE 的 http_port>，端口号默认为 8030。多个地址之间用英文半角逗号分隔。例如 192.168.xxx.xxx:8030,192.168.xxx.xxx:8030。 |
+| jdbc-url                    | 是       | String   | FE 节点的连接地址，用于访问 FE 节点上的 MySQL 客户端。具体格式为 jdbc: mysql://< FE 节点的 IP 地址>: < FE 的 query_port>，端口号默认为 9030。 |
+| username                    | 是       | String   | StarRocks 中的用户名称。需具备目标数据库表的读权限。用户权限说明，请参见 [用户权限](../administration/User_privilege.md)。 |
 | password                    | 是       | String   | StarRocks 的用户密码。                                       |
 | database-name               | 是       | String   | StarRocks 数据库的名称。                                     |
 | table-name                  | 是       | String   | StarRocks 数据表的名称。                                     |
-| scan.connect.timeout-ms     | 否       | String   | flink-connector-starrocks 连接 StarRocks 的时间上限，单位为毫秒，默认值为1000。超过该时间上限，则将报错。 |
-| scan.params.keep-alive-min  | 否       | String   | 查询任务的保活时间，单位为分钟。默认值为10，建议取值大于等于5。      |
-| scan.params.query-timeout-s | 否       | String   | 查询任务的超时时间，单位为秒，默认值为600。如果超过该时间，仍未返回查询结果，则停止查询任务。  |
-| scan.params.mem-limit-byte  | 否       | String   | BE 节点中单个查询的内存上限，单位为字节，默认值为1073741824（1G）。 |
-| scan.max-retries            | 否       | String   | 查询失败时的最大重试次数，默认值为1。超过该数量上限，则将报错。 |
+| scan.connect.timeout-ms     | 否       | String   | flink-connector-starrocks 连接 StarRocks 的时间上限，单位为毫秒，默认值为 1000。超过该时间上限，则将报错。 |
+| scan.params.keep-alive-min  | 否       | String   | 查询任务的保活时间，单位为分钟。默认值为 10，建议取值大于等于 5。      |
+| scan.params.query-timeout-s | 否       | String   | 查询任务的超时时间，单位为秒，默认值为 600。如果超过该时间，仍未返回查询结果，则停止查询任务。  |
+| scan.params.mem-limit-byte  | 否       | String   | BE 节点中单个查询的内存上限，单位为字节，默认值为 1073741824（1G）。 |
+| scan.max-retries            | 否       | String   | 查询失败时的最大重试次数，默认值为 1。超过该数量上限，则将报错。 |
 
 ## Flink 与 StarRocks 的数据类型映射关系
 

@@ -55,4 +55,4 @@ mysql> show builtin functions in testDb like 'year%';
 
 ## keyword
 
-SHOW,FUNCTIONS
+SHOW, FUNCTIONS

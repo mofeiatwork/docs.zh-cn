@@ -2,7 +2,7 @@
 
 ## description
 
-该语句用于展示当前db下所有的动态分区表状态
+该语句用于展示当前 db 下所有的动态分区表状态
 
 语法：
 
@@ -20,4 +20,4 @@ SHOW DYNAMIC PARTITION TABLES FROM database;
 
 ## keyword
 
-SHOW,DYNAMIC,PARTITION,TABLES
+SHOW, DYNAMIC, PARTITION, TABLES

@@ -13,7 +13,7 @@ PROPERTIES ("key"="value", ...);
 
 说明：
 
-1. PROPERTIES中需要指定资源的类型，目前仅支持 spark 和 hive。
+1. PROPERTIES 中需要指定资源的类型，目前仅支持 spark 和 hive。
 2. 根据资源类型的不同 PROPERTIES 有所不同，具体见示例。
 
 ## example

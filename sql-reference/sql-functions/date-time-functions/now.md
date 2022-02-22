@@ -8,7 +8,7 @@
 DATETIME NOW()
 ```
 
-获得当前的时间，以Datetime类型返回
+获得当前的时间，以 Datetime 类型返回
 
 ## example
 

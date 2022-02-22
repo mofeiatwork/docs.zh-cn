@@ -24,4 +24,4 @@ plugin_name 可以通过 `SHOW PLUGINS;` 命令查看。
 
 ## keyword
 
-UNINSTALL,PLUGIN
+UNINSTALL, PLUGIN

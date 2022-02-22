@@ -6,9 +6,9 @@
 
 `TIME TIMEDIFF(DATETIME expr1, DATETIME expr2)`
 
-TIMEDIFF返回两个DATETIME之间的差值
+TIMEDIFF 返回两个 DATETIME 之间的差值
 
-TIMEDIFF函数返回表示为时间值的expr1 - expr2的结果，返回值为TIME类型
+TIMEDIFF 函数返回表示为时间值的 expr1 - expr2 的结果，返回值为 TIME 类型
 
 ## example
 

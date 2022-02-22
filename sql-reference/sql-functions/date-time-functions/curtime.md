@@ -1,4 +1,4 @@
-# curtime,current_time
+# curtime, current_time
 
 ## Syntax
 
@@ -6,7 +6,7 @@
 
 ## Description
 
-获得当前的时间，以TIME类型返回
+获得当前的时间，以 TIME 类型返回
 
 ## Examples
 
@@ -21,4 +21,4 @@ MySQL > select current_time();
 
 ## keyword
 
-CURTIME,CURRENT_TIME
+CURTIME, CURRENT_TIME

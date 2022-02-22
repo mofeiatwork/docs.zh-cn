@@ -133,7 +133,7 @@ WHERE:
 ```
 
 可以指定如下参数：
-timeout：         指定导入操作的超时时间。默认超时为4小时。单位秒。
+timeout：         指定导入操作的超时时间。默认超时为 4 小时。单位秒。
 max_filter_ratio：最大容忍可过滤（数据不规范等原因）的数据比例。默认零容忍。
 strict mode：     是否对数据进行严格限制。默认为 false。
 timezone:         指定某些受时区影响的函数的时区，如 strftime/alignment_timestamp/from_unixtime 等等，具体请查阅 [时区] 文档。如果不指定，则使用 "Asia/Shanghai" 时区。
@@ -142,10 +142,10 @@ timezone:         指定某些受时区影响的函数的时区，如 strftime/a
 
 整型类（TINYINT/SMALLINT/INT/BIGINT/LARGEINT）：1, 1000, 1234
 浮点类（FLOAT/DOUBLE/DECIMAL）：1.1, 0.23, .356
-日期类（DATE/DATETIME）：2017-10-03, 2017-06-13 12:34:03。
+日期类（DATE/DATETIME）：2017-10-03, 2017-06-13 12: 34: 03。
 （注：如果是其他日期格式，可以在导入命令中，使用 strftime 或者 time_format 函数进行转换）
 字符串类（CHAR/VARCHAR）："I am a student", "a"
-NULL值：\N
+NULL 值：\N
 
 ## example
 
@@ -165,9 +165,9 @@ NULL值：\N
     );
     ```
 
-    其中 hdfs_host 为 namenode 的 host，hdfs_port 为 fs.defaultFS 端口（默认9000）
+    其中 hdfs_host 为 namenode 的 host，hdfs_port 为 fs.defaultFS 端口（默认 9000）
 
-2. 从 HDFS 导入一批"负"数据，指定分隔符为逗号，使用通配符*指定目录下的所有文件，并指定 spark 资源的临时参数。
+2. 从 HDFS 导入一批 "负" 数据，指定分隔符为逗号，使用通配符*指定目录下的所有文件，并指定 spark 资源的临时参数。
 
     ```sql
     LOAD LABEL example_db.label3
@@ -220,7 +220,7 @@ NULL值：\N
 
 4. 提取文件路径中的分区字段
 
-    如果需要，则会根据表中定义的字段类型解析文件路径中的分区字段（partitioned fields），类似Spark中Partition Discovery的功能
+    如果需要，则会根据表中定义的字段类型解析文件路径中的分区字段（partitioned fields），类似 Spark 中 Partition Discovery 的功能
 
     ```sql
     LOAD LABEL example_db.label10
@@ -234,11 +234,11 @@ NULL值：\N
     WITH RESOURCE 'my_spark';
     ```
 
-    hdfs://hdfs_host:hdfs_port/user/starRocks/data/input/dir/city=beijing目录下包括如下文件：
+    hdfs://hdfs_host: hdfs_port/user/starRocks/data/input/dir/city = beijing 目录下包括如下文件：
 
-    [hdfs://hdfs_host:hdfs_port/user/starRocks/data/input/dir/city=beijing/utc_date=2019-06-26/0000.csv, hdfs://hdfs_host:hdfs_port/user/starRocks/data/input/dir/city=beijing/utc_date=2019-06-26/0001.csv, ...]
+    [hdfs://hdfs_host: hdfs_port/user/starRocks/data/input/dir/city = beijing/utc_date = 2019-06-26/0000.csv, hdfs://hdfs_host: hdfs_port/user/starRocks/data/input/dir/city = beijing/utc_date = 2019-06-26/0001.csv, ...]
 
-    则提取文件路径的中的city和utc_date字段
+    则提取文件路径的中的 city 和 utc_date 字段
 
 5. 对待导入数据进行过滤，k1 值大于 10 的列才能被导入。
 
@@ -269,4 +269,4 @@ NULL值：\N
 
 ## keyword
 
-SPARK,LOAD
+SPARK, LOAD

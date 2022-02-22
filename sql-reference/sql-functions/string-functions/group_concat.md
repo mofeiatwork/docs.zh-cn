@@ -39,4 +39,4 @@ MySQL > select group_concat(value, " ") from test;
 
 ## keyword
 
-GROUP_CONCAT,GROUP,CONCAT
+GROUP_CONCAT, GROUP, CONCAT

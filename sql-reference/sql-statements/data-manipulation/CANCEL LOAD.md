@@ -26,4 +26,4 @@ WHERE LABEL = "load_label";
 
 ## keyword
 
-CANCEL,LOAD
+CANCEL, LOAD

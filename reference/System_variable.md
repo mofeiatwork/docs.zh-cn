@@ -2,9 +2,9 @@
 
 ## 变量设置与查看
 
-本节介绍StarRocks系统支持的变量（variables）。它们可以通过命令 `SHOW VARIABLES` 查看，能在系统全局范围内生效，或者仅在当前会话中生效。
+本节介绍 StarRocks 系统支持的变量（variables）。它们可以通过命令 `SHOW VARIABLES` 查看，能在系统全局范围内生效，或者仅在当前会话中生效。
 
-StarRocks 中的变量参考 MySQL 中的变量设置，但**部分变量仅用于兼容 MySQL 客户端协议，并不产生其在 MySQL 数据库中的实际意义**。
+StarRocks 中的变量参考 MySQL 中的变量设置，但 **部分变量仅用于兼容 MySQL 客户端协议，并不产生其在 MySQL 数据库中的实际意义**。
 
 ### 查看
 
@@ -18,7 +18,7 @@ SHOW VARIABLES LIKE '%time_zone%';
 
 ### 设置
 
-变量一般可以设置为**全局**生效或**仅当前会话**生效。设置为全局生效后，**后续新的会话**连接中会使用新设置的值，而不影响当前会话；设置为仅当前会话生效时，变量仅对当前会话产生作用。
+变量一般可以设置为 **全局** 生效或 **仅当前会话** 生效。设置为全局生效后，**后续新的会话** 连接中会使用新设置的值，而不影响当前会话；设置为仅当前会话生效时，变量仅对当前会话产生作用。
 
 通过 `SET var_name=xxx;` 语句设置的变量仅当前会话生效。如：
 
@@ -70,7 +70,7 @@ SET forward_to_master = concat('tr', 'u', 'e');
 
 ### 在查询语句中设置变量
 
-在一些场景中，我们可能需要针对某些查询专门设置变量。 通过使用SET_VAR提示可以在查询中设置仅在单个语句内生效的会话变量。例子：
+在一些场景中，我们可能需要针对某些查询专门设置变量。 通过使用 SET_VAR 提示可以在查询中设置仅在单个语句内生效的会话变量。例子：
 
 ```sql
 SELECT /*+ SET_VAR(exec_mem_limit = 8589934592) */ name FROM people ORDER BY name;
@@ -78,7 +78,7 @@ SELECT /*+ SET_VAR(exec_mem_limit = 8589934592) */ name FROM people ORDER BY nam
 SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 ```
 
-> 注：提示必须以"/*+"开头，并且只能跟随在SELECT关键字之后。
+> 注：提示必须以 "/*+" 开头，并且只能跟随在 SELECT 关键字之后。
 
 ## 支持的变量
 
@@ -132,7 +132,7 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * exec_mem_limit
 
-    用于设置单个查询计划实例所能使用的内存限制。默认为 2GB，单位为：B/K/KB/M/MB/G/GB/T/TB/P/PB, 默认为B。
+    用于设置单个查询计划实例所能使用的内存限制。默认为 2GB，单位为：B/K/KB/M/MB/G/GB/T/TB/P/PB, 默认为 B。
 
     一个查询计划可能有多个实例，一个 BE 节点可能执行一个或多个实例。所以该参数并不能准确限制一个查询在整个集群中的内存使用，也不能准确限制一个查询在单一 BE 节点上的内存使用。具体需要根据生成的查询计划判断。
 
@@ -142,7 +142,7 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * force_streaming_aggregate
 
-    用于控制聚合节点是否启用流式聚合计算策略。默认为false，表示不启用该策略。
+    用于控制聚合节点是否启用流式聚合计算策略。默认为 false，表示不启用该策略。
 
 * forward_to_master
 
@@ -176,7 +176,7 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * hash_join_push_down_right_table
 
-    用于控制在Join查询中是否可以使用针对右表的过滤条件来过滤左表的数据，可以减少Join过程中需要处理的左表的数据量。取值为true时表示允许该操作，系统将根据实际情况决定是否能对左表进行过滤；取值为false表示禁用该操作。缺省值为true。
+    用于控制在 Join 查询中是否可以使用针对右表的过滤条件来过滤左表的数据，可以减少 Join 过程中需要处理的左表的数据量。取值为 true 时表示允许该操作，系统将根据实际情况决定是否能对左表进行过滤；取值为 false 表示禁用该操作。缺省值为 true。
 
 * init_connect
 
@@ -190,7 +190,7 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
     用于设置是否需要查看查询的 profile。默认为 false，即不需要 profile。
 
-    默认情况下，只有在查询发生错误时，BE 才会发送 profile 给 FE，用于查看错误。正常结束的查询不会发送 profile。发送 profile 会产生一定的网络开销，对高并发查询场景不利。 当用户希望对一个查询的 profile 进行分析时，可以将这个变量设为 true 后，发送查询。查询结束后，可以通过在当前连接的 FE 的 web 页面（地址：fe_host:fe_http_port/query）查看 profile。该页面会显示最近100条开启了 is_report_success 的查询的 profile。
+    默认情况下，只有在查询发生错误时，BE 才会发送 profile 给 FE，用于查看错误。正常结束的查询不会发送 profile。发送 profile 会产生一定的网络开销，对高并发查询场景不利。 当用户希望对一个查询的 profile 进行分析时，可以将这个变量设为 true 后，发送查询。查询结束后，可以通过在当前连接的 FE 的 web 页面（地址：fe_host: fe_http_port/query）查看 profile。该页面会显示最近 100 条开启了 is_report_success 的查询的 profile。
 
 * language
 
@@ -238,7 +238,7 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * parallel_exchange_instance_num
 
-    用于设置执行计划中，一个上层节点接收下层节点数据所使用的 exchange node 数量。默认为 -1，即表示 exchange node 数量等于下层节点执行实例的个数（默认行为）。当设置大于0，并且小于下层节点执行实例的个数，则 exchange node 数量等于设置值。
+    用于设置执行计划中，一个上层节点接收下层节点数据所使用的 exchange node 数量。默认为 -1，即表示 exchange node 数量等于下层节点执行实例的个数（默认行为）。当设置大于 0，并且小于下层节点执行实例的个数，则 exchange node 数量等于设置值。
 
     在一个分布式的查询执行计划中，上层节点通常有一个或多个 exchange node 用于接收来自下层节点在不同 BE 上的执行实例的数据。通常 exchange node 数量等于下层节点执行实例数量。
 
@@ -250,11 +250,11 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
     一个查询计划通常会产生一组 scan range，即需要扫描的数据范围。这些数据分布在多个 BE 节点上。一个 BE 节点会有一个或多个 scan range。默认情况下，每个 BE 节点的一组 scan range 只由一个执行实例处理。当机器资源比较充裕时，可以将增加该变量，让更多的执行实例同时处理一组 scan range，从而提升查询效率。
 
-    而 scan 实例的数量决定了上层其他执行节点，如聚合节点，join 节点的数量。因此相当于增加了整个查询计划执行的并发度。修改该参数会对大查询效率提升有帮助，但较大数值会消耗更多的机器资源，如CPU、内存、磁盘IO。
+    而 scan 实例的数量决定了上层其他执行节点，如聚合节点，join 节点的数量。因此相当于增加了整个查询计划执行的并发度。修改该参数会对大查询效率提升有帮助，但较大数值会消耗更多的机器资源，如 CPU、内存、磁盘 IO。
 
 * performance_schema
 
-    用于兼容 8.0.16及以上版本的MySQL JDBC。无实际作用。
+    用于兼容 8.0.16 及以上版本的 MySQL JDBC。无实际作用。
 
 * query_cache_size
 
@@ -266,7 +266,7 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * query_timeout
 
-    用于设置查询超时，单位是「秒」。该变量会作用于当前连接中所有的查询语句，以及 INSERT 语句。默认为300秒，即 5 分钟。
+    用于设置查询超时，单位是「秒」。该变量会作用于当前连接中所有的查询语句，以及 INSERT 语句。默认为 300 秒，即 5 分钟。
 
 * resource_group
 
@@ -290,13 +290,13 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * storage_engine
 
-    指定系统使用的存储引擎。StarRocks支持的引擎类型包括：
+    指定系统使用的存储引擎。StarRocks 支持的引擎类型包括：
 
-  * olap：StarRocks系统自有引擎。
-  * mysql：使用MySQL外部表。
-  * broker：通过Broker程序访问外部表。
-  * elasticsearch 或者 es：使用Elasticsearch外部表。
-  * hive：使用Hive外部表。
+  * olap：StarRocks 系统自有引擎。
+  * mysql：使用 MySQL 外部表。
+  * broker：通过 Broker 程序访问外部表。
+  * elasticsearch 或者 es：使用 Elasticsearch 外部表。
+  * hive：使用 Hive 外部表。
 
 * system_time_zone
 
@@ -312,11 +312,11 @@ SELECT /*+ SET_VAR(query_timeout = 1) */ sleep(3);
 
 * use_v2_rollup
 
-    用于控制查询使用segment v2存储格式的Rollup索引获取数据。该变量用于上线segment v2的时进行验证使用。其他情况不建议使用。
+    用于控制查询使用 segment v2 存储格式的 Rollup 索引获取数据。该变量用于上线 segment v2 的时进行验证使用。其他情况不建议使用。
 
 * vectorized_engine_enable
 
-    用于控制是否使用向量化引擎执行查询。值为true时表示使用向量化引擎，否则使用非向量化引擎。缺省值为true。
+    用于控制是否使用向量化引擎执行查询。值为 true 时表示使用向量化引擎，否则使用非向量化引擎。缺省值为 true。
 
 * version
 

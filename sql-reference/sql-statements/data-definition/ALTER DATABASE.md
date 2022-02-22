@@ -6,7 +6,7 @@
 
 语法：
 
-1. 设置数据库数据量配额，单位为B/K/KB/M/MB/G/GB/T/TB/P/PB
+1. 设置数据库数据量配额，单位为 B/K/KB/M/MB/G/GB/T/TB/P/PB
 
     ```sql
     ALTER DATABASE db_name SET DATA QUOTA quota;
@@ -59,4 +59,4 @@
 
 ## keyword
 
-ALTER,DATABASE,RENAME
+ALTER, DATABASE, RENAME

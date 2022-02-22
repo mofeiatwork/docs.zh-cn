@@ -8,7 +8,7 @@
  `ARRAY<BIGINT>` BITMAP_TO_ARRAY (BITMAP)
 ```
 
-将一个BIMTAP中的所有值组合成一个bigint数组
+将一个 BIMTAP 中的所有值组合成一个 bigint 数组
 
 ## example
 
@@ -30,4 +30,4 @@ mysql> select bitmap_to_array(NULL);
 
 ## keyword
 
-BITMAP_TO_ARRAY,BITMAP
+BITMAP_TO_ARRAY, BITMAP

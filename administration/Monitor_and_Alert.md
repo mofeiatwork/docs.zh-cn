@@ -1,15 +1,15 @@
 # 监控报警
 
-StarRocks提供两种监控报警的方案，第一种是使用内置的StarRocksManager，其自带的Agent从各个Host采集监控信息上报到Center Service然后做可视化展示，也提供了邮件和Webhook的方式发送报警通知。但是如果用户为了二次开发需求，需要自己搭建部署监控服务，也可以使用开源的Prometheus+Grafana的方案，StarRocks提供了兼容Prometheus的信息采集接口，可以通过直接链接BE/FE的HTTP端口来获取集群的监控信息。
+StarRocks 提供两种监控报警的方案，第一种是使用内置的 StarRocksManager，其自带的 Agent 从各个 Host 采集监控信息上报到 Center Service 然后做可视化展示，也提供了邮件和 Webhook 的方式发送报警通知。但是如果用户为了二次开发需求，需要自己搭建部署监控服务，也可以使用开源的 Prometheus+Grafana 的方案，StarRocks 提供了兼容 Prometheus 的信息采集接口，可以通过直接链接 BE/FE 的 HTTP 端口来获取集群的监控信息。
 
-## 使用StarRocksManager
+## 使用 StarRocksManager
 
-StarRocksManager的监控可以分成**集群**和**节点**两个维度，在集群页面可以看到下列监控项：
+StarRocksManager 的监控可以分成 **集群** 和 **节点** 两个维度，在集群页面可以看到下列监控项：
 
 * 集群性能监控
-  * CPU使用率
+  * CPU 使用率
   * 内存使用
-  * 磁盘I/O使用率，磁盘使用量、磁盘空闲量
+  * 磁盘 I/O 使用率，磁盘使用量、磁盘空闲量
   * 发包带宽、收包带宽，发包数、收包数
 * 集群查询监控
   * QPS
@@ -25,7 +25,7 @@ StarRocksManager的监控可以分成**集群**和**节点**两个维度，在�
   * 增量合并数据组速率
   * 增量合并数据量
 
-在节点页面可以看到所有BE/FE的机器列表和状态等基础信息
+在节点页面可以看到所有 BE/FE 的机器列表和状态等基础信息
 
 ![8.10.1-1](../assets/8.10.1-1.png)
 
@@ -39,21 +39,21 @@ StarRocksManager的监控可以分成**集群**和**节点**两个维度，在�
 
   |指标|单位|类型|含义|
 |---|:---:|:---:|---|
-|be_broker_count|个|平均值|broker的数量|
-|be_brpc_endpoint_count|个|平均值|Brpc中StubCache的数量|
+|be_broker_count|个|平均值|broker 的数量|
+|be_brpc_endpoint_count|个|平均值|Brpc 中 StubCache 的数量|
 |be_bytes_read_per_second|bytes/s|平均值|BE 读取速度|
 |be_bytes_written_per_second|bytes/s|平均值|BE 写入速度|
 |be_base_compaction_bytes_per_second|bytes/s|平均值|BE 的基线合并速率|
 |be_cumulative_compaction_bytes_per_second|bytes/s|平均值|BE 的增量合并速率|
-|be_base_compaction_rowsets_per_second|rowsets/s|平均值|BE的基线合并rowsets合并速率|
-|be_cumulative_compaction_rowsets_per_second|rowsets/s|平均值|BE的增量合并rowsets合并速率|
-|be_base_compaction_failed|个/秒|平均值|BE基线合并失败|
-|be_clone_failed|个/秒|平均值|BE克隆失败|
+|be_base_compaction_rowsets_per_second|rowsets/s|平均值|BE 的基线合并 rowsets 合并速率|
+|be_cumulative_compaction_rowsets_per_second|rowsets/s|平均值|BE 的增量合并 rowsets 合并速率|
+|be_base_compaction_failed|个/秒|平均值|BE 基线合并失败|
+|be_clone_failed|个/秒|平均值|BE 克隆失败|
 |be_create_rollup_failed|个/秒|平均值|BE 创建物化视图失败|
-|be_create_tablet_failed|个/秒|平均值|BE创建tablet 失败|
-|be_cumulative_compaction_failed|个/秒|平均值|BE增量合并失败|
-|be_delete_failed|个/秒|平均值|BE删除失败|
-|be_finish_task_failed|个/秒|平均值|BE task失败|
+|be_create_tablet_failed|个/秒|平均值|BE 创建 tablet 失败|
+|be_cumulative_compaction_failed|个/秒|平均值|BE 增量合并失败|
+|be_delete_failed|个/秒|平均值|BE 删除失败|
+|be_finish_task_failed|个/秒|平均值|BE task 失败|
 |be_publish_failed|个/秒|平均值|BE 版本发布失败|
 |be_report_tables_failed|个/秒|平均值|BE 表上报失败|
 |be_report_disk_failed|个/秒|平均值|BE 磁盘上报失败|
@@ -66,48 +66,48 @@ StarRocksManager的监控可以分成**集群**和**节点**两个维度，在�
 |be_create_tablet_requests|个/秒|平均值|BE 创建分片请求|
 |be_cumulative_compaction_requests|个/秒|平均值|BE 增量合并请求|
 |be_delete_requests|个/秒|平均值|BE 删除请求|
-|be_finish_task_requests|个/秒|平均值|BE完成任务请求|
-|be_publish_requests|个/秒|平均值|BE版本发布请求|
-|be_report_tablets_requests|个/秒|平均值|BE分片上报请求|
-|be_report_disk_requests|个/秒|平均值|BE磁盘上报请求|
-|be_report_tablet_requests|个/秒|平均值|BE任务上报请求|
-|be_report_task_requests|个/秒|平均值|BE任务上报请求|
-|be_schema_change_requests|个/秒|平均值|BE表结构修改请求|
-|be_storage_migrate_requests|个/秒|平均值|BE迁移请求|
-|be_fragment_endpoint_count|个|平均值|BE DataStream数量|
+|be_finish_task_requests|个/秒|平均值|BE 完成任务请求|
+|be_publish_requests|个/秒|平均值|BE 版本发布请求|
+|be_report_tablets_requests|个/秒|平均值|BE 分片上报请求|
+|be_report_disk_requests|个/秒|平均值|BE 磁盘上报请求|
+|be_report_tablet_requests|个/秒|平均值|BE 任务上报请求|
+|be_report_task_requests|个/秒|平均值|BE 任务上报请求|
+|be_schema_change_requests|个/秒|平均值|BE 表结构修改请求|
+|be_storage_migrate_requests|个/秒|平均值|BE 迁移请求|
+|be_fragment_endpoint_count|个|平均值|BE DataStream 数量|
 |be_fragment_request_latency_avg|ms|平均值|fragment 请求响应时间|
 |be_fragment_requests_per_second|个/秒|平均值|fragment 请求数|
-|be_http_request_latency_avg|ms|平均值|HTTP请求响应时间|
-|be_http_requests_per_second|个/秒|平均值|HTTP请求数|
-|be_http_request_send_bytes_per_second|bytes/s|平均值|HTTP请求发送字节数|
-|fe_connections_per_second|connections/s|平均值|FE的新增连接速率|
-|fe_connection_total|connections|累计值|FE的总连接数量|
+|be_http_request_latency_avg|ms|平均值|HTTP 请求响应时间|
+|be_http_requests_per_second|个/秒|平均值|HTTP 请求数|
+|be_http_request_send_bytes_per_second|bytes/s|平均值|HTTP 请求发送字节数|
+|fe_connections_per_second|connections/s|平均值|FE 的新增连接速率|
+|fe_connection_total|connections|累计值|FE 的总连接数量|
 |fe_edit_log_read|operations/s|平均值|FE edit log 读取速率|
 |fe_edit_log_size_bytes|bytes/s|平均值|FE edit log 大小|
 |fe_edit_log_write|bytes/s|平均值|FE edit log 写入速率|
 |fe_checkpoint_push_per_second|operations/s|平均值|FE checkpoint 数|
-|fe_pending_hadoop_load_job|个|平均值|Pending的hadoop job数量|
-|fe_committed_hadoop_load_job|个|平均值|提交的 hadoop job数量|
-|fe_loading_hadoop_load_job|个|平均值|加载中的hadoop job数量|
-|fe_finished_hadoop_load_job|个|平均值|完成的hadoop job 数量|
-|fe_cancelled_hadoop_load_job|个|平均值|取消的hadoop job 数量|
-|fe_pending_insert_load_job|个|平均值|Pending的insert job数量|
-|fe_loading_insert_load_job|个|平均值|提交的 insert job数量|
-|fe_committed_insert_load_job|个|平均值|加载中的insert job数量|
-|fe_finished_insert_load_job|个|平均值|完成的insert job 数量|
-|fe_cancelled_insert_load_job|个|平均值|取消的insert job 数量|
-|fe_pending_broker_load_job|个|平均值|Pending的broker job数量|
-|fe_loading_broker_load_job|个|平均值|提交的 broker job数量|
-|fe_committed_broker_load_job|个|平均值|加载中的broker job数量|
-|fe_finished_broker_load_job|个|平均值|完成的broker job 数量|
-|fe_cancelled_broker_load_job|个|平均值|取消的broker job 数量|
-|fe_pending_delete_load_job|个|平均值|Pending的delete job数量|
-|fe_loading_delete_load_job|个|平均值|提交的 delete job数量|
-|fe_committed_delete_load_job|个|平均值|加载中的delete job数量|
-|fe_finished_delete_load_job|个|平均值|完成的delete job 数量|
-|fe_cancelled_delete_load_job|个|平均值|取消的delete job 数量|
-|fe_rollup_running_alter_job|个|平均值|rollup创建中的job 数量|
-|fe_schema_change_running_job|个|平均值|表结构变更中的job数量|
+|fe_pending_hadoop_load_job|个|平均值|Pending 的 hadoop job 数量|
+|fe_committed_hadoop_load_job|个|平均值|提交的 hadoop job 数量|
+|fe_loading_hadoop_load_job|个|平均值|加载中的 hadoop job 数量|
+|fe_finished_hadoop_load_job|个|平均值|完成的 hadoop job 数量|
+|fe_cancelled_hadoop_load_job|个|平均值|取消的 hadoop job 数量|
+|fe_pending_insert_load_job|个|平均值|Pending 的 insert job 数量|
+|fe_loading_insert_load_job|个|平均值|提交的 insert job 数量|
+|fe_committed_insert_load_job|个|平均值|加载中的 insert job 数量|
+|fe_finished_insert_load_job|个|平均值|完成的 insert job 数量|
+|fe_cancelled_insert_load_job|个|平均值|取消的 insert job 数量|
+|fe_pending_broker_load_job|个|平均值|Pending 的 broker job 数量|
+|fe_loading_broker_load_job|个|平均值|提交的 broker job 数量|
+|fe_committed_broker_load_job|个|平均值|加载中的 broker job 数量|
+|fe_finished_broker_load_job|个|平均值|完成的 broker job 数量|
+|fe_cancelled_broker_load_job|个|平均值|取消的 broker job 数量|
+|fe_pending_delete_load_job|个|平均值|Pending 的 delete job 数量|
+|fe_loading_delete_load_job|个|平均值|提交的 delete job 数量|
+|fe_committed_delete_load_job|个|平均值|加载中的 delete job 数量|
+|fe_finished_delete_load_job|个|平均值|完成的 delete job 数量|
+|fe_cancelled_delete_load_job|个|平均值|取消的 delete job 数量|
+|fe_rollup_running_alter_job|个|平均值|rollup 创建中的 job 数量|
+|fe_schema_change_running_job|个|平均值|表结构变更中的 job 数量|
 |cpu_util| 百分比|平均值|CPU 使用率|
 |cpu_system | 百分比|平均值|cpu_system 使用率|
 |cpu_user| 百分比|平均值|cpu_user 使用率|
@@ -119,7 +119,7 @@ StarRocksManager的监控可以分成**集群**和**节点**两个维度，在�
 |cpu_softirq| 百分比|平均值|cpu_softirq 使用率|
 |cpu_steal| 百分比|平均值|cpu_steal 使用率|
 |disk_free|bytes|平均值|空闲磁盘容量|
-|disk_io_svctm|Ms|平均值|磁盘IO服务时间|
+|disk_io_svctm|Ms|平均值|磁盘 IO 服务时间|
 |disk_io_util|百分比|平均值|磁盘使用率|
 |disk_used|bytes|平均值|已用磁盘容量|
 
@@ -135,7 +135,7 @@ StarRocksManager的监控可以分成**集群**和**节点**两个维度，在�
 
 1. 监控的目的是要既能在异常时报警、又尽量避免正常状况下的报警；
 2. 不同集群的资源（比如内存、磁盘）、使用量都不一样，需要设置不一样的值；不过，这种 Gauge 值可能“百分比”是有普适性的；
-3. 对于失败次数等，都需要看对应的总量的变化，根据一定比例（比如针对 P90，P99，P999的量）来计算报警边界值；
+3. 对于失败次数等，都需要看对应的总量的变化，根据一定比例（比如针对 P90，P99，P999 的量）来计算报警边界值；
 4. 一些 used/query 等，一般都可以按照 2 倍甚至更多些来作为增长上线预警值；或者比峰值再高一些些即可；
 
 ### 规则设置参考样例
@@ -150,13 +150,13 @@ e.g. schema change 等，本来操作就少，“失败就报警”就可以了�
 
 这种统计可能一段时间都是 0，但一旦有此类任务，后续 success 和 failed 都可能比较多。
 
-则，可以暂时先设置 `failed > 1`就报警，后续可以再修改。
+则，可以暂时先设置 `failed > 1` 就报警，后续可以再修改。
 
 #### 波动大小
 
 ##### 波动较大的
 
-需要关注不同时间粒度的数据，因为粒度大的数据中的波峰波谷会被平均掉 （后续会让 Manager 增加 sum/min/max/average等指标聚合值）。一般需要看 15 天、3 天、12 小时、3 小时、1 小时的（不同时间范围的）。
+需要关注不同时间粒度的数据，因为粒度大的数据中的波峰波谷会被平均掉 （后续会让 Manager 增加 sum/min/max/average 等指标聚合值）。一般需要看 15 天、3 天、12 小时、3 小时、1 小时的（不同时间范围的）。
 
 并且监控间隔时间可能需要稍长一些（比如 3 分钟、5 分钟，甚至更长时间），以屏蔽波动引起的报警。
 
@@ -176,7 +176,7 @@ e.g. schema change 等，本来操作就少，“失败就报警”就可以了�
 
 ##### 资源使用很高的
 
-可以按照“预留一点资源”的方式设置报警，比如内存，可以设置为 `mem_avaliable<=20%` 报警notice。
+可以按照“预留一点资源”的方式设置报警，比如内存，可以设置为 `mem_avaliable<=20%` 报警 notice。
 
 ### 注意事项
 
@@ -188,21 +188,21 @@ e.g. schema change 等，本来操作就少，“失败就报警”就可以了�
 
 #### P99 分位计算规则
 
-节点会每 15 秒钟采集数据，并计算一个值，这个 99 分位就是这 15 秒钟内的 99 分位。当 qps 不高时（比如 qps在 10 以下），这些分位其实就不是很准确率了。同时，1 分钟（共 4 次 15 秒）内的 4 个值，也不能简单的求聚合（不管是 sum 还是 average），都是没有意义的。
+节点会每 15 秒钟采集数据，并计算一个值，这个 99 分位就是这 15 秒钟内的 99 分位。当 qps 不高时（比如 qps 在 10 以下），这些分位其实就不是很准确率了。同时，1 分钟（共 4 次 15 秒）内的 4 个值，也不能简单的求聚合（不管是 sum 还是 average），都是没有意义的。
 
 其他 P50、P90 等都一样。
 
 #### 集群错误性监控
 
-> 需要监控集群中一些非期望的错误项，以及时发现问题，并帮助更快速地解决问题，让集群正常服务。如果一些项虽不太重要（比如 SQL 语法错误等），但**暂时无法从重要错误项中剥离**的，也先一并进行监控，并在后期推动区分。
+> 需要监控集群中一些非期望的错误项，以及时发现问题，并帮助更快速地解决问题，让集群正常服务。如果一些项虽不太重要（比如 SQL 语法错误等），但 **暂时无法从重要错误项中剥离** 的，也先一并进行监控，并在后期推动区分。
 
-## 使用Prometheus+Grafana
+## 使用 Prometheus+Grafana
 
-StarRocks可使用[Prometheus](https://prometheus.io/)作为监控数据存储方案，使用[Grafana](https://grafana.com/)作为可视化组件。
+StarRocks 可使用 [Prometheus](https://prometheus.io/) 作为监控数据存储方案，使用 [Grafana](https://grafana.com/) 作为可视化组件。
 
 ### 组件
 
->本文档仅提供基于Prometheus和Grafana实现的一种StarRocks可视化监控方案，原则上不维护和开发这些组件。更多详细的介绍和使用，请参考对应的官网文档。
+> 本文档仅提供基于 Prometheus 和 Grafana 实现的一种 StarRocks 可视化监控方案，原则上不维护和开发这些组件。更多详细的介绍和使用，请参考对应的官网文档。
 
 #### Prometheus
 
@@ -216,22 +216,22 @@ Grafana 是一个开源的 metric 分析及可视化系统。支持多种数据�
 
 ![8.10.2-1](../assets/8.10.2-1.png)
 
-Prometheus通过Pull方式访问FE/BE的Metric接口，然后将监控数据存入时序数据库。
+Prometheus 通过 Pull 方式访问 FE/BE 的 Metric 接口，然后将监控数据存入时序数据库。
 
-用户可以通过Grafana配置Prometheus为数据源，自定义绘制Dashboard。
+用户可以通过 Grafana 配置 Prometheus 为数据源，自定义绘制 Dashboard。
 
 ### 部署
 
 #### Prometheus
 
-**1.** 从[Prometheus官网](https://prometheus.io/download/)下载最新版本的Prometheus，以下步骤以prometheus-2.29.1.linux-amd64版本为例
+**1.** 从 [Prometheus 官网](https://prometheus.io/download/) 下载最新版本的 Prometheus，以下步骤以 prometheus-2.29.1.linux-amd64 版本为例
 
 ```bash
 wget https://github.com/prometheus/prometheus/releases/download/v2.29.1/prometheus-2.29.1.linux-amd64.tar.gz
 tar -xf prometheus-2.29.1.linux-amd64.tar.gz
 ```
 
-**2.** vi prometheus.yml，添加StarRocks监控相关的配置
+**2.** vi prometheus.yml，添加 StarRocks 监控相关的配置
 
 ```yml
 # my global config
@@ -279,15 +279,15 @@ nohup ./prometheus \
 
 **4.** 访问 Prometheus
 
-Prometheus 可以通过 web 页面进行简单的访问。通过浏览器打开 9090 端口，即可访问 Prometheus 的页面。点击导航栏中，`Status -> Targets`，可以看到所有分组 Job 的监控主机节点。正常情况下，所有节点都应为 UP，表示数据采集正常。如果节点状态不为 UP，可以先访问 StarRocks 的 metrics (<http://fe_host:fe_http_port/metrics>或<http://be_host:be_http_port/metrics>)接口检查是否可以访问，或查询 Prometheus 相关文档尝试解决。
+Prometheus 可以通过 web 页面进行简单的访问。通过浏览器打开 9090 端口，即可访问 Prometheus 的页面。点击导航栏中，`Status -> Targets`，可以看到所有分组 Job 的监控主机节点。正常情况下，所有节点都应为 UP，表示数据采集正常。如果节点状态不为 UP，可以先访问 StarRocks 的 metrics (<http://fe_host:fe_http_port/metrics> 或 <http://be_host:be_http_port/metrics>)接口检查是否可以访问，或查询 Prometheus 相关文档尝试解决。
 
 ![8.10.2-6](../assets/8.10.2-6.png)
 
-至此，一个简单的 Prometheus 已经搭建、配置完毕。更多高级使用方式，请参阅[官方文档](https://prometheus.io/docs/introduction/overview/)
+至此，一个简单的 Prometheus 已经搭建、配置完毕。更多高级使用方式，请参阅 [官方文档](https://prometheus.io/docs/introduction/overview/)
 
 #### Grafana
 
-**1.** 从[Grafana官网](https://grafana.com/grafana/download)下载最新版本的Grafana，以下以grafana-8.0.6.linux-amd64版本为例
+**1.** 从 [Grafana 官网](https://grafana.com/grafana/download) 下载最新版本的 Grafana，以下以 grafana-8.0.6.linux-amd64 版本为例
 
 ```SHELL
 wget https://dl.grafana.com/oss/release/grafana-8.0.6.linux-amd64.tar.gz
@@ -308,7 +308,7 @@ domain = localhost
 ...
 ```
 
-**3.** 启动Grafana
+**3.** 启动 Grafana
 
 ```Plain text
 nohup ./bin/grafana-server \
@@ -317,15 +317,15 @@ nohup ./bin/grafana-server \
 
 ### Dashboard
 
-#### DashBoard配置
+#### DashBoard 配置
 
-登录grafana，即上一步配置的地址<http://grafana_host:8000>，默认用户名/密码为admin/admin。
+登录 grafana，即上一步配置的地址 <http://grafana_host:8000>，默认用户名/密码为 admin/admin。
 
 **1.** 数据源配置
 
 配置路径：`Configuration-->Data sources-->Add data source-->Prometheus`
 
-Data Source配置简介
+Data Source 配置简介
 
 ![8.10.2-2](../assets/8.10.2-2.png)
 
@@ -336,23 +336,23 @@ Data Source配置简介
 
 点击最下方 Save & Test，如果显示 Data source is working，即表示数据源可用。
 
-**2.** 添加Dashboard
+**2.** 添加 Dashboard
 
 `注：StarRocks-1.19.0版本及其之后的版本监控Metric name有调整，需要下载下面 StarRocks-1.19.0+版本DashBoard模版`
 
-[Dashboard模版下载](http://starrocks-thirdparty.oss-cn-zhangjiakou.aliyuncs.com/StarRocks-Overview.json)
+[Dashboard 模版下载](http://starrocks-thirdparty.oss-cn-zhangjiakou.aliyuncs.com/StarRocks-Overview.json)
 
-[StarRocks-1.19.0版本及其之后版本DashBoard模版下载](http://starrocks-thirdparty.oss-cn-zhangjiakou.aliyuncs.com/StarRocks-Overview-19.json)
+[StarRocks-1.19.0 版本及其之后版本 DashBoard 模版下载](http://starrocks-thirdparty.oss-cn-zhangjiakou.aliyuncs.com/StarRocks-Overview-19.json)
 
-Dashboard模版会不定期更新。欢迎提供更优的Dashboard。
+Dashboard 模版会不定期更新。欢迎提供更优的 Dashboard。
 
 确认数据源可用后，点击左边导航栏的 + 号，开始添加 Dashboard。这里我们使用上文下载的 StarRocks 的 Dashboard 模板。点击 `左边的导航栏 + 号 -> Import -> Upload Json File`，将下载的 json 文件导入。
 导入后，可以命名 Dashboard，默认是 StarRocks Overview。同时，需要选择数据源，这里选择之前创建的 starrocks_monitor。
 点击 Import，即完成导入。之后，可以看到 StarRocks 的 Dashboard 展示。
 
-#### Dashboard说明
+#### Dashboard 说明
 
-这里我们简要介绍 StarRocks Dashboard。Dashboard 的内容可能会随版本升级，不断更新，请参考上文Dashboard模版。
+这里我们简要介绍 StarRocks Dashboard。Dashboard 的内容可能会随版本升级，不断更新，请参考上文 Dashboard 模版。
 
 **1.** 顶栏
 
@@ -390,17 +390,17 @@ Grafana 中，Row 的概念，即一组图表的集合。如上图中的 Overvie
 * 点击下方的图例，可以单独查看某一监控项。再次点击，则显示所有。
 * 在图表中拖拽可以选定时间范围。
 * 标题的 [] 中显示选定的集群名称。
-* 一些数值对应左边的Y轴，一些对应右边的，可以通过图例末尾的 -right 区分。
-* 点击图表名称->Edit，可以对图表进行编辑。
+* 一些数值对应左边的 Y 轴，一些对应右边的，可以通过图例末尾的 -right 区分。
+* 点击图表名称-> Edit，可以对图表进行编辑。
 
 ### 其他
 
-如果仅仅需要将监控数据接入自有的Prometheus系统，可以通过下列接口访问：
+如果仅仅需要将监控数据接入自有的 Prometheus 系统，可以通过下列接口访问：
 
 * FE:  fe_host:fe_http_port/metrics
 * BE:  be_host:be_web_server_port/metrics
 
-如果需要JSON格式可以访问：
+如果需要 JSON 格式可以访问：
 
 * FE:  fe_host:fe_http_port/metrics?type=json
 * BE:  be_host:be_web_server_port/metrics?type=json

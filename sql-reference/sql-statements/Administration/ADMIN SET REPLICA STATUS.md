@@ -40,4 +40,4 @@ PROPERTIES ("key" = "value", ...);
 
 ## keyword
 
-ADMIN,SET,REPLICA,STATUS
+ADMIN, SET, REPLICA, STATUS

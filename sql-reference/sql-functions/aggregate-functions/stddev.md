@@ -1,5 +1,5 @@
 
-# STDDEV,STDDEV_POP
+# STDDEV, STDDEV_POP
 
 ## description
 
@@ -9,7 +9,7 @@
 STDDEV(expr)
 ```
 
-返回expr表达式的标准差
+返回 expr 表达式的标准差
 
 ## example
 
@@ -35,4 +35,4 @@ group by datetime;
 
 ## keyword
 
-STDDEV,STDDEV_POP,POP
+STDDEV, STDDEV_POP, POP

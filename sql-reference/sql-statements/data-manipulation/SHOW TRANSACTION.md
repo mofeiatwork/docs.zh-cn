@@ -29,7 +29,7 @@ ListenerId: -1
 TimeoutMs: 300000
 ```
 
-* TransactionId：事务id
+* TransactionId：事务 id
 * Label：导入任务对应的 label
 * Coordinator：负责事务协调的节点
 * TransactionStatus：事务状态
@@ -43,7 +43,7 @@ TimeoutMs: 300000
 * FinishTime：数据可见的时间
 * Reason：错误信息
 * ErrorReplicasCount：有错误的副本数
-* ListenerId：相关的导入作业的id
+* ListenerId：相关的导入作业的 id
 * TimeoutMs：事务超时时间，单位毫秒
 
 ## example

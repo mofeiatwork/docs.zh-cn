@@ -18,7 +18,7 @@ source 支持三种类型：
 3. 指向一个 http 或 https 协议的 zip 文件下载路径
 ```
 
-PROPERTIES 支持设置插件的一些配置,如设置zip文件的md5sum的值等。
+PROPERTIES 支持设置插件的一些配置, 如设置 zip 文件的 md5sum 的值等。
 
 ## example
 
@@ -40,7 +40,7 @@ PROPERTIES 支持设置插件的一些配置,如设置zip文件的md5sum的值�
     INSTALL PLUGIN FROM "http://mywebsite.com/plugin.zip";
     ```
 
-4. 下载并安装一个插件,同时设置了zip文件的md5sum的值：
+4. 下载并安装一个插件, 同时设置了 zip 文件的 md5sum 的值：
 
     ```sql
     INSTALL PLUGIN FROM "http://mywebsite.com/plugin.zip" PROPERTIES("md5sum" = "73877f6029216f4314d712086a146570");
@@ -48,4 +48,4 @@ PROPERTIES 支持设置插件的一些配置,如设置zip文件的md5sum的值�
 
 ## keyword
 
-INSTALL,PLUGIN
+INSTALL, PLUGIN

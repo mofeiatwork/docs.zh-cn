@@ -1,5 +1,5 @@
 
-# VARIANCE,VAR_POP,VARIANCE_POP
+# VARIANCE, VAR_POP, VARIANCE_POP
 
 ## description
 
@@ -9,7 +9,7 @@
 VARIANCE(expr)
 ```
 
-返回expr表达式的方差
+返回 expr 表达式的方差
 
 ## example
 
@@ -35,4 +35,4 @@ group by datetime;
 
 ## keyword
 
-VARIANCE,VAR_POP,VARIANCE_POP,VAR,POP
+VARIANCE, VAR_POP, VARIANCE_POP, VAR, POP

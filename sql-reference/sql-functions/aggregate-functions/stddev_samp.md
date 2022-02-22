@@ -8,7 +8,7 @@
 STDDEV_SAMP(expr)
 ```
 
-返回expr表达式的样本标准差
+返回 expr 表达式的样本标准差
 
 ## example
 
@@ -25,4 +25,4 @@ group by datetime;
 
 ## keyword
 
-STDDEV_SAMP,STDDEV,SAMP
+STDDEV_SAMP, STDDEV, SAMP

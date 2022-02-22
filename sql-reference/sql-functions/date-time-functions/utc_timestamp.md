@@ -8,9 +8,9 @@
 DATETIME UTC_TIMESTAMP()
 ```
 
-返回当前UTC日期和时间在 "YYYY-MM-DD HH:MM:SS" 或
+返回当前 UTC 日期和时间在 "YYYY-MM-DD HH: MM: SS" 或
 
-"YYYYMMDDHHMMSS"格式的一个值
+"YYYYMMDDHHMMSS" 格式的一个值
 
 根据该函数是否用在字符串或数字语境中
 
@@ -27,4 +27,4 @@ MySQL > select utc_timestamp(),utc_timestamp() + 1;
 
 ## keyword
 
-UTC_TIMESTAMP,UTC,TIMESTAMP
+UTC_TIMESTAMP, UTC, TIMESTAMP

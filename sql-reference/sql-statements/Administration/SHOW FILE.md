@@ -31,4 +31,4 @@ MD5:        文件的 MD5
 
 ## keyword
 
-SHOW,FILE
+SHOW, FILE

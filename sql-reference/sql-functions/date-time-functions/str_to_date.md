@@ -8,9 +8,9 @@
 DATETIME STR_TO_DATE(VARCHAR str, VARCHAR format)
 ```
 
-通过format指定的方式将str转化为DATE类型，如果转化结果不对返回NULL
+通过 format 指定的方式将 str 转化为 DATE 类型，如果转化结果不对返回 NULL
 
-支持的format格式与 date_format 一致
+支持的 format 格式与 date_format 一致
 
 ## example
 
@@ -39,4 +39,4 @@ MySQL > select str_to_date('200442 Monday', '%X%V %W');
 
 ## keyword
 
-STR_TO_DATE,STR,TO,DATE
+STR_TO_DATE, STR, TO, DATE

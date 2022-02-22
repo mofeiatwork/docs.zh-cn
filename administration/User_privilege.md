@@ -16,7 +16,7 @@ user\_identity 的另一种表现方式为 username@\['domain'\]，其中 domain
 
 * 角色 Role
 
-StarRocks可以创建自定义命名的角色。角色可以被看做是一组权限的集合。新创建的用户可以被赋予某一角色，则自动被赋予该角色所拥有的权限。后续对角色的权限变更，也会体现在所有属于该角色的用户权限上。
+StarRocks 可以创建自定义命名的角色。角色可以被看做是一组权限的集合。新创建的用户可以被赋予某一角色，则自动被赋予该角色所拥有的权限。后续对角色的权限变更，也会体现在所有属于该角色的用户权限上。
 
 * 用户属性 User Property
 
@@ -60,7 +60,7 @@ StarRocks 目前支持以下几种权限：
 
 ## 权限层级
 
-根据权限适用范围的不同，StarRocks将库表的权限分为以下三个层级：
+根据权限适用范围的不同，StarRocks 将库表的权限分为以下三个层级：
 
 * GLOBAL LEVEL：全局权限。即通过 GRANT 语句授予的 *.* 上的权限。被授予的权限适用于任意数据库中的任意表。
 * DATABASE LEVEL：数据库级权限。即通过 GRANT 语句授予的 db.\* 上的权限。被授予的权限适用于指定数据库中的任意表。
@@ -89,9 +89,9 @@ ADMIN\_PRIV 和 GRANT\_PRIV 权限同时拥有授予权限的权限，较为特�
 
 * GRANT/REVOKE
 
-  * 拥有 ADMIN 权限，或者 GLOBAL 层级 GRANT 权限的用户，可以授予或撤销任意**用户**的权限。
-  * 拥有 DATABASE 层级 GRANT 权限的用户，可以授予或撤销任意用户对指定**数据库**的权限。
-  * 拥有 TABLE 层级 GRANT 权限的用户，可以授予或撤销任意用户对指定数据库中**指定表**的权限。
+  * 拥有 ADMIN 权限，或者 GLOBAL 层级 GRANT 权限的用户，可以授予或撤销任意 **用户** 的权限。
+  * 拥有 DATABASE 层级 GRANT 权限的用户，可以授予或撤销任意用户对指定 **数据库** 的权限。
+  * 拥有 TABLE 层级 GRANT 权限的用户，可以授予或撤销任意用户对指定数据库中 **指定表** 的权限。
 
 * SET PASSWORD
 
@@ -112,7 +112,7 @@ ADMIN\_PRIV 和 GRANT\_PRIV 权限同时拥有授予权限的权限，较为特�
 * operator 角色的用户有且只有一个。admin 角色的用户可以创建多个。
 * 一些可能产生冲突的操作说明：
 
-* 域名与IP冲突
+* 域名与 IP 冲突
 
 假设创建了如下用户：  
    `CREATE USER cmy@['domain'];`  
@@ -122,7 +122,7 @@ ADMIN\_PRIV 和 GRANT\_PRIV 权限同时拥有授予权限的权限，较为特�
    `GRANT ALTER_PRIV ON` `*.*` `TO cmy@'ip1';`  
 则 cmy@'ip1' 的权限会被修改为 SELECT\_PRIV, ALTER\_PRIV，而且当我们再次变更 cmy@\['domain'\] 的权限时，cmy@'ip1' 也不会跟随改变。
 
-* 重复IP冲突
+* 重复 IP 冲突
 
 假设创建了如下用户：  
    `CREATE USER cmy@'%' IDENTIFIED BY "12345";`  

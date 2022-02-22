@@ -8,7 +8,7 @@
 BITMAP BITMAP_EMPTY()
 ```
 
-返回一个空bitmap。主要用于 insert 或 stream load 时填充默认值。例如
+返回一个空 bitmap。主要用于 insert 或 stream load 时填充默认值。例如
 
 ```bash
 cat data | curl --location-trusted -u user:passwd -T - \
@@ -29,4 +29,4 @@ MySQL > select bitmap_count(bitmap_empty());
 
 ## keyword
 
-BITMAP_EMPTY,BITMAP
+BITMAP_EMPTY, BITMAP

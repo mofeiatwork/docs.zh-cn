@@ -10,4 +10,4 @@
 
 ## keyword
 
-PAUSE,ROUTINE,LOAD
+PAUSE, ROUTINE, LOAD

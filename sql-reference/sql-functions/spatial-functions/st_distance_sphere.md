@@ -8,7 +8,7 @@
 DOUBLE ST_Distance_Sphere(DOUBLE x_lng, DOUBLE x_lat, DOUBLE y_lng, DOUBLE x_lat)
 ```
 
-计算地球两点之间的球面距离，单位是「米」。传入的参数分别为X点的经度，X点的纬度，Y点的经度，Y点的纬度。
+计算地球两点之间的球面距离，单位是「米」。传入的参数分别为 X 点的经度，X 点的纬度，Y 点的经度，Y 点的纬度。
 
 ## example
 
@@ -23,4 +23,4 @@ MySQL > select st_distance_sphere(116.35620117, 39.939093, 116.4274406433, 39.90
 
 ## keyword
 
-ST_DISTANCE_SPHERE,ST,DISTANCE,SPHERE
+ST_DISTANCE_SPHERE, ST, DISTANCE, SPHERE

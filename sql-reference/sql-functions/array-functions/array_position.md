@@ -8,7 +8,7 @@
 array_position(any_array, any_element)
 ```
 
-获取数组中某个元素位置，是的话返回位置，否则返回0.
+获取数组中某个元素位置，是的话返回位置，否则返回 0.
 
 ## example
 
@@ -22,7 +22,7 @@ mysql> select array_position(["apple","orange","pear"], "orange");
 1 row in set (0.01 sec)
 ```
 
-也可以获取数组NULL的位置
+也可以获取数组 NULL 的位置
 
 ```plain text
 mysql> select array_position([1, NULL], NULL);
@@ -56,4 +56,4 @@ mysql> select array_position([[1,2,3], [4,5,6]], [4,6,5]);
 
 ## keyword
 
-ARRAY_POSITION,ARRAY
+ARRAY_POSITION, ARRAY

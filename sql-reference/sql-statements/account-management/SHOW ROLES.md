@@ -20,4 +20,4 @@ SHOW ROLES;
 
 ## keyword
 
-SHOW,ROLES
+SHOW, ROLES

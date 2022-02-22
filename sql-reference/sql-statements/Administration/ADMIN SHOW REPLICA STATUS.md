@@ -49,4 +49,4 @@ MISSING:        replica 不存在
 
 ## keyword
 
-ADMIN,SHOW,REPLICA,STATUS
+ADMIN, SHOW, REPLICA, STATUS

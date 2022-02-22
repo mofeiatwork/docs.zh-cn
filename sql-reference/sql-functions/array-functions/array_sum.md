@@ -8,7 +8,7 @@
 array_sum(array(type))
 ```
 
-对一个ARRAY中的所有数据做和，返回这个结果。
+对一个 ARRAY 中的所有数据做和，返回这个结果。
 
 ## example
 
@@ -30,4 +30,4 @@ mysql> select array_sum([11.33, 11.11, 12.324]);
 
 ## keyword
 
-ARRAY_SUM,ARRAY
+ARRAY_SUM, ARRAY

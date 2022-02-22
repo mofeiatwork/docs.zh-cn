@@ -15,13 +15,13 @@ LINK DATABASE src_cluster_name.src_db_name des_cluster_name.des_db_name
 
 ## example
 
-1. 链接test_clusterA中的test_db到test_clusterB,并命名为link_test_db
+1. 链接 test_clusterA 中的 test_db 到 test_clusterB, 并命名为 link_test_db
 
     ```sql
     LINK DATABASE test_clusterA.test_db test_clusterB.link_test_db;
     ```
 
-2. 删除链接的数据库link_test_db
+2. 删除链接的数据库 link_test_db
 
     ```sql
     DROP DATABASE link_test_db;
@@ -29,4 +29,4 @@ LINK DATABASE src_cluster_name.src_db_name des_cluster_name.des_db_name
 
 ## keyword
 
-LINK,DATABASE
+LINK, DATABASE

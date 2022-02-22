@@ -55,4 +55,4 @@ WHERE
 
 ## keyword
 
-SHOW,EXPORT
+SHOW, EXPORT

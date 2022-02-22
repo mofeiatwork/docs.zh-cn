@@ -8,9 +8,9 @@
 INT DAY(DATETIME date)
 ```
 
-获得日期中的天信息，返回值范围从1-31。
+获得日期中的天信息，返回值范围从 1-31。
 
-参数为Date或者Datetime类型
+参数为 Date 或者 Datetime 类型
 
 ## example
 

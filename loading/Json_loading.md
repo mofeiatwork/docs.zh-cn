@@ -1,13 +1,13 @@
 # 介绍
 
-对于一些半结构化的比如Json类型的数据，我们可以用stream load 或者 routine load的方式进行导入。
+对于一些半结构化的比如 Json 类型的数据，我们可以用 stream load 或者 routine load 的方式进行导入。
 
 ## 使用场景
 
-* Stream Load： 对于文本文件存储的Json数据，我们可以使用 stream load进行导入。
-* Routine Load：对于Kafka中的json格式数据，可以使用Routine load的方式导入。
+* Stream Load： 对于文本文件存储的 Json 数据，我们可以使用 stream load 进行导入。
+* Routine Load：对于 Kafka 中的 json 格式数据，可以使用 Routine load 的方式导入。
 
-### Stream Load导入
+### Stream Load 导入
 
 样例数据：
 
@@ -23,24 +23,24 @@
 curl -v --location-trusted -u root: \
     -H "format: json" -H "jsonpaths: [\"$.id\", \"$.city\"]" \
     -T example.json \
-    http://FE_HOST:HTTP_PORT/api/DATABASE/TABLE/_stream_load
+    http://FE_HOST: HTTP_PORT/api/DATABASE/TABLE/_stream_load
 ~~~
 
 通过 format: json 参数可以执行导入的数据格式 jsonpaths 用来执行对应的数据导入路径
 
 相关参数：
 
-* jsonpaths : 选择每一列的json路径
-* json\_root : 选择json开始解析的列
+* jsonpaths : 选择每一列的 json 路径
+* json\_root : 选择 json 开始解析的列
 * strip\_outer\_array ： 裁剪最外面的 array 字段（可以见下一个样例）
 * strict\_mode：导入过程中的列类型转换进行严格过滤
-* columns:对应StarRocks表中的字段的名称
+* columns: 对应 StarRocks 表中的字段的名称
 
-jsonpaths参数和columns参数还有StarRocks表中字段三者关系如下：
+jsonpaths 参数和 columns 参数还有 StarRocks 表中字段三者关系如下：
 
-* jsonpaths的值名称与json文件中的key的名称一致
-* columns的值的名称和StarRocks表中字段名称保持一致
-* columns和jsonpaths属性的值，名称不需要保持一致(建议设置为一致方便区分)，值的顺序保持一致就可以将json文件中的value和StarRocks表中字段对应起来，如下图：
+* jsonpaths 的值名称与 json 文件中的 key 的名称一致
+* columns 的值的名称和 StarRocks 表中字段名称保持一致
+* columns 和 jsonpaths 属性的值，名称不需要保持一致(建议设置为一致方便区分)，值的顺序保持一致就可以将 json 文件中的 value 和 StarRocks 表中字段对应起来，如下图：
 
 ![streamload](../assets/4.8.1.png)
 
@@ -55,9 +55,9 @@ jsonpaths参数和columns参数还有StarRocks表中字段三者关系如下：
 ~~~bash
 curl -v --location-trusted -u root: \
     -H "format: json" -H "jsonpaths: [\"$.name\", \"$.code\"]" \
-    -H "columns: city,tmp_id, id = tmp_id * 100" \
+    -H " columns: city, tmp_id, id = tmp_id * 100 " \
     -T jsontest.json \
-    http://127.0.0.1:8030/api/test/testJson/_stream_load
+    http://127.0.0.1: 8030/api/test/testJson/_stream_load
 ~~~
 
 导入后结果
@@ -70,7 +70,7 @@ curl -v --location-trusted -u root: \
 +------+------+
 ~~~
 
-如果想先对Json中数据进行加工，然后再落入StarRocks表中，可以通过更改columns的值来实现，属性的对应关系可以参考上图中描述，示例如下:
+如果想先对 Json 中数据进行加工，然后再落入 StarRocks 表中，可以通过更改 columns 的值来实现，属性的对应关系可以参考上图中描述，示例如下:
 
 样例数据：
 
@@ -88,7 +88,7 @@ curl -v --location-trusted -u root: \
     http://127.0.0.1:8030/api/db1/tbl1/_stream_load
 ~~~
 
-这里导入过程中进行了将k1乘以100的ETL操作，并且通过Jsonpath来进行column和原始数据的对应
+这里导入过程中进行了将 k1 乘以 100 的 ETL 操作，并且通过 Jsonpath 来进行 column 和原始数据的对应
 
 导入后结果
 
@@ -102,7 +102,7 @@ curl -v --location-trusted -u root: \
 
 <br>
 
-对于缺失的列 如果列的定义是nullable，那么会补上NULL，也可以通过ifnull补充默认值。
+对于缺失的列 如果列的定义是 nullable，那么会补上 NULL，也可以通过 ifnull 补充默认值。
 
 样例数据：
 
@@ -164,18 +164,18 @@ curl -v --location-trusted -u root: \
 +------+------+
 ~~~
 
-### Routine Load导入
+### Routine Load 导入
 
-对于 Kafka 数据源，和Stream Load的原理类似，每个 Massage 中的内容被视作一个完整的 Json 数据。
+对于 Kafka 数据源，和 Stream Load 的原理类似，每个 Massage 中的内容被视作一个完整的 Json 数据。
 
 1. 如果一个 Massage 中是以 Array 格式的表示的多行数据，则会导入多行，而 Kafka 的 offset 只会增加 1。
 2. 如果一个 Array 格式的 Json 表示多行数据，但是因为 Json 格式错误导致解析 Json 失败，则错误行只会增加 1（因为解析失败，实际上 StarRocks 无法判断其中包含多少行数据，只能按一行错误数据记录）。
   
-### 使用Canal从mysql中增量同步binlog导入StarRocks
+### 使用 Canal 从 mysql 中增量同步 binlog 导入 StarRocks
   
-[Canal](https://github.com/alibaba/canal) 是阿里巴巴开源的一个Mysql binlog同步工具，通过他我们可以把Mysql的数据同步到Kafka，在Kafka中数据是用Json的格式生成的，我们这里演示一下如何使用Routine load同步kafka中的数据来实现和Mysql进行增量数据同步的工作：
+[Canal](https://github.com/alibaba/canal) 是阿里巴巴开源的一个 Mysql binlog 同步工具，通过他我们可以把 Mysql 的数据同步到 Kafka，在 Kafka 中数据是用 Json 的格式生成的，我们这里演示一下如何使用 Routine load 同步 kafka 中的数据来实现和 Mysql 进行增量数据同步的工作：
 
-* 在MySQL中我们有一张数据表 其建表语句如下：
+* 在 MySQL 中我们有一张数据表 其建表语句如下：
 
 ~~~sql
 CREATE TABLE `query_record` (
@@ -194,19 +194,19 @@ CREATE TABLE `query_record` (
   `plan` longtext,
   PRIMARY KEY (`query_id`),
   KEY `idx_start_time` (`start_time`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE = InnoDB DEFAULT CHARSET = utf8
 ~~~
 
-* 准备：首先确认mysql开启了binlog 并且格式为ROW模式
+* 准备：首先确认 mysql 开启了 binlog 并且格式为 ROW 模式
 
 ~~~bash
 [mysqld]
-log-bin=mysql-bin # 开启 binlog
-binlog-format=ROW # 选择 ROW 模式
-server_id=1       # 配置 MySQL replaction 需要定义，不要和 canal 的 slaveId 重复
+log-bin = mysql-bin # 开启 binlog
+binlog-format = ROW # 选择 ROW 模式
+server_id = 1       # 配置 MySQL replaction 需要定义，不要和 canal 的 slaveId 重复
 ~~~
 
-* 创建一个账号并授予Mysql slave的权限
+* 创建一个账号并授予 Mysql slave 的权限
 
 ~~~sql
 CREATE USER canal IDENTIFIED BY 'canal';
@@ -215,7 +215,7 @@ GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
 FLUSH PRIVILEGES;
 ~~~
 
-* 然后我们下载安装canal
+* 然后我们下载安装 canal
 
 ~~~bash
 wget https://github.com/alibaba/canal/releases/download/canal-1.0.17/canal.deployer-1.0.17.tar.gz
@@ -263,21 +263,21 @@ canal.serverMode = kafka
 # kafka/rocketmq 集群配置: 192.168.1.117:9092,192.168.1.118:9092,192.168.1.119:9092
 canal.mq.servers = 127.0.0.1:6667
 canal.mq.retries = 0
-# flagMessage模式下可以调大该值, 但不要超过MQ消息体大小上限
+# flagMessage 模式下可以调大该值, 但不要超过 MQ 消息体大小上限
 canal.mq.batchSize = 16384
 canal.mq.maxRequestSize = 1048576
-# flatMessage模式下请将该值改大, 建议50-200
+# flatMessage 模式下请将该值改大, 建议 50-200
 canal.mq.lingerMs = 1
 canal.mq.bufferMemory = 33554432
-# Canal的batch size, 默认50K, 由于kafka最大消息体限制请勿超过1M(900K以下)
+# Canal 的 batch size, 默认 50K, 由于 kafka 最大消息体限制请勿超过 1M(900K 以下)
 canal.mq.canalBatchSize = 50
-# Canal get数据的超时时间, 单位: 毫秒, 空为不限超时
+# Canal get 数据的超时时间, 单位: 毫秒, 空为不限超时
 canal.mq.canalGetTimeout = 100
-# 是否为flat json格式对象
+# 是否为 flat json 格式对象
 canal.mq.flatMessage = false
 canal.mq.compressionType = none
 canal.mq.acks = all
-# kafka消息投递是否使用事务
+# kafka 消息投递是否使用事务
 canal.mq.transaction = false
 ~~~
 
@@ -285,7 +285,7 @@ canal.mq.transaction = false
 
 `bin/startup.sh`
 
-在 `logs/example/example.log` 可以看到相应的同步日志信息，在kafka中也能看到消息，其消息格式如下
+在 `logs/example/example.log` 可以看到相应的同步日志信息，在 kafka 中也能看到消息，其消息格式如下
 
 ~~~json
 {
@@ -375,7 +375,7 @@ canal.mq.transaction = false
 }
 ~~~
 
-这里我们只需要导入data中的数据，所以需要加上 json_root 和 strip_outer_array = true
+这里我们只需要导入 data 中的数据，所以需要加上 json_root 和 strip_outer_array = true
 
 ~~~sql
 create routine load manual.query_job on query_record   
@@ -393,6 +393,6 @@ FROM KAFKA (
 );
 ~~~
 
-这样就可以完成数据从mysql到StarRocks的近实时同步。
+这样就可以完成数据从 mysql 到 StarRocks 的近实时同步。
 
-通过`show routine load` 可以看到导入任务的进度和错误信息。
+通过 `show routine load` 可以看到导入任务的进度和错误信息。

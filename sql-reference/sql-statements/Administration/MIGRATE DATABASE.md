@@ -13,7 +13,7 @@ MIGRATE DATABASE src_cluster_name.src_db_name des_cluster_name.des_db_name
 
 ## example
 
-1. 迁移test_clusterA中的test_db到test_clusterB
+1. 迁移 test_clusterA 中的 test_db 到 test_clusterB
 
     ```sql
     MIGRATE DATABASE test_clusterA.test_db test_clusterB.link_test_db;
@@ -21,4 +21,4 @@ MIGRATE DATABASE src_cluster_name.src_db_name des_cluster_name.des_db_name
 
 ## keyword
 
-MIGRATE,DATABASE
+MIGRATE, DATABASE

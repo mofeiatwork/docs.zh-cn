@@ -16,7 +16,7 @@ DESC[RIBE] [db_name.]table_name [ALL];
 
 ## example
 
-1. 显示Base表Schema
+1. 显示 Base 表 Schema
 
     ```sql
     DESC table_name;
@@ -30,4 +30,4 @@ DESC[RIBE] [db_name.]table_name [ALL];
 
 ## keyword
 
-DESCRIBE,DESC
+DESCRIBE, DESC

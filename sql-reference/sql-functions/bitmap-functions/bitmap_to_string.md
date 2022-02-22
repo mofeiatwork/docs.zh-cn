@@ -8,7 +8,7 @@
 VARCHAR BITMAP_TO_STRING(BITMAP input)
 ```
 
-将一个bitmap转化成一个逗号分隔的字符串，字符串中包含所有设置的BIT位。输入是null的话会返回null。
+将一个 bitmap 转化成一个逗号分隔的字符串，字符串中包含所有设置的 BIT 位。输入是 null 的话会返回 null。
 
 ## example
 
@@ -45,4 +45,4 @@ MySQL > select bitmap_to_string(bitmap_or(to_bitmap(1), to_bitmap(2)));
 
 ## keyword
 
-BITMAP_TO_STRING,BITMAP
+BITMAP_TO_STRING, BITMAP

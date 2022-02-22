@@ -31,4 +31,4 @@ catalog: 必须。文件所属分类。
 
 ## keyword
 
-DROP,FILE
+DROP, FILE

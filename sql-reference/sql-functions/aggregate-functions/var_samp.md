@@ -1,5 +1,5 @@
 
-# VAR_SAMP,VARIANCE_SAMP
+# VAR_SAMP, VARIANCE_SAMP
 
 ## description
 
@@ -9,7 +9,7 @@
 VAR_SAMP(expr)
 ```
 
-返回expr表达式的样本方差
+返回 expr 表达式的样本方差
 
 ## example
 
@@ -26,4 +26,4 @@ group by datetime;
 
 ## keyword
 
-VAR_SAMP,VARIANCE_SAMP,VAR,SAMP,VARIANCE
+VAR_SAMP, VARIANCE_SAMP, VAR, SAMP, VARIANCE

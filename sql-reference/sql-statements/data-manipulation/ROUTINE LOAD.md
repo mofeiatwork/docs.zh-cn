@@ -15,7 +15,7 @@ FROM data_source
 [data_source_properties]
 ```
 
-1. **[db.]job_name**
+1. **[db.] job_name**
 
     导入作业的名称，在同一个 database 内，相同名称只能有一个 job 在运行。
 
@@ -39,7 +39,7 @@ FROM data_source
 
     1. 设置列分隔符
 
-        对于csv格式的数据，可以指定列分隔符，例如，将列分隔符指定为逗号(,)
+        对于 csv 格式的数据，可以指定列分隔符，例如，将列分隔符指定为逗号(,)
 
         ```sql
         COLUMNS TERMINATED BY ","
@@ -54,7 +54,7 @@ FROM data_source
         1. 映射列：
 
             按顺序指定，源数据中各个列，对应目的表中的哪些列。对于希望跳过的列，可以指定一个不存在的列名。
-            假设目的表有三列 k1, k2, v1。源数据有4列，其中第1、2、4列分别对应 k2, k1, v1。则书写如下：
+            假设目的表有三列 k1, k2, v1。源数据有 4 列，其中第 1、2、4 列分别对应 k2, k1, v1。则书写如下：
 
             ```SQL
             COLUMNS (k2, k1, xxx, v1)
@@ -66,13 +66,13 @@ FROM data_source
 
             以 col_name = expr 的形式表示的列，我们称为衍生列。即支持通过 expr 计算得出目的表中对应列的值。
             衍生列通常排列在映射列之后，虽然这不是强制的规定，但是 StarRocks 总是先解析映射列，再解析衍生列。
-            接上一个示例，假设目的表还有第4列 v2，v2 由 k1 和 k2 的和产生。则可以书写如下：
+            接上一个示例，假设目的表还有第 4 列 v2，v2 由 k1 和 k2 的和产生。则可以书写如下：
 
             ```plain text
             COLUMNS (k2, k1, xxx, v1, v2 = k1 + k2);
             ```
 
-        对于csv格式的数据，COLUMNS中的映射列的个数必须要与数据中的列个数一致
+        对于 csv 格式的数据，COLUMNS 中的映射列的个数必须要与数据中的列个数一致
 
     3. 指定过滤条件
 
@@ -109,7 +109,7 @@ FROM data_source
 
     1. `desired_concurrent_number`
 
-        期望的并发度。一个例行导入作业会被分成多个子任务执行。这个参数指定一个作业最多有多少任务可以同时执行。必须大于0。默认为3。
+        期望的并发度。一个例行导入作业会被分成多个子任务执行。这个参数指定一个作业最多有多少任务可以同时执行。必须大于 0。默认为 3。
         这个并发度并不是实际的并发度，实际的并发度，会通过集群的节点数、负载情况，以及数据源的情况综合考虑。
         例：
 
@@ -117,17 +117,17 @@ FROM data_source
 
     2. `max_batch_interval`
 
-        任务的调度时间，即任务多久执行一次，默认为10s。
-        任务的消费数据时间为fe.conf中的routine_load_task_consume_second，默认为3s。
-        任务的执行超时时间为fe.conf中的routine_load_task_timeout_second，默认为15s。
+        任务的调度时间，即任务多久执行一次，默认为 10s。
+        任务的消费数据时间为 fe.conf 中的 routine_load_task_consume_second，默认为 3s。
+        任务的执行超时时间为 fe.conf 中的 routine_load_task_timeout_second，默认为 15s。
         例：
 
         "max_batch_interval" = "20"
 
     3. `max_error_number/max_batch_rows`
 
-        采样窗口内，允许的最大错误行数。必须大于等于0。默认是 0，即不允许有错误行。
-        采样窗口为 max_batch_rows \* 10,默认为(200000 * 10 = 2000000)。即如果在采样窗口内，错误行数大于 max_error_number，则会导致例行作业被暂停，需要人工介入检查数据质量问题。
+        采样窗口内，允许的最大错误行数。必须大于等于 0。默认是 0，即不允许有错误行。
+        采样窗口为 max_batch_rows \* 10, 默认为(200000 * 10 = 2000000)。即如果在采样窗口内，错误行数大于 max_error_number，则会导致例行作业被暂停，需要人工介入检查数据质量问题。
         被 where 条件过滤掉的行不算错误行。
 
     4. `strict_mode`
@@ -140,19 +140,19 @@ FROM data_source
 
     6. `format`
 
-        指定导入数据格式，默认是csv，支持json格式。
+        指定导入数据格式，默认是 csv，支持 json 格式。
 
     7. `jsonpaths`
 
-        jsonpaths: 导入json方式分为：简单模式和匹配模式。如果设置了jsonpath则为匹配模式导入，否则为简单模式导入，具体可参考示例。
+        jsonpaths: 导入 json 方式分为：简单模式和匹配模式。如果设置了 jsonpath 则为匹配模式导入，否则为简单模式导入，具体可参考示例。
 
     8. `strip_outer_array`
 
-        布尔类型，为true表示json数据以数组对象开始且将数组对象中进行展平，默认值是false。
+        布尔类型，为 true 表示 json 数据以数组对象开始且将数组对象中进行展平，默认值是 false。
 
     9. `json_root`
 
-        json_root为合法的jsonpath字符串，用于指定json document的根节点，默认值为""。
+        json_root 为合法的 jsonpath 字符串，用于指定 json document 的根节点，默认值为 ""。
 
 5. **data_source**
 
@@ -267,7 +267,7 @@ FROM data_source
     浮点类（FLOAT/DOUBLE/DECIMAL）：1.1, 0.23, .356
     日期类（DATE/DATETIME）：2017-10-03, 2017-06-13 12:34:03
     字符串类（CHAR/VARCHAR）（无引号）：I am a student, a
-    NULL值：\N
+    NULL 值：\N
 
 ## example
 
@@ -340,7 +340,7 @@ FROM data_source
     );
     ```
 
-4. 简单模式导入json
+4. 简单模式导入 json
 
     ```sql
     CREATE ROUTINE LOAD example_db.test_json_label_1 ON table1
@@ -367,7 +367,7 @@ FROM data_source
     ]
     ```
 
-5. 精准导入json数据格式
+5. 精准导入 json 数据格式
 
     ```sql
     CREATE TABLE `example_tbl` (
@@ -417,10 +417,10 @@ FROM data_source
     ```
 
     说明：
-    1）如果json数据是以数组开始，并且数组中每个对象是一条记录，则需要将strip_outer_array设置成true，表示展平数组。
-    2）如果json数据是以数组开始，并且数组中每个对象是一条记录，在设置jsonpath时，我们的ROOT节点实际上是数组中对象。
+    1）如果 json 数据是以数组开始，并且数组中每个对象是一条记录，则需要将 strip_outer_array 设置成 true，表示展平数组。
+    2）如果 json 数据是以数组开始，并且数组中每个对象是一条记录，在设置 jsonpath 时，我们的 ROOT 节点实际上是数组中对象。
 
-6. 用户指定根节点json_root
+6. 用户指定根节点 json_root
 
     ```sql
     CREATE ROUTINE LOAD example_db.test1 ON example_tbl
@@ -454,4 +454,4 @@ FROM data_source
 
 ## keyword
 
-CREATE,ROUTINE,LOAD
+CREATE, ROUTINE, LOAD

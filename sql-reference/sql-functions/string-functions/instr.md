@@ -8,7 +8,7 @@
 INT instr(VARCHAR str, VARCHAR substr)
 ```
 
-返回 substr 在 str 中第一次出现的位置（从1开始计数，按「字符」计算）。如果 substr 不在 str 中出现，则返回0。
+返回 substr 在 str 中第一次出现的位置（从 1 开始计数，按「字符」计算）。如果 substr 不在 str 中出现，则返回 0。
 
 ## example
 

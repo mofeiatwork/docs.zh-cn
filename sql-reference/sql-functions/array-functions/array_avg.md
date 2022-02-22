@@ -8,7 +8,7 @@
 array_avg(array(type))
 ```
 
-求取一个ARRAY中的所有数据的平均数，返回这个结果。
+求取一个 ARRAY 中的所有数据的平均数，返回这个结果。
 
 ## example
 
@@ -30,4 +30,4 @@ mysql> select array_avg([11.33, 11.11, 12.324]);
 
 ## keyword
 
-ARRAY_AVG,ARRAY
+ARRAY_AVG, ARRAY
