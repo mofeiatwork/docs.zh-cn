@@ -34,9 +34,9 @@
 ### 排序键设计
 
 * 排序键要根据查询的特点来设计。
-* 将 **经常作为过滤条件和 group by 的列作为排序键** 可以加速查询。
+* 将经常作为过滤条件和 group by 的列作为排序键 可以加速查询。
 * 如果是有 **大量点查**，建议把查询点查的 ID 放到第一列。例如 查询主要类型是 `select sum(revenue) from lineorder where user_id='aaa100'`;  并且有很高的并发，强烈推荐把 user\_id 作为排序键的第一列。
-* 如果查询的主要是* *聚合和 scan 比较多**，建议把低基数的列放在前面。例如 查询的主要类型是 `select region, nation, count(*)  from lineorder_flat group by region, nation`，把 region 作为第一列、nation 作为第二列会更合适。低基数的列放在前面可以有助于数据局部性。
+* 如果查询的主要是聚合和 scan 比较多，建议把低基数的列放在前面。例如 查询的主要类型是 `select region, nation, count(*)  from lineorder_flat group by region, nation`，把 region 作为第一列、nation 作为第二列会更合适。低基数的列放在前面可以有助于数据局部性。
 
 ### 合理选择数据类型
 
@@ -47,7 +47,7 @@
 ### 如何合理地设置并行度
 
 * 通过 session 变量   parallel\_fragment\_exec\_instance\_num  可以设置查询的并行度（单个 BE 内部的并行度），如果我们觉得查询性能不够好但是 cpu 资源充足可以通过 set parallel\_fragment\_exec\_instance\_num = 16; 来调整这里并行度可以 **设置成 CPU 核数量的一半** 。
-* 通过 set * *global** parallel\_fragment\_exec\_instance\_num = 16; 可以让 session 变量全局有效。
+* 通过 set global parallel\_fragment\_exec\_instance\_num = 16; 可以让 session 变量全局有效。
 * parallel\_fragment\_exec\_instance\_num 受到每个 BE 的 tablet 数量的影响，比如 一张表的 bucket 数量是 32, 有 3 个分区，分布在 4 个 BE 上，那么每个 BE 的 tablet 数量是 32 * 3  / 4 = 24, 那么单机的并行度无法超过 24，即使你 set parallel\_fragment\_exec\_instance\_num = 32 ，但是实际执行的时候并行度还是会变成 24。
 * 对于需要进行高 QPS 查询的场景，因为机器整体资源是充分利用的，所以建议设置 parallel\_fragment\_exec\_instance\_num 为 1，这样可以减少不同查询之间的资源竞争，反而整体可以提升 QPS。
 

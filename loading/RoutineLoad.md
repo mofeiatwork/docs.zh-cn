@@ -95,11 +95,11 @@ FROM KAFKA
 * **desired_concurrent_number**：导入并发度，指定一个导入作业最多会被分成多少个子任务执行。必须大于 0，默认为 3。
 * **max_batch_interval**：每个子任务最大执行时间，单位是「秒」。范围为 5 到 60。默认为 10。**1.15 版本后**: 该参数是子任务的调度时间，即任务多久执行一次，任务的消费数据时间为 fe.conf 中的 routine_load_task_consume_second，默认为 3s，
 任务的执行超时时间为 fe.conf 中的 routine_load_task_timeout_second，默认为 15s。
-* **max_batch_rows**：每个子任务最多读取的行数。必须大于等于 200000。默认是 200000。**1.15 版本后**: 该参数只用于定义错误检测窗口范围，窗口的范围是 10 * * *max-batch-rows**。
-* * *max_batch_size* *：每个子任务最多读取的字节数。单位是「字节」，范围是 100MB 到 1GB。默认是 100MB。* *1.15 版本后**: 废弃该参数，任务消费数据的时间为 fe.conf 中的 routine_load_task_consume_second，默认为 3s。
-* * *max_error_number**：采样窗口内，允许的最大错误行数。必须大于等于 0。默认是 0，即不允许有错误行。注意：被 where 条件过滤掉的行不算错误行。
-* * *strict_mode**：是否开启严格模式，默认为开启。如果开启后，非空原始数据的列类型变换如果结果为 NULL，则会被过滤，关闭方式为 "strict_mode" = "false"。
-* * *timezone**：指定导入作业所使用的时区。默认为使用 Session 的 timezone 参数。该参数会影响所有导入涉及的和时区有关的函数结果。
+* **max_batch_rows**：每个子任务最多读取的行数。必须大于等于 200000。默认是 200000。**1.15 版本后**: 该参数只用于定义错误检测窗口范围，窗口的范围是 10 ** *max-batch-rows**。
+* **max_batch_size**：每个子任务最多读取的字节数。单位是「字节」，范围是 100MB 到 1GB。默认是 100MB。**1.15 版本后**: 废弃该参数，任务消费数据的时间为 fe.conf 中的 routine_load_task_consume_second，默认为 3s。
+* **max_error_number**：采样窗口内，允许的最大错误行数。必须大于等于 0。默认是 0，即不允许有错误行。注意：被 where 条件过滤掉的行不算错误行。
+* **strict_mode**：是否开启严格模式，默认为开启。如果开启后，非空原始数据的列类型变换如果结果为 NULL，则会被过滤，关闭方式为 "strict_mode" = "false"。
+* **timezone**：指定导入作业所使用的时区。默认为使用 Session 的 timezone 参数。该参数会影响所有导入涉及的和时区有关的函数结果。
 
 * **DATA_SOURCE**：指定数据源，请使用 KAFKA。
 * **data_source_properties**: 指定数据源相关的信息。
