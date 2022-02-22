@@ -2,7 +2,7 @@
 
 ## 功能
 
-查询JSON对象中是否存在某个字段。
+查询 JSON 对象中是否存在某个字段。
 
 ## 语法
 
@@ -10,16 +10,16 @@
 
 ## 参数说明
 
-- `document JSON`: JSON对象, 须为JSON类型
-- `json_path`: json_path, JSON对象中的路径。须为varchar类型
+- `document JSON`: JSON 对象, 须为 JSON 类型
+- `json_path`: json_path, JSON 对象中的路径。须为 varchar 类型
 
 ## 返回值说明
 
-返回类型为 BOOL，表示JSON对象中是否存在某个字段。
+返回类型为 BOOL，表示 JSON 对象中是否存在某个字段。
 
 ## 注意事项
 
-Starrocks支持的JSON Path的语法请参考 [JSON Path语法](/sql-reference/sql-functions/json-functions/json_path.md)。
+Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](/sql-reference/sql-functions/json-functions/json_path.md)。
 
 ## 示例
 

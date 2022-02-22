@@ -2,7 +2,7 @@
 
 ## 功能
 
-使用箭头语法查询JSON对象中的某个字段，相对于JSON_QUERY函数更容易使用。
+使用箭头语法查询 JSON 对象中的某个字段，相对于 JSON_QUERY 函数更容易使用。
 
 ## 语法
 
@@ -10,17 +10,17 @@
 
 ## 参数说明
 
-- `JSON json_object`: 查询的JSON对象，可以是列引用，或者通过`parse_json`等函数构造的JSON对象
+- `JSON json_object`: 查询的 JSON 对象，可以是列引用，或者通过 `parse_json` 等函数构造的 JSON 对象
 
 ## 返回值说明
 
-如果查询的字段存在，则返回查询出的JSON值，否则返回NULL。
+如果查询的字段存在，则返回查询出的 JSON 值，否则返回 NULL。
 
 ## 注意事项
 
-Starrocks支持的JSON Path的语法请参考 [JSON Path语法](/sql-reference/sql-functions/json-functions/json_path.md)。
+Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](/sql-reference/sql-functions/json-functions/json_path.md)。
 
-箭头语法中允许省略JSON Path的前缀 `$`。
+箭头语法中允许省略 JSON Path 的前缀 `$`。
 
 ## 示例
 

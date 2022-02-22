@@ -2,7 +2,7 @@
 
 ## 功能
 
-将JSON对象的最外层展开成多行Key/Value的表示形式。
+将 JSON 对象的最外层展开成多行 Key/Value 的表示形式。
 
 ## 语法
 
@@ -10,15 +10,15 @@
 
 ## 参数说明
 
-- `JSON doc`: 需要展开的JSON对象
+- `JSON doc`: 需要展开的 JSON 对象
 
 ## 返回值说明
 
-返回JSON最外层展开的Key/Value结果，Key为JSON字段名，Value为字段值。
+返回 JSON 最外层展开的 Key/Value 结果，Key 为 JSON 字段名，Value 为字段值。
 
 ## 注意事项
 
-`json_each`为Table Function，须在From子句中通过Lateral Join使用，不可用于select子句。
+`json_each` 为 Table Function，须在 From 子句中通过 Lateral Join 使用，不可用于 select 子句。
 
 ## 示例
 

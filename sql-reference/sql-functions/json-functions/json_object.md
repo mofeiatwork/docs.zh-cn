@@ -2,7 +2,7 @@
 
 ## 功能
 
-手动构造JSON对象。
+手动构造 JSON 对象。
 
 ## 语法
 
@@ -11,12 +11,12 @@
 
 ## 参数说明
 
-- `VARCHAR field_name`: JSON字段名
-- `ANY field_value`: JSON字段值，允许double/float/integer/varchar/char等类型
+- `VARCHAR field_name`: JSON 字段名
+- `ANY field_value`: JSON 字段值，允许 double/float/integer/varchar/char 等类型
 
 ## 返回值说明
 
-返回类型为 JSON, 即构造出的JSON对象。
+返回类型为 JSON, 即构造出的 JSON 对象。
 
 ## 示例
 

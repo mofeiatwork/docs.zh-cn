@@ -2,7 +2,7 @@
 
 ## 功能
 
-构造JSON数组。
+构造 JSON 数组。
 
 ## 语法
 
@@ -12,12 +12,12 @@
 ## 参数说明
 
 - `value ANY`
-JSON值，允许integer/double/float/varchar/char等类型
+JSON 值，允许 integer/double/float/varchar/char 等类型
 
 ## 返回值说明
 
 - 返回类型：JSON
-- 返回构造出的JSON数组
+- 返回构造出的 JSON 数组
 
 ## 示例
 

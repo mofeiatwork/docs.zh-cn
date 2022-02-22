@@ -2,7 +2,7 @@
 
 ## 功能
 
-查询JSON中的某个字段。
+查询 JSON 中的某个字段。
 
 ## 语法
 
@@ -10,16 +10,16 @@
 
 ## 参数说明
 
-- `JSON doc`: 查询的JSON对象，可以为列引用，或通过`parse_json`等函数构造的JSON对象
-- `VARCHAR json_path`: JSON对象中的查询路径
+- `JSON doc`: 查询的 JSON 对象，可以为列引用，或通过 `parse_json` 等函数构造的 JSON 对象
+- `VARCHAR json_path`: JSON 对象中的查询路径
 
 ## 返回值说明
 
-如果查询的字段存在，返回其JSON对象，否则返回NULL。
+如果查询的字段存在，返回其 JSON 对象，否则返回 NULL。
 
 ## 注意事项
 
-Starrocks支持的JSON Path的语法请参考 [JSON Path语法](/sql-reference/sql-functions/json-functions/json_path.md)。
+Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](/sql-reference/sql-functions/json-functions/json_path.md)。
 
 ## 示例
 

@@ -2,12 +2,12 @@
 
 ## 功能
 
-JSON类型可以通过CAST函数实现与其他SQL类型的转换。
+JSON 类型可以通过 CAST 函数实现与其他 SQL 类型的转换。
 
 ## 语法
 
-- `CAST(JSON json AS VARCHAR/INTEGER/BOOLEAN/DOUBLE/FLOAT)`: 将JSON转为SQL类型
-- `CAST(VARCHAR/INTEGER/BOOLEAN/DOUBLE/FLOAT AS JSON)`: 将SQL类型转为JSON类型
+- `CAST(JSON json AS VARCHAR/INTEGER/BOOLEAN/DOUBLE/FLOAT)`: 将 JSON 转为 SQL 类型
+- `CAST(VARCHAR/INTEGER/BOOLEAN/DOUBLE/FLOAT AS JSON)`: 将 SQL 类型转为 JSON 类型
 
 ## 参数说明
 
@@ -15,17 +15,17 @@ JSON类型可以通过CAST函数实现与其他SQL类型的转换。
 
 ## 返回值说明
 
-将JSON转型为SQL类型时:
+将 JSON 转型为 SQL 类型时:
 
-- 如果类型不兼容，例如将数值类型转成字符串，会返回NULL
-- 如果JSON的数值类型转为更窄的SQL数值类型，会存在溢出问题
-- 对于JSON中的null类型，会转为SQL中的NULL类型
-- 将JSON转为varchar类型时，如果JSON本身是string类型，则返回无引号的字符串表示，否则会将其转为JSON的字符串表示
+- 如果类型不兼容，例如将数值类型转成字符串，会返回 NULL
+- 如果 JSON 的数值类型转为更窄的 SQL 数值类型，会存在溢出问题
+- 对于 JSON 中的 null 类型，会转为 SQL 中的 NULL 类型
+- 将 JSON 转为 varchar 类型时，如果 JSON 本身是 string 类型，则返回无引号的字符串表示，否则会将其转为 JSON 的字符串表示
 
-将SQL类型转为JSON类型时:
+将 SQL 类型转为 JSON 类型时:
 
-- 如果数值超出JSON的表示范围，会发生溢出问题
-- 对于SQL的NULL类型，不会转为JSON中的NULL类型，仍然为SQL中的NULL
+- 如果数值超出 JSON 的表示范围，会发生溢出问题
+- 对于 SQL 的 NULL 类型，不会转为 JSON 中的 NULL 类型，仍然为 SQL 中的 NULL
 
 ## 示例
 

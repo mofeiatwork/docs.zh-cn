@@ -2,7 +2,7 @@
 
 ## 功能
 
-从JSON字符串解析出JSON对象。
+从 JSON 字符串解析出 JSON 对象。
 
 ## 语法
 
@@ -10,15 +10,15 @@
 
 ## 参数说明
 
-- `VARCHAR str`: JSON字符串，允许多种JSON类型，包括 Number/Boolean/Null/Array/Object
+- `VARCHAR str`: JSON 字符串，允许多种 JSON 类型，包括 Number/Boolean/Null/Array/Object
 
 ## 返回值说明
 
-如果字符串是合法的JSON，则返回构造出的JSON，否则返回NULL。
+如果字符串是合法的 JSON，则返回构造出的 JSON，否则返回 NULL。
 
 ## 注意事项
 
-JSON对象的string需要用双引号括起来，遵循JSON标准，而JSON字符串需要用单引号。
+JSON 对象的 string 需要用双引号括起来，遵循 JSON 标准，而 JSON 字符串需要用单引号。
 
 ## 示例
 
