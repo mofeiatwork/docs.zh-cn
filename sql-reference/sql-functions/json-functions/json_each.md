@@ -6,15 +6,16 @@
 
 ## 语法
 
-`Table<VARCHAR, JSON> json_each(JSON object)`
+`Table<VARCHAR, JSON> json_each(object)`
 
 ## 参数说明
 
-- `JSON doc`: 需要展开的 JSON 对象
+- `doc`: 需要展开的 JSON 对象；支持 JSON 类型
 
 ## 返回值说明
 
-返回 JSON 最外层展开的 Key/Value 结果，Key 为 JSON 字段名，Value 为字段值。
+- 返回两列数据，分别为 VARCHAR 和 JSON 类型
+- Key 为 JSON 字段名，Value 为字段值。
 
 ## 注意事项
 

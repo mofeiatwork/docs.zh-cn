@@ -6,13 +6,13 @@
 
 ## 语法
 
-- `JSON json_object()`
-- `JSON json_object(VARCHAR field_name, ANY field_value, ...)`
+- `json_object()`
+- `json_object(field_name, field_value, ...)`
 
 ## 参数说明
 
-- `VARCHAR field_name`: JSON 字段名
-- `ANY field_value`: JSON 字段值，允许 INTEGER/DOUBLE/FLOAT/VARCHAR/CHAR SQL 类型
+- `field_name`: JSON 字段名；支持 VARCHAR 类型
+- `field_value`: JSON 字段值；支持 INTEGER/DOUBLE/FLOAT/VARCHAR/CHAR SQL 类型，以及 JSON 类型
 
 ## 返回值说明
 

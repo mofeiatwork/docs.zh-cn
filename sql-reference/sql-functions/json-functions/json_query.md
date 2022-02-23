@@ -4,18 +4,28 @@
 
 查询 JSON 中的某个字段。
 
+其中，JSON 类型支持以下几种子类型：
+
+- Object：对象类型，例如 `{"a": 1}`
+- Array: 数组类型，例如 `[1, 2, 3]`
+- Number: 数值类型，支持 double 或 int64, 例如 `3.14`
+- String: 字符串类型，例如 `"star"`
+- Bool: 布尔类型，支持 `true` 或 `false1
+- Null：空值类型
+
 ## 语法
 
-`JSON json_query(JSON doc, VARCHAR json_path)`
+`json_query(doc, json_path)`
 
 ## 参数说明
 
-- `JSON doc`: 查询的 JSON 对象，可以为列引用，或通过 `parse_json` 等函数构造的 JSON 对象
-- `VARCHAR json_path`: JSON 对象中的查询路径
+- `doc`: 查询的 JSON，可以为列引用，或通过 `parse_json` 等函数构造的 JSON Object/Array；支持 JSON 类型
+- `json_path`: JSON 中的查询路径；支持 VARCHAR 类型；语法参考 [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
 
 ## 返回值说明
 
-如果查询的字段存在，返回其 JSON 对象，否则返回 NULL。
+- 返回 JSON 类型
+- 如果查询的字段存在，返回其 JSON 对象，否则返回 NULL。
 
 ## 注意事项
 

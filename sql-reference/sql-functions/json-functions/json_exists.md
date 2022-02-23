@@ -6,12 +6,12 @@
 
 ## 语法
 
-- bool json_exists(JSON object, VARCHAR json_path)
+- bool json_exists(object, json_path)
 
 ## 参数说明
 
-- `JSON object`: JSON 对象
-- `VARCHAR json_path`: JSON 对象中的路径
+- `object`: JSON 对象；支持 JSON 类型。
+- `json_path`: JSON 对象中的路径，支持 VARCHAR 类型。
 
 ## 返回值说明
 

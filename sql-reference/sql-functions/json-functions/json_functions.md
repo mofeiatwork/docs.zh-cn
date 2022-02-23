@@ -4,8 +4,8 @@ Starrocks 当前支持以下 JSON 函数。
 
 ## 构造函数
 
-| 函数名 | 功能 | 示例 |
-| ---- | ---- | --- |
+| 函数名 | 功能 | 示例 | 详细说明 | 
+| ---- | ---- | --- | --- |
 | json_object | 构造 JSON Object | `json_object('a', 1, 'b', 2)` | [json_object](/sql-reference/sql-functions/json-functions/json_object.md) |
 | json_array | 构造 JSON Array | `json_array(1, 2, 3)` | [json_array](/sql-reference/sql-functions/json-functions/json_array.md) |
 | parse_json | 从字符串解析 JSON | `parse_json('{"a": 1}')`| [parse_json](/sql-reference/sql-functions/json-functions/parse_json.md) |

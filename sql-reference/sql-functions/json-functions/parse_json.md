@@ -6,15 +6,16 @@
 
 ## 语法
 
-- `JSON parse_json(VARCHAR str)`
+- `parse_json(str)`
 
 ## 参数说明
 
-- `VARCHAR str`: JSON 字符串，允许多种 JSON 类型，包括 Number/Boolean/Null/Array/Object
+- `str`: JSON 格式的字符串；支持 VARCHAR 类型
 
 ## 返回值说明
 
-如果字符串是合法的 JSON，则返回构造出的 JSON，否则返回 NULL。
+- 返回 JSON 类型
+- 如果字符串是合法的 JSON，则返回构造出的 JSON，否则返回 NULL。
 
 ## 注意事项
 

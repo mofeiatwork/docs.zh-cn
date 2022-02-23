@@ -157,7 +157,7 @@ mysql> select * from tj where j->'a' <= parse_json('3') order by cast(j->'a' as 
 ## 限制
 
 - 当前 JSON 类型的最大长度和 String 类型相同
-- 当前 JSON 类型不能直接用于 ORDER BY、GROUP BY、JOIN 计算，可转为 SQL 类型计算
+- 当前 JSON 类型不能直接用于 ORDER BY、GROUP BY、JOIN 计算，可使用 CAST 函数转为 SQL 类型计算，参考 [JSON 类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
 - 当前 JSON 类型仅可用于 Duplicate 模型，且不支持作为 Duplicate Key
 - 当前 JSON 类型不支持用作 Distribute Key 或 Partition Key
 - 当前 JSON 类型仅支持 `<, <=, >, >=, =, !=` 谓词查询，不支持 IN 查询

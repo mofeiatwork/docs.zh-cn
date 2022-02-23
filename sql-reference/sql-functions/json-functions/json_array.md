@@ -7,17 +7,17 @@
 ## 语法
 
 - JSON json_array()
-- JSON json_array(ANY value, ...)
+- JSON json_array(value, ...)
 
 ## 参数说明
 
-- `value ANY`: JSON 值
+- `value`: JSON 值
   - 允许 INTEGER/DOUBLE/FLOAT/VARCHAR/CHAR 等 SQL 类型
   - 允许为 JSON 类型，支持嵌套调用
 
 ## 返回值说明
 
-- 返回类型：JSON
+- 返回 JSON 类型
 - 返回构造出的 JSON 数组
 
 ## 示例

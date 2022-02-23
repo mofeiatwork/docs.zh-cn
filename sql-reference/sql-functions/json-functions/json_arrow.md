@@ -10,12 +10,13 @@
 
 ## 参数说明
 
-- `JSON json_object`: 查询的 JSON 对象，包括 JSON 列、`PARSE_JSON(...)` 产生的 JSON 对象、以及其他 JSON 函数产生的 JSON 对象。
+- `json_object`: 查询的 JSON 对象，包括 JSON 列、`PARSE_JSON(...)` 产生的 JSON 对象、以及其他 JSON 函数产生的 JSON 对象。
 
 ## 返回值说明
 
-如果查询的字段不存在，返回 NULL，否则返回查询出的 JSON，其值类型可以是 Object/Array/Number/String/Boolean/Null。
-如果需要进一步对返回值进行计算，可通过 `CAST` 将其转换为 SQL 类型。
+- 返回 JSON 类型
+- 如果查询的字段不存在，返回 NULL，否则返回查询出的 JSON，其值类型可以是 Object/Array/Number/String/Boolean/Null。
+- 如果需要进一步对返回值进行计算，可通过 `CAST` 将其转换为 SQL 类型。
 
 ## 注意事项
 
