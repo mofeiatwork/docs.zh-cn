@@ -4,7 +4,7 @@ Starrocks 当前支持以下 JSON 函数。
 
 ## 构造函数
 
-| 函数名 | 功能 | 示例 | 详细说明 | 
+| 函数名 | 功能 | 示例 | 详细说明 |
 | ---- | ---- | --- | --- |
 | json_object | 构造 JSON Object | `json_object('a', 1, 'b', 2)` | [json_object](/sql-reference/sql-functions/json-functions/json_object.md) |
 | json_array | 构造 JSON Array | `json_array(1, 2, 3)` | [json_array](/sql-reference/sql-functions/json-functions/json_array.md) |
@@ -22,7 +22,3 @@ Starrocks 当前支持以下 JSON 函数。
 ## 其他
 
 在以上函数中，通常使用 JSON Path 进行查询，其语法参考文档 [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)。
-
-## 关键词
-
-JSON, JSON_ARRAY

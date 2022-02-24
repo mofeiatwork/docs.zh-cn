@@ -4,7 +4,7 @@
 
 通过 CAST 可以实现 SQL 类型之间的转换，常见的数据类型 TINYINT/SMALLINT/INT/BIGINT/VARCHAR 等都可以进行类型转换。
 
-除此之外，JSON 数据类型也可以支持转换，JSON 中的 Number/String/Bool 可以转换成 SQL 中的类型。细节可参考 [JSON 类型转换](sql-reference/sql-functions/json-functions/json_cast.md)。
+除此之外，JSON 数据类型也可以支持转换，JSON 中的 Number/String/Bool 可以转换成 SQL 中的类型。细节可参考 [JSON 类型转换](./json-functions/json_cast.md)。
 
 ### Syntax
 

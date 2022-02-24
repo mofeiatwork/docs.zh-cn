@@ -154,6 +154,17 @@ mysql> select * from tj where j->'a' <= parse_json('3') order by cast(j->'a' as 
 - [类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
 - [JSON 谓词](/sql-reference/sql-functions/json-functions/json_predicate.md)
 
+## JSON 子类型
+
+Starrocks 支持的 JSON 类型允许以下几种子类型：
+
+- Object：对象类型，例如 `{"a": 1}`
+- Array: 数组类型，例如 `[1, 2, 3]`
+- Number: 数值类型，支持 double 或 int64, 例如 `3.14`
+- String: 字符串类型，例如 `"star"`
+- Bool: 布尔类型，支持 `true` 或 `false`
+- Null：空值类型
+
 ## 限制
 
 - 当前 JSON 类型的最大长度和 String 类型相同

@@ -4,15 +4,6 @@
 
 查询 JSON 中的某个字段。
 
-其中，JSON 类型支持以下几种子类型：
-
-- Object：对象类型，例如 `{"a": 1}`
-- Array: 数组类型，例如 `[1, 2, 3]`
-- Number: 数值类型，支持 double 或 int64, 例如 `3.14`
-- String: 字符串类型，例如 `"star"`
-- Bool: 布尔类型，支持 `true` 或 `false1
-- Null：空值类型
-
 ## 语法
 
 `json_query(doc, json_path)`

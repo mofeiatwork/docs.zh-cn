@@ -20,7 +20,7 @@
 
 ## 注意事项
 
-Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](/sql-reference/sql-functions/json-functions/json_path.md)。
+Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](./json_path.md)。
 
 箭头语法中允许省略 JSON Path 的前缀 `$`。
 
