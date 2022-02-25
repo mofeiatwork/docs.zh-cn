@@ -142,17 +142,17 @@ mysql> select * from tj where j->'a' <= parse_json('3') order by cast(j->'a' as 
 
 ## 查询
 
-当前 JSON 支持以下 [JSON 函数](/sql-reference/sql-functions/json-functions/json_functions.md)：
+当前 JSON 支持以下 [JSON 函数](../../sql-functions/json-functions/json_functions.md)：
 
-- [箭头语法](/sql-reference/sql-functions/json-functions/json_arrow.md)
-- [json_query](/sql-reference/sql-functions/json-functions/json_query.md)
-- [json_exists](/sql-reference/sql-functions/json-functions/json_exists.md)
-- [json_object](/sql-reference/sql-functions/json-functions/json_object.md)
-- [json_array](/sql-reference/sql-functions/json-functions/json_array.md)
-- [parse_json](/sql-reference/sql-functions/json-functions/parse_json.md)
-- [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
-- [类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
-- [JSON 谓词](/sql-reference/sql-functions/json-functions/json_predicate.md)
+- [箭头语法](../../sql-functions/json-functions/json_arrow.md)
+- [json_query](../../sql-functions/json-functions/json_query.md)
+- [json_exists](../../sql-functions/json-functions/json_exists.md)
+- [json_object](../../sql-functions/json-functions/json_object.md)
+- [json_array](../../sql-functions/json-functions/json_array.md)
+- [parse_json](../../sql-functions/json-functions/parse_json.md)
+- [JSON Path](../../sql-functions/json-functions/json_path.md)
+- [类型转换](../../sql-functions/json-functions/json_cast.md)
+- [JSON 谓词](../../sql-functions/json-functions/json_predicate.md)
 
 ## JSON 子类型
 
@@ -168,7 +168,7 @@ Starrocks 支持的 JSON 类型允许以下几种子类型：
 ## 限制
 
 - 当前 JSON 类型的最大长度和 String 类型相同
-- 当前 JSON 类型不能直接用于 ORDER BY、GROUP BY、JOIN 计算，可使用 CAST 函数转为 SQL 类型计算，参考 [JSON 类型转换](/sql-reference/sql-functions/json-functions/json_cast.md)
+- 当前 JSON 类型不能直接用于 ORDER BY、GROUP BY、JOIN 计算，可使用 CAST 函数转为 SQL 类型计算，参考 [JSON 类型转换](../../sql-functions/json-functions/json_cast.md)
 - 当前 JSON 类型仅可用于 Duplicate 模型，且不支持作为 Duplicate Key
 - 当前 JSON 类型不支持用作 Distribute Key 或 Partition Key
 - 当前 JSON 类型仅支持 `<, <=, >, >=, =, !=` 谓词查询，不支持 IN 查询

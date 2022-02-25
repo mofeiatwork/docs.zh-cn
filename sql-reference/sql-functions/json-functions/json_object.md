@@ -12,7 +12,7 @@
 ## 参数说明
 
 - `field_name`: JSON 字段名；支持 VARCHAR 类型
-- `field_value`: JSON 字段值；支持 INTEGER/DOUBLE/FLOAT/VARCHAR/CHAR SQL 类型，以及 JSON 类型
+- `field_value`: JSON 字段值；支持 TINYINT/SMALLINT/INTEGER/BIGINT/LARGEINT/DOUBLE/FLOAT/VARCHAR/CHAR SQL 类型，以及 JSON 类型
 
 ## 返回值说明
 

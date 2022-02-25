@@ -15,7 +15,7 @@
 ## 返回值说明
 
 - 返回 JSON 类型
-- 如果查询的字段不存在，返回 NULL，否则返回查询出的 JSON，其值类型可以是 Object/Array/Number/String/Boolean/Null。
+- 如果查询的字段不存在，返回 NULL，否则返回查询出的 JSON，其子类型可以是 Object/Array/Number/String/Boolean/Null。
 - 如果需要进一步对返回值进行计算，可通过 `CAST` 将其转换为 SQL 类型。
 
 ## 注意事项

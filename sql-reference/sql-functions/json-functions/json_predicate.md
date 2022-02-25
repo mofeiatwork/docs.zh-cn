@@ -28,14 +28,14 @@ JSON 的比较运算符遵循以下规则：
 举例来说，`{"a": 1, "c": 2}` 和 `{"b": 1, "a": 2}` 的比较规则如下：
 
 1. 定义 `left = {"a": 1, "c": 2}`, `right = {"b": 1, "a": 2}`
-2. 遍历 left 的所有 field，并在 right 查找
-3. 对于 field a: 在 right 能找到，且其 value `1 < 2` ；则返回结果 `left < right`
+2. 遍历 left 的所有字段，并在 right 查找
+3. 对于字段 `a`: 在 right 能找到，且其值 `1 < 2` ；则返回结果 `left < right`
 
 而对于 `{"a": 1, "c": 2}` 和 `{"b": 1, "a": 1}` 来说，其比较规则如下：
 
 1. 定义 `left = {"a": 1, "c": 2}`, `right = {"b": 1, "a": 1}`
-2. 对比 field a, 其 value 相同，都是 `1`
-3. 对比 field c，在 right 中不存在，因此返回 `left > right`
+2. 对比字段 `a`, 其值相同，都是 `1`
+3. 对比字段 `c`，在 right 中不存在，因此返回 `left > right`
 
 ## 示例
 

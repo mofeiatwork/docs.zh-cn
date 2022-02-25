@@ -12,7 +12,7 @@
 ## 参数说明
 
 - `value`: JSON 值
-  - 允许 INTEGER/DOUBLE/FLOAT/VARCHAR/CHAR 等 SQL 类型
+  - 允许 TINYINT/SMALLINT/INTEGER/BIGINT/LARGEINT/DOUBLE/FLOAT/VARCHAR/CHAR SQL 类型
   - 允许为 JSON 类型，支持嵌套调用
 
 ## 返回值说明

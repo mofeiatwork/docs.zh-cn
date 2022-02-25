@@ -11,7 +11,7 @@
 ## 参数说明
 
 - `doc`: 查询的 JSON，可以为列引用，或通过 `parse_json` 等函数构造的 JSON Object/Array；支持 JSON 类型
-- `json_path`: JSON 中的查询路径；支持 VARCHAR 类型；语法参考 [JSON Path](/sql-reference/sql-functions/json-functions/json_path.md)
+- `json_path`: JSON 中的查询路径；支持 VARCHAR 类型；语法参考 [JSON Path](./json_path.md)
 
 ## 返回值说明
 
@@ -20,7 +20,7 @@
 
 ## 注意事项
 
-Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](/sql-reference/sql-functions/json-functions/json_path.md)。
+Starrocks 支持的 JSON Path 的语法请参考 [JSON Path 语法](./json_path.md)。
 
 ## 示例
 
