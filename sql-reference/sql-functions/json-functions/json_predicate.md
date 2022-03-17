@@ -24,8 +24,9 @@ JSON 类型支持谓词计算，作为 WHERE 子句进行数据过滤。
 JSON 的比较运算符遵循以下规则：
 
 1. 如果运算符两边类型相同，且都是基本类型（Number/String/Boolean)，遵循基本类型的运算规则
-2. 如果运算符两边类型相同，且是复合类型(Object, Array)，按照元素逐个比较
-3. 如果运算符两边类型不同，则按照类型顺序比较，当前的类型顺序是: `Null < Bool < Array < Object < Double < Integer < String`
+2. 如果运算符两边类型都是数值类型，但存在 Double 和 Int 两种时，会转型成 Double 进行比较
+3. 如果运算符两边类型相同，且是复合类型(Object, Array)，按照元素逐个比较
+4. 如果运算符两边类型不同，则按照类型顺序比较，当前的类型顺序是: `Null < Bool < Array < Object < Double < Integer < String`
 
 举例来说，`{"a": 1, "c": 2}` 和 `{"b": 1, "a": 2}` 的比较规则如下：
 
