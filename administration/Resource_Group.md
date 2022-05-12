@@ -32,6 +32,7 @@
   - `role`：用户所属的 Role。
   - `query_type`: 查询类型，目前仅支持 SELECT。
   - `source_ip`：发起查询的 IP 地址，类型为 CIDR。
+  - `database`: 查询所访问的 database，可以为 `,` 分割的字符串
 
 - 分类器与查询任务的匹配方式
 
@@ -41,6 +42,7 @@
    - 如果用户所属 Role 一致，则匹配度加 1。
    - 如果查询类型一致，则该部分匹配度为 1 + 1/分类器的 `query_type` 数量。
    - 如果发起查询的 IP 地址一致，则该部分匹配度为 1 +  (32-cidr_prefix)/64。
+   - 如果查询的 database 匹配，则匹配度加 10。
 
 例如，多个与查询任务匹配的分类器中，分类器的条件数量越多，则其匹配度越高。
 
@@ -86,7 +88,7 @@ WITH (
 
 -- 创建分类器的语法如下：
 CLASSIFIER: 
-   (user='string', role='string', query_type in ('select'), source_ip='cidr')
+   (user='string', role='string', query_type in ('select'), source_ip='cidr', database='db1,db2')
 ```
 
 示例：
@@ -97,7 +99,8 @@ to
     (user='rg1_user1', role='rg1_role1', query_type in ('select'), source_ip='192.168.2.1/24'),
     (user='rg1_user2', query_type in ('select'), source_ip='192.168.3.1/24'),
     (user='rg1_user3', source_ip='192.168.4.1/24'),
-    (user='rg1_user4')
+    (user='rg1_user4'),
+    (database='db1')
 with (
     'cpu_core_limit' = '10',
     'mem_limit' = '20%',
