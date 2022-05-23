@@ -72,6 +72,14 @@ classifier D (user='Alice', query_type in ('insert','select', 'ctas')）
 
 > 如果需要设置全局变量，则需要设置 `SET GLOBAL enable_resource_group = true`。
 
+### 指定资源组
+
+资源组可以通过两种方式使用，一种是通过 classifier 进行匹配，另一种则是通过 session 变量直接指定。Classifier 的使用参考上述文档，而通过 session 变量的方式可参考如下方式：
+
+```sql
+SET resource_group = 'rg1';
+```
+
 ### 创建资源组和分类器
 
 语法如下：
