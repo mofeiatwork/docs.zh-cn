@@ -32,7 +32,7 @@
   - `role`：用户所属的 Role。
   - `query_type`: 查询类型，目前仅支持 SELECT。
   - `source_ip`：发起查询的 IP 地址，类型为 CIDR。
-  - `database`: 查询所访问的 database，可以为 `,` 分割的字符串
+  - `db`: 查询所访问的 database，可以为 `,` 分割的字符串
 
 - 分类器与查询任务的匹配方式
 
@@ -96,7 +96,7 @@ WITH (
 
 -- 创建分类器的语法如下：
 CLASSIFIER: 
-   (user='string', role='string', query_type in ('select'), source_ip='cidr', database='db1,db2')
+   (user='string', role='string', query_type in ('select'), source_ip='cidr', db='db1,db2')
 ```
 
 示例：
@@ -108,7 +108,7 @@ to
     (user='rg1_user2', query_type in ('select'), source_ip='192.168.3.1/24'),
     (user='rg1_user3', source_ip='192.168.4.1/24'),
     (user='rg1_user4'),
-    (database='db1')
+    (db='db1')
 with (
     'cpu_core_limit' = '10',
     'mem_limit' = '20%',
